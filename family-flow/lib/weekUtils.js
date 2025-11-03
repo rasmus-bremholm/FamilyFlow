@@ -7,10 +7,11 @@ dayjs.extend(isoWeek);
 dayjs.locale("sv");
 
 // Denna funktionen returnerar veckan som en ISOWeek, bra för main-view kalendern
-export function getWeekArray() {
+export function getWeekArray(startDate) {
 	const week = [];
+	const today = dayjs();
 	for (let i = 0; i < 7; i++) {
-		const date = startOfWeek.add(i, "day");
+		const date = startDate.add(i, "day");
 		week.push({
 			date: date.format("YYYY-MM-DD"), // Hela datumet 2025-10-15
 			dayName: date.format("dddd"), // Monday, Tuesday etc...
