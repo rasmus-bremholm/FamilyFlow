@@ -36,8 +36,10 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
       onClose={onClose}
       fullWidth
       maxWidth="xs"
-      PaperProps={{
-        sx: { borderRadius: 3, p: 1, bgcolor: "#f9fdf9" },
+      slotProps={{
+        paper: {
+          sx: { borderRadius: 4, p: 1 },
+        },
       }}
     >
       <DialogTitle>
@@ -49,40 +51,42 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
       <DialogContent>
         <Box component="form" onSubmit={handleSubmit}>
           {/* Type Toggle */}
-          <Typography variant="subtitle2" sx={{ mb: 1 }}>
+          <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
             Type
           </Typography>
           <ToggleButtonGroup
-            color="success"
-            exclusive
             value={type}
             onChange={(_, value) => value && setType(value)}
             fullWidth
             sx={{ mb: 2 }}
           >
-            <ToggleButton value="meal" sx={{ py: 1.5, fontWeight: 500 }}>
-              <RestaurantIcon sx={{ mr: 1 }} /> Meal
+            <ToggleButton value="meal" color="primary" sx={{ fontWeight: 500 }}>
+              <RestaurantIcon color="primary" sx={{ mr: 1 }} /> Meal
             </ToggleButton>
-            <ToggleButton value="activity" sx={{ py: 1.5, fontWeight: 500 }}>
-              <DirectionsRunIcon sx={{ mr: 1 }} /> Activity
+            <ToggleButton
+              value="activity"
+              color="secondary"
+              sx={{ fontWeight: 500 }}
+            >
+              <DirectionsRunIcon color="secondary" sx={{ mr: 1 }} /> Activity
             </ToggleButton>
           </ToggleButtonGroup>
 
           {/* Title */}
-          <Typography variant="subtitle2" sx={{ mb: 1 }}>
+          <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
             Title *
           </Typography>
           <TextField
             placeholder="e.g., Spaghetti Bolognese"
             fullWidth
             required
-            margin="normal"
+            margin="dense"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
 
           {/* Notes */}
-          <Typography variant="subtitle2" sx={{ mb: 1 }}>
+          <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
             Notes (optional)
           </Typography>
           <TextField
@@ -90,27 +94,29 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
             fullWidth
             multiline
             minRows={2}
-            margin="normal"
+            margin="dense"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
           />
         </Box>
       </DialogContent>
 
-      <DialogActions sx={{ px: 3, pb: 2 }}>
+      <DialogActions
+        sx={{ px: 0, pb: 0, gap: 1, display: "flex", flexDirection: "column" }}
+      >
         <Button
           onClick={onClose}
+          color="primary"
           variant="outlined"
-          color="inherit"
-          sx={{ borderRadius: 2 }}
+          sx={{ borderRadius: 2, flex: 1, width: "100%" }}
         >
           Cancel
         </Button>
         <Button
           type="submit"
+          color="primary"
           variant="contained"
-          color="success"
-          sx={{ borderRadius: 2, px: 3 }}
+          sx={{ borderRadius: 2, flex: 1, width: "100%" }}
           onClick={handleSubmit}
         >
           {type === "meal" ? "Add Meal" : "Add Activity"}
