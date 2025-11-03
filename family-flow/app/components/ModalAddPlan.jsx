@@ -52,14 +52,20 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
           <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
             Type
           </Typography>
-          <ToggleButtonGroup value={type} fullWidth sx={{ mb: 2 }}>
-            <ToggleButton value="meal" color="primary" sx={{ fontWeight: 500 }}>
+          <ToggleButtonGroup
+            value={type}
+            exclusive
+            onChange={(_, value) => value && setType(value)}
+            fullWidth
+            sx={{ mb: 2 }}
+          >
+            <ToggleButton value="meal" color="primary" sx={{ borderRadius: 2 }}>
               <RestaurantIcon color="primary" sx={{ mr: 1 }} /> Meal
             </ToggleButton>
             <ToggleButton
               value="activity"
               color="secondary"
-              sx={{ fontWeight: 500 }}
+              sx={{ borderRadius: 2 }}
             >
               <DirectionsRunIcon color="secondary" sx={{ mr: 1 }} /> Activity
             </ToggleButton>
@@ -76,6 +82,7 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
             margin="dense"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            sx={{ borderRadius: 2, mb: 2 }}
           />
 
           {/* Notes */}
@@ -90,6 +97,7 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
             margin="dense"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
+            sx={{ borderRadius: 2, mb: 2 }}
           />
         </Box>
       </DialogContent>
