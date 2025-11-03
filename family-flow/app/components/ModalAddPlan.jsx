@@ -11,9 +11,12 @@ import {
   ToggleButtonGroup,
   Typography,
   Box,
+  IconButton,
 } from "@mui/material";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
+import CloseIcon from "@mui/icons-material/Close";
+
 import { useState } from "react";
 
 export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
@@ -42,12 +45,26 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
         },
       }}
     >
+      {/* X Close Button */}
+      <IconButton
+        onClick={onClose}
+        sx={{
+          position: "absolute",
+          right: 8,
+          top: 8,
+          color: "text.secondary",
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
+
       <DialogTitle sx={{ fontWeight: 550, fontSize: "1.25rem" }}>
         {date}
       </DialogTitle>
 
       <DialogContent>
         <Box component="form" onSubmit={handleSubmit}>
+					
           {/* Type Toggle */}
           <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
             Type
