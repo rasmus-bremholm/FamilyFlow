@@ -1,9 +1,11 @@
+"use client";
+
+import { Container } from "@mui/material";
+
 export default function LoginPage() {
-	return (
-		<main>
-			<div>
-				
-			</div>
-		</main>
-	);
+  return (
+    <Container component="main" maxWidth="sm">
+
+    </Container>
+  );
 }
