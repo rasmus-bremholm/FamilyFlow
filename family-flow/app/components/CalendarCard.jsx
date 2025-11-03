@@ -1,8 +1,8 @@
-import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack } from "@mui/material";
+import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack, Button } from "@mui/material";
+import { Restaurant, DirectionsRun } from "@mui/icons-material";
 
-export default function CalendarCard({ dayName, shortDay, dayNumber, isToday }) {
+export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, activites }) {
 	return (
-		// Viktigt, byt ut färgerna till theme colors när dom är klara
 		<Box
 			sx={{
 				minWidth: 100,
@@ -10,7 +10,7 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday }) 
 				border: (theme) => (isToday ? `2px solid ${theme.palette.primary.main}` : `2px solid ${theme.palette.divider}`),
 				borderRadius: 3,
 				p: 2,
-				bgcolor: "backgroun.paper",
+				bgcolor: "background.paper",
 				transition: "all 0.2s",
 				"&:hover": {
 					borderColor: isToday ? "primary.main" : "action.hover",
@@ -24,7 +24,14 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday }) 
 					{dayNumber}
 				</Typography>
 			</Stack>
-			<Stack>{/* Sen när vi löst aktiviterna så kommer dom hamna här i en slags map. */}</Stack>
+			<Stack>
+				{activities &&
+					activities.map((activity) => (
+						<Button startIcon={activity.action ? <Restaurant /> : <DirectionsRun />} key={activity.id}>
+							{activity.title}
+						</Button>
+					))}
+			</Stack>
 		</Box>
 	);
 }
