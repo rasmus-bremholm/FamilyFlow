@@ -41,7 +41,7 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
       maxWidth="xs"
       slotProps={{
         paper: {
-          sx: { borderRadius: 4, p: 1 },
+          sx: { borderRadius: 4, p: 1, position: "relative" },
         },
       }}
     >
@@ -52,7 +52,6 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
           position: "absolute",
           right: 8,
           top: 8,
-          color: "text.secondary",
         }}
       >
         <CloseIcon />
@@ -64,7 +63,6 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
 
       <DialogContent>
         <Box component="form" onSubmit={handleSubmit}>
-					
           {/* Type Toggle */}
           <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
             Type
@@ -74,7 +72,15 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
             exclusive
             onChange={(_, value) => value && setType(value)}
             fullWidth
-            sx={{ mb: 2 }}
+            sx={{
+              mb: 3,
+              "& .MuiToggleButton-root": {
+                textTransform: "none",
+                borderRadius: 3,
+                border: "1.5px solid #c8e1c8",
+                ml: 1,
+              },
+            }}
           >
             <ToggleButton value="meal" color="primary" sx={{ borderRadius: 2 }}>
               <RestaurantIcon color="primary" sx={{ mr: 1 }} /> Meal
@@ -99,7 +105,12 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
             margin="dense"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            sx={{ borderRadius: 2, mb: 2 }}
+            InputProps={{
+              sx: {
+                borderRadius: 3,
+              },
+            }}
+            sx={{ mb: 2 }}
           />
 
           {/* Notes */}
@@ -114,28 +125,50 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
             margin="dense"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            sx={{ borderRadius: 2, mb: 2 }}
+            InputProps={{
+              sx: {
+                borderRadius: 3,
+              },
+            }}
+            sx={{ mb: 2 }}
           />
         </Box>
       </DialogContent>
 
-      <DialogActions>
+      <DialogActions
+        sx={{
+          px: 3,
+          pb: 3,
+          pt: 0,
+          display: "flex",
+          gap: 1,
+        }}
+      >
         <Button
           onClick={onClose}
-          color="primary"
           variant="outlined"
-          sx={{ borderRadius: 2, width: "100%" }}
+          fullWidth
+          color="primary"
+          sx={{
+            borderRadius: 3,
+            textTransform: "none",
+          }}
         >
-          Cancel
+          cancel
         </Button>
+
         <Button
           type="submit"
-          color="primary"
           variant="contained"
-          sx={{ borderRadius: 2, width: "100%" }}
+          color="primary"
+          fullWidth
+          sx={{
+            borderRadius: 3,
+            textTransform: "none",
+          }}
           onClick={handleSubmit}
         >
-          {type === "meal" ? "Add Meal" : "Add Activity"}
+          {type === "meal" ? "add meal" : "add activity"}
         </Button>
       </DialogActions>
     </Dialog>

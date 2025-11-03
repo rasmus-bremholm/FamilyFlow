@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <Container sx={{ mt: 4 }}>
-      <Button
+      {/*       <Button
         variant="contained"
         color="success"
         onClick={() => setOpen(true)}
@@ -28,7 +28,7 @@ export default function Home() {
         date="Monday, October 27"
         onClose={() => setOpen(false)}
         onSubmit={handleAddPlan}
-      />
+      /> */}
     </Container>
   );
 }
