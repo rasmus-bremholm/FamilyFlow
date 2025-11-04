@@ -11,7 +11,7 @@ const theme = createTheme({
 		background: {
 			default: "#F5FAF7",
 			card: "#FBFBFB"
-		},
+		},	
 		text: {
 			primary: "#2E2E2E",
 			secondary: "#6C9380"
