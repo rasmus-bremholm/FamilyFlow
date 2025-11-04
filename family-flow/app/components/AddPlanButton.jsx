@@ -13,7 +13,7 @@ export default function AddPlanButton() {
     };
 
     return (
-        <Container sx={{ mt: 4 }}>
+      <>
             <Button
                 variant="contained"
                 color="success"
@@ -29,6 +29,6 @@ export default function AddPlanButton() {
                 onClose={() => setOpen(false)}
                 onSubmit={handleAddPlan}
             />
-        </Container>
+       </>
     );
 }
