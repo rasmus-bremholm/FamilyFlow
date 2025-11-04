@@ -1,3 +1,4 @@
+"use client";
 import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack } from "@mui/material";
 
 export default function CalendarCard({ dayName, shortDay, dayNumber, isToday }) {
@@ -10,7 +11,7 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday }) 
 				border: (theme) => (isToday ? `2px solid ${theme.palette.primary.main}` : `2px solid ${theme.palette.divider}`),
 				borderRadius: 3,
 				p: 2,
-				bgcolor: "backgroun.paper",
+				bgcolor: "background.paper",
 				transition: "all 0.2s",
 				"&:hover": {
 					borderColor: isToday ? "primary.main" : "action.hover",
