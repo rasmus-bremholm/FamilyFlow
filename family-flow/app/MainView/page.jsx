@@ -9,7 +9,6 @@ import { useWeekNavigation } from "@/lib/useWeekNavigation";
 
 function WeeklySchedule() {
 	const { previousWeek, nextWeek, currentWeek, weekNumber } = useWeekNavigation();
-	console.log(currentWeek[0].month);
 
 	return (
 		<Container maxWidth={false} sx={{ height: "100vh" }}>
@@ -30,15 +29,19 @@ function WeeklySchedule() {
 					<AddPlanButton />
 				</Box>
 			</Box>
-			<Box display='flex' direction='row' justifyContent='space-between'>
+			<Box
+				display='flex'
+				direction='row'
+				justifyContent='space-between'
+				sx={{ backgroundColor: "background.card", p: 2, borderRadius: 3, border: (theme) => `1px solid ${theme.palette.divider}` }}>
 				<WeekNavButton direction={"prev"} onClick={() => previousWeek()} />
 				<Box>
-					<Typography variant='h2' textAlign='center'>
+					<Typography variant='h4' component='h2' textAlign='center'>
 						v. {weekNumber}
 					</Typography>
-					<Box display='flex' gap={2}>
-						<Typography variant='h6'>{currentWeek[0].month}</Typography>
-						<Typography variant='h6'>{currentWeek[0].year}</Typography>
+					<Box display='flex' gap={1}>
+						<Typography variant='subtitle'>{currentWeek[0].month}</Typography>
+						<Typography variant='subtitle'>{currentWeek[0].year}</Typography>
 					</Box>
 				</Box>
 				<WeekNavButton direction={"next"} onClick={() => nextWeek()} />
