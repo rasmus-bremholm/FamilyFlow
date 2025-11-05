@@ -33,6 +33,7 @@ function WeeklySchedule() {
 				display='flex'
 				direction='row'
 				justifyContent='space-between'
+				alignItems='center'
 				sx={{ backgroundColor: "background.card", p: 2, borderRadius: 3, border: (theme) => `1px solid ${theme.palette.divider}` }}>
 				<WeekNavButton direction={"prev"} onClick={() => previousWeek()} />
 				<Box>
