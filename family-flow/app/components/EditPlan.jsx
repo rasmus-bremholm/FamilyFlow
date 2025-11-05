@@ -8,9 +8,11 @@ export default function EditPlan() {
   const [open, setOpen] = useState(false);
 
   const ActivityToEdit = {
-    type: "activity",
+    activityCategory: "Sports / Exercise",
+    activityType: "activity",
     title: "Morning Run",
-    time: "07:30",
+    startTime: "07:30",
+    date: "2025-11-06",
     person: "Person 1",
     notes: "Warm up 10 min",
   };
@@ -21,14 +23,14 @@ export default function EditPlan() {
 
   return (
     <>
-      <Button
+      {/*       <Button
         variant="contained"
         color="primary"
         onClick={() => setOpen(true)}
         sx={{ borderRadius: 2, textTransform: "none", px: 3 }}
       >
         Edit Plan
-      </Button>
+      </Button> */}
 
       <Modal
         open={open}
