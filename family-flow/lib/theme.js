@@ -23,6 +23,7 @@ const theme = createTheme({
     background: {
       default: "#F5FAF7",
       card: "#FBFBFB",
+			input: "#edfbf2ff",
     },
     text: {
       primary: "#2E2E2E",

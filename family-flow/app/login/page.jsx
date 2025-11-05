@@ -56,12 +56,30 @@ export default function LoginPage() {
             label="Email"
             id="outlined-size-normal"
             placeholder="Email"
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                backgroundColor: theme.palette.background.default,
+                borderRadius: 2,
+                "&.Mui-focused": {
+                  backgroundColor: theme.palette.background.input,
+                },
+              },
+            }}
           />
           <TextField
             label="Password"
             type="password"
             id="outlined-size-normal"
             placeholder="Password"
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                backgroundColor: theme.palette.background.default,
+                borderRadius: 2,
+                "&.Mui-focused": {
+                  backgroundColor: theme.palette.background.input,
+                },
+              },
+            }}
           />
         </Stack>
         <Button variant="contained" color="primary" sx={{ py: 1.5 }}>
