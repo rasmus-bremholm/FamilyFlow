@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import isoWeek from "dayjs/plugin/isoWeek";
+import "dayjs/locale/sv";
 
 dayjs.extend(weekOfYear);
 dayjs.extend(isoWeek);
