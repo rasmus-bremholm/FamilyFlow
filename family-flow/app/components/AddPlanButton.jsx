@@ -1,34 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { Container, Button } from "@mui/material";
-import ModalAddPlan from "./ModalAddPlan";
+import { Button } from "@mui/material";
+import Modal from "./Modal";
 
 export default function AddPlanButton() {
-    const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-    const handleAddPlan = (data) => {
-        console.log("Plan added:", data);
-        // Här kan du spara i Supabase eller local state
-    };
+  const handleAddPlan = (data) => {
+    localStorage.setItem("added plan", data);
+    console.log("Plan added:", data);
+  };
 
-    return (
-      <>
-            <Button
-                variant="contained"
-                color="success"
-                onClick={() => setOpen(true)}
-                sx={{ borderRadius: 2 }}
-            >
-                + Add Plan
-            </Button>
+  return (
+    <>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => setOpen(true)}
+        sx={{ borderRadius: 2, textTransform: "none", px: 3 }}
+      >
+        + Add Plan
+      </Button>
 
-            <ModalAddPlan
-                open={open}
-                date="Monday, October 27"
-                onClose={() => setOpen(false)}
-                onSubmit={handleAddPlan}
-            />
-       </>
-    );
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        onSubmit={handleAddPlan}
+        mode="add"
+      />
+    </>
+  );
 }

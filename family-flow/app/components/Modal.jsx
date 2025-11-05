@@ -1,0 +1,386 @@
+"use client";
+
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  TextField,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+  Box,
+  IconButton,
+  MenuItem,
+} from "@mui/material";
+import RestaurantIcon from "@mui/icons-material/Restaurant";
+import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
+import CloseIcon from "@mui/icons-material/Close";
+import DeleteIcon from "@mui/icons-material/Delete";
+
+import { useState } from "react";
+
+export default function Modal({ open, onClose, onSubmit, mode, activity }) {
+  const [activityType, setActivityType] = useState(
+    mode === "edit" && activity ? activity.activityType : "meal"
+  );
+  const [title, setTitle] = useState(
+    mode === "edit" && activity ? activity.title : ""
+  );
+  const [activityCategory, setActivityCategory] = useState(
+    mode === "edit" && activity ? activity.activityCategory : ""
+  );
+  const [startTime, setStartTime] = useState(
+    mode === "edit" && activity ? activity.startTime : ""
+  );
+  const [date, setDate] = useState(
+    mode === "edit" && activity ? activity.date : ""
+  );
+  const [person, setPerson] = useState(
+    mode === "edit" && activity ? activity.person : ""
+  );
+  const [notes, setNotes] = useState(
+    mode === "edit" && activity ? activity.notes : ""
+  );
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit({
+      activityType,
+      title,
+      activityCategory,
+      startTime,
+      date,
+      person,
+      notes,
+    });
+
+    if (mode === "add") {
+      setActivityType("meal");
+      setTitle("");
+      setActivityCategory("");
+      setStartTime("");
+      setDate("");
+      setPerson("");
+      setNotes("");
+    }
+    onClose();
+  };
+
+  return (
+    <Dialog
+      open={open}
+      onClose={onClose}
+      fullWidth
+      slotProps={{
+        paper: {
+          sx: { borderRadius: 4, p: 1, position: "relative" },
+        },
+      }}
+    >
+      {/* X Close Button */}
+      <IconButton
+        onClick={onClose}
+        sx={{
+          position: "absolute",
+          right: 8,
+          top: 8,
+          color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
+
+      <DialogTitle
+        sx={{
+          color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+          fontWeight: 550,
+          fontSize: "1.25rem",
+        }}
+      >
+        {mode === "add" ? "Add Plan" : "Edit Plan"}
+      </DialogTitle>
+
+      <DialogContent>
+        <Box component="form" onSubmit={handleSubmit}>
+          {/* Type Toggle */}
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+              mb: 0.5,
+            }}
+          >
+            Type
+          </Typography>
+          <ToggleButtonGroup
+            value={activityType}
+            exclusive
+            onChange={(_, value) => value && setActivityType(value)}
+            fullWidth
+            sx={{
+              mb: 3,
+              display: "flex",
+              gap: 1,
+              "& .MuiToggleButton-root": {
+                textTransform: "none",
+                borderRadius: 3,
+                border: (theme) => `1.5px solid ${theme.palette.primary.light}`,
+              },
+            }}
+          >
+            <ToggleButton value="meal" color="primary" sx={{ borderRadius: 2 }}>
+              <RestaurantIcon color="primary" sx={{ mr: 1 }} /> Meal
+            </ToggleButton>
+            <ToggleButton
+              value="activity"
+              color="secondary"
+              sx={{ borderRadius: 2 }}
+            >
+              <DirectionsRunIcon color="secondary" sx={{ mr: 1 }} /> Activity
+            </ToggleButton>
+          </ToggleButtonGroup>
+
+          {/* Title or activity */}
+          {mode === "add" && activityType === "meal" ? (
+            <>
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+                  mb: 0.5,
+                }}
+              >
+                Title *
+              </Typography>
+              <TextField
+                placeholder={
+                  activityType === "meal"
+                    ? "e.g., Spaghetti Bolognese"
+                    : "e.g., Park Playdate"
+                }
+                fullWidth
+                required
+                margin="dense"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                InputProps={{
+                  sx: {
+                    borderRadius: 3,
+                  },
+                }}
+                sx={{ mb: 2 }}
+              />
+            </>
+          ) : (
+            <>
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+                  mb: 0.5,
+                }}
+              >
+                Category *
+              </Typography>
+              <TextField
+                select
+                fullWidth
+                required
+                margin="dense"
+                value={activityCategory}
+                onChange={(e) => setActivityCategory(e.target.value)}
+                InputProps={{
+                  sx: {
+                    borderRadius: 3,
+                  },
+                }}
+                sx={{ mb: 2 }}
+              >
+                {[
+                  "Homework / Study",
+                  "Outdoor Play",
+                  "Sports / Exercise",
+                  "Arts & Crafts",
+                  "Music / Dance",
+                  "Chores / Household Tasks",
+                  "Screen / Media Time",
+                  "Social / Playdates",
+                  "Relax / Family Time",
+                  "Nature / Outdoor Adventures",
+                ].map((category) => (
+                  <MenuItem key={category} value={category}>
+                    {category}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </>
+          )}
+
+          {/* Time */}
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+              mb: 0.5,
+            }}
+          >
+            Time *
+          </Typography>
+          <TextField
+            required
+            type="time"
+            fullWidth
+            margin="dense"
+            value={startTime}
+            onChange={(e) => setStartTime(e.target.value)}
+            InputProps={{
+              sx: {
+                borderRadius: 3,
+              },
+            }}
+            sx={{ mb: 2 }}
+          />
+
+          {/* Date */}
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+              mb: 0.5,
+            }}
+          >
+            Date *
+          </Typography>
+          <TextField
+            required
+            type="date"
+            fullWidth
+            margin="dense"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            InputProps={{
+              sx: {
+                borderRadius: 3,
+              },
+            }}
+            sx={{ mb: 2 }}
+          />
+
+          {/* Assign */}
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+              mb: 0.5,
+            }}
+          >
+            Assign to *
+          </Typography>
+          <TextField
+            required
+            select
+            fullWidth
+            margin="dense"
+            value={person}
+            onChange={(e) => setPerson(e.target.value)}
+            InputProps={{
+              sx: {
+                borderRadius: 3,
+              },
+            }}
+            sx={{ mb: 2 }}
+          >
+            <MenuItem value="Person 1">Person 1</MenuItem>
+            <MenuItem value="Person 2">Person 2</MenuItem>
+          </TextField>
+
+          {/* Notes */}
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+              mb: 0.5,
+            }}
+          >
+            Notes (optional)
+          </Typography>
+          <TextField
+            placeholder="Add any notes..."
+            fullWidth
+            multiline
+            minRows={2}
+            margin="dense"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            InputProps={{
+              sx: {
+                borderRadius: 3,
+              },
+            }}
+            sx={{ mb: 2 }}
+          />
+        </Box>
+      </DialogContent>
+
+      <DialogActions
+        sx={{
+          px: 3,
+          pb: 3,
+          pt: 0,
+          display: "flex",
+          gap: 1,
+        }}
+      >
+        {/* Render delete button in edit mode */}
+        {mode === "edit" && (
+          <Button
+            onClick={onClose}
+            variant="outlined"
+            fullWidth
+            color="primary"
+            sx={{
+              borderRadius: 3,
+              textTransform: "none",
+            }}
+          >
+            <DeleteIcon color="primary" sx={{ mr: 1 }} />
+            Delete
+          </Button>
+        )}
+
+        <Button
+          onClick={onClose}
+          variant="outlined"
+          fullWidth
+          color="primary"
+          sx={{
+            borderRadius: 3,
+            textTransform: "none",
+          }}
+        >
+          Cancel
+        </Button>
+
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{
+            borderRadius: 3,
+            textTransform: "none",
+          }}
+          onClick={handleSubmit}
+        >
+          {mode === "add"
+            ? activityType === "meal"
+              ? "Add Meal"
+              : "Add Activity"
+            : "Save Changes"}
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+}
