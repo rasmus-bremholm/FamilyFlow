@@ -1,7 +1,6 @@
 "use client";
 import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack, Button } from "@mui/material";
 import { Restaurant, DirectionsRun } from "@mui/icons-material";
-import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack } from "@mui/material";
 
 export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, activites }) {
 	return (
@@ -27,12 +26,14 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, ac
 				</Typography>
 			</Stack>
 			<Stack>
-				{activities &&
+				{/*
+	{activities &&
 					activities.map((activity) => (
 						<Button startIcon={activity.action ? <Restaurant /> : <DirectionsRun />} key={activity.id}>
 							{activity.title}
 						</Button>
 					))}
+					*/}
 			</Stack>
 		</Box>
 	);
