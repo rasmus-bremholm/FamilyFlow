@@ -23,6 +23,18 @@ const theme = createTheme({
 			primary: "#2E2E2E",
 			secondary: "#6C9380",
 		},
+		activity: {
+			homework: "",
+			outdoor: "",
+			sports: "",
+			arts: "",
+			music: "",
+			chore: "",
+			screen: "",
+			social: "",
+			relax: "",
+			nature: "",
+		}
 	},
 	typography: {
 		fontFamily: [RobotoFont.style.fontFamily, "Arial", "sans-serif"].join(","),
