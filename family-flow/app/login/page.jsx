@@ -14,6 +14,7 @@ export default function LoginPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleLogin = () => {
     const loggedInUser = loginUser(email, password);
@@ -22,6 +23,7 @@ export default function LoginPage() {
       console.log("Success!");
     } else {
       console.log("D'oh!");
+      setError("Invalid email or password");
     }
   };
 
@@ -37,8 +39,7 @@ export default function LoginPage() {
       }}
     >
       <Stack
-        color="primary"
-        spacing={5}
+        spacing={4}
         sx={{
           alignItems: "stretch",
           backgroundColor: theme.palette.background.card,
@@ -65,18 +66,21 @@ export default function LoginPage() {
           <Typography variant="h1" align="center" sx={{ fontSize: "1.75rem" }}>
             Family Planner
           </Typography>
-          <Typography align="center" sx={{ color: "primary.main" }}>
+          <Typography
+            component="p"
+            align="center"
+            sx={{ color: "primary.main" }}
+          >
             Sign in to your account.
           </Typography>
         </Stack>
         <Stack spacing={4}>
           <TextField
             label="Email"
-						type="email"
-            id="outlined-size-normal"
+            type="email"
             placeholder="Email"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             sx={{
               "& .MuiOutlinedInput-root": {
                 backgroundColor: theme.palette.background.default,
@@ -90,10 +94,9 @@ export default function LoginPage() {
           <TextField
             label="Password"
             type="password"
-            id="outlined-size-normal"
             placeholder="Password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             sx={{
               "& .MuiOutlinedInput-root": {
                 backgroundColor: theme.palette.background.default,
@@ -105,9 +108,16 @@ export default function LoginPage() {
             }}
           />
         </Stack>
-        <Button variant="contained" color="primary" onClick={handleLogin} sx={{ py: 1.5 }}>
+        
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleLogin}
+          sx={{ py: 1.5 }}
+        >
           Sign In
         </Button>
+				<Typography align="center" sx={{ fontSize: "0.80rem", minHeight: "1.5rem"}}>{error}</Typography>
       </Stack>
     </Container>
   );
