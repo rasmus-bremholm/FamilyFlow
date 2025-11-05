@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@mui/material";
-import ModalAddPlan from "./ModalAddPlan";
+import ModalAddPlan from "./Modal";
 
 export default function AddPlanButton() {
   const [open, setOpen] = useState(false);

@@ -18,14 +18,18 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
+export default function Modal({ open, date, onClose, onSubmit, mode }) {
   const [type, setType] = useState("meal");
   const [title, setTitle] = useState("");
   const [time, setTime] = useState("");
   const [person, setPerson] = useState("");
   const [notes, setNotes] = useState("");
+
+  useEffect(() => {
+		
+	});
 
   const handleSubmit = (e) => {
     e.preventDefault();
