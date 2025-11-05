@@ -17,6 +17,7 @@ import {
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import CloseIcon from "@mui/icons-material/Close";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import { useState } from "react";
 
@@ -62,7 +63,6 @@ export default function Modal({
       open={open}
       onClose={onClose}
       fullWidth
-      maxWidth="xs"
       slotProps={{
         paper: {
           sx: { borderRadius: 4, p: 1, position: "relative" },
@@ -82,8 +82,7 @@ export default function Modal({
       </IconButton>
 
       <DialogTitle sx={{ fontWeight: 550, fontSize: "1.25rem" }}>
-        {date}{" "}
-        {/* {mode === "add" ? `Add Plan - ${date}` : `Edit Plan - ${date}`} */}
+        {mode === "add" ? `Add Plan - ${date}` : `Edit Plan - ${date}`}
       </DialogTitle>
 
       <DialogContent>
@@ -213,6 +212,23 @@ export default function Modal({
           gap: 1,
         }}
       >
+        {/* Render delete button in edit mode */}
+        {mode === "edit" && (
+          <Button
+            onClick={onClose}
+            variant="outlined"
+            fullWidth
+            color="primary"
+            sx={{
+              borderRadius: 3,
+              textTransform: "none",
+            }}
+          >
+            <DeleteIcon color="primary" sx={{ mr: 1 }} />
+            Delete
+          </Button>
+        )}
+
         <Button
           onClick={onClose}
           variant="outlined"

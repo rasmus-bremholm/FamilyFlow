@@ -6,6 +6,7 @@ import AddPlanButton from "../components/AddPlanButton";
 import WeekCards from "../components/WeekCards";
 import WeekNavButton from "../components/WeekNavButton";
 import { useWeekNavigation } from "@/lib/useWeekNavigation";
+import EditPlan from "../components/EditPlan";
 
 function WeeklySchedule() {
 	const { previousWeek, nextWeek, currentWeek, weekNumber } = useWeekNavigation();
@@ -27,6 +28,7 @@ function WeeklySchedule() {
 
 				<Box sx={{ display: "flex", justifyContent: "flex-end" }}>
 					<AddPlanButton />
+					<EditPlan />
 				</Box>
 			</Box>
 			<Box

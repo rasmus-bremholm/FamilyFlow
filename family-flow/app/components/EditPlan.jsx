@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@mui/material";
 import Modal from "./Modal";
 
 export default function EditPlan() {
@@ -19,13 +20,24 @@ export default function EditPlan() {
   };
 
   return (
-    <Modal
-      open={open}
-      date="Monday, October 27"
-      onClose={() => setOpen(false)}
-      onSubmit={handleEditPlan}
-      mode="edit"
-      activity={ActivityToEdit}
-    />
+    <>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => setOpen(true)}
+        sx={{ borderRadius: 2, textTransform: "none", px: 3 }}
+      >
+        Edit Plan
+      </Button>
+
+      <Modal
+        open={open}
+        date="Monday, October 27"
+        onClose={() => setOpen(false)}
+        onSubmit={handleEditPlan}
+        mode="edit"
+        activity={ActivityToEdit}
+      />
+    </>
   );
 }
