@@ -45,11 +45,15 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 			<Stack spacing={0.5} sx={{ mt: 2 }}>
 				{activities.map((activity) => (
 					<Box key={activity.id} sx={{ borderRadius: 1, p: 1, backgroundColor: activity.color }}>
-						<Typography variant='body2'>{activity.startTime}</Typography>
-						<Typography>{activity.title}</Typography>
-						<Box display='flex' justifyContent='flex-end'>
-							<Avatar sx={{ height: 12, width: 12 }} {...stringAvatar(`${activity.createdBy}`)} />
-						</Box>
+						<Stack direction='row'>
+							<Box>
+								<Typography>{activity.title}</Typography>
+								<Typography variant='body2'>{activity.startTime}</Typography>
+							</Box>
+							<Box display='flex' flex={1} flexDirection='row' justifyContent='flex-end' alignItems='flex-start'>
+								<Avatar sx={{ height: 12, width: 12 }} {...stringAvatar(`${activity.createdBy}`)} />
+							</Box>
+						</Stack>
 					</Box>
 				))}
 			</Stack>
