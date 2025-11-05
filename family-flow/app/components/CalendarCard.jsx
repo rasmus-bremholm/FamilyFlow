@@ -1,5 +1,7 @@
+"use client";
 import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack, Button } from "@mui/material";
 import { Restaurant, DirectionsRun } from "@mui/icons-material";
+import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack } from "@mui/material";
 
 export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, activites }) {
 	return (

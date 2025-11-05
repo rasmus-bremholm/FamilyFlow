@@ -1,15 +1,12 @@
 import CalendarCard from "./CalendarCard";
 import { Grid } from "@mui/material";
-import { useWeekNavigation } from "@/lib/useWeekNavigation";
+//import { useWeekNavigation } from "@/lib/useWeekNavigation";
 
-export default function WeekCards() {
-	const { currentWeek } = useWeekNavigation();
-	console.log(currentWeek);
-
+export default function WeekCards({ currentWeek }) {
 	return (
-		<Grid container spacing={2}>
+		<Grid container spacing={2} sx={{ mt: 2 }}>
 			{currentWeek.map((day) => (
-				<Grid key={day.date}>
+				<Grid key={day.date} size={1.7}>
 					<CalendarCard shortDay={day.shortDay} dayNumber={day.dayNumber} isToday={day.isToday} />
 				</Grid>
 			))}

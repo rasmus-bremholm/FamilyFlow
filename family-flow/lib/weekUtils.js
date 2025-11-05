@@ -18,6 +18,7 @@ export function getWeekArray(startDate) {
 			dayName: date.format("dddd"), // Monday, Tuesday etc...
 			shortDay: date.format("ddd"),
 			dayNumber: date.date(), // 1-31
+			year: date.format("YYYY"),
 			month: date.format("MMMM"),
 			isToday: date.isSame(today, "day"),
 			dayjs: date, // Hela datum objektet, ifall man behöver det.
@@ -35,9 +36,9 @@ export function getNextWeekStart(currentStart) {
 	return currentStart.add(1, "week");
 }
 
-export function getPreviousWeekStart(currenStart) {
+export function getPreviousWeekStart(currentStart) {
 	// Samma som förut, bara bakåt.
-	return currenStart.subtract(1, "week");
+	return currentStart.subtract(1, "week");
 }
 
 export function getWeekNumber(date) {

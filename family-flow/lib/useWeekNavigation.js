@@ -16,7 +16,7 @@ export function useWeekNavigation() {
 		setWeekStart((prev) => getPreviousWeekStart(prev));
 	};
 
-	const gotToToday = () => {
+	const goToToday = () => {
 		setWeekStart(getCurrentWeekStart());
 	};
 
@@ -31,7 +31,7 @@ export function useWeekNavigation() {
 		weekYear,
 		nextWeek,
 		previousWeek,
-		gotToToday,
+		goToToday,
 		goToWeek,
 		weekStart,
 	};
