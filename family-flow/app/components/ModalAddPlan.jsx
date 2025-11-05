@@ -12,6 +12,7 @@ import {
   Typography,
   Box,
   IconButton,
+  MenuItem,
 } from "@mui/material";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
@@ -22,12 +23,15 @@ import { useState } from "react";
 export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
   const [type, setType] = useState("meal");
   const [title, setTitle] = useState("");
+  const [time, setTime] = useState("");
+  const [person, setPerson] = useState("");
   const [notes, setNotes] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({ type, title, notes });
     setTitle("");
+    setTime("");
     setNotes("");
     setType("meal");
     onClose();
@@ -74,11 +78,12 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
             fullWidth
             sx={{
               mb: 3,
+              display: "flex",
+              gap: 1,
               "& .MuiToggleButton-root": {
                 textTransform: "none",
                 borderRadius: 3,
                 border: "1.5px solid #c8e1c8",
-                ml: 1,
               },
             }}
           >
@@ -99,11 +104,32 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
             Title *
           </Typography>
           <TextField
-            placeholder="e.g., Spaghetti Bolognese"
+            placeholder={
+              type === "meal"
+                ? "e.g., Spaghetti Bolognese"
+                : "e.g., Park Playdate"
+            }
             fullWidth
             required
             margin="dense"
             value={title}
+            onChange={(e) => setPerson(e.target.value)}
+            InputProps={{
+              sx: {
+                borderRadius: 3,
+              },
+            }}
+            sx={{ mb: 2 }}
+          />
+
+          {/* Time */}
+          <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+            Time (optional)
+          </Typography>
+          <TextField
+            type="time"
+            fullWidth
+            margin="dense"
             onChange={(e) => setTitle(e.target.value)}
             InputProps={{
               sx: {
@@ -112,6 +138,26 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
             }}
             sx={{ mb: 2 }}
           />
+
+          {/* Assign */}
+          <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+            Assign to (optional)
+          </Typography>
+          <TextField
+            select
+            fullWidth
+            margin="dense"
+            onChange={(e) => setTitle(e.target.value)}
+            InputProps={{
+              sx: {
+                borderRadius: 3,
+              },
+            }}
+            sx={{ mb: 2 }}
+          >
+            <MenuItem value="Person 1">Person 1</MenuItem>
+            <MenuItem value="Person 2">Person 2</MenuItem>
+          </TextField>
 
           {/* Notes */}
           <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
@@ -154,7 +200,7 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
             textTransform: "none",
           }}
         >
-          cancel
+          Cancel
         </Button>
 
         <Button
@@ -168,7 +214,7 @@ export default function ModalAddPlan({ open, date, onClose, onSubmit }) {
           }}
           onClick={handleSubmit}
         >
-          {type === "meal" ? "add meal" : "add activity"}
+          {type === "meal" ? "Add meal" : "Add activity"}
         </Button>
       </DialogActions>
     </Dialog>
