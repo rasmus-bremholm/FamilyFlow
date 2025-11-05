@@ -1,15 +1,24 @@
 "use client";
-import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack, Button } from "@mui/material";
+import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack, Button, Avatar } from "@mui/material";
 import { useState, useEffect, useMemo } from "react";
 
 export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, date }) {
 	const activities = useMemo(() => {
+		// Ett weird hack för att "localstorage is not defined ska försvinna"
+		if (typeof window === "undefined") return [];
+
 		const storedActivities = localStorage.getItem("activities");
 		if (!storedActivities) return [];
 
 		const allActivities = JSON.parse(storedActivities);
 		return allActivities.filter((activity) => activity.date === date).sort((a, b) => a.startTime.localeCompare(b.startTime));
 	}, [date]);
+
+	function stringAvatar(name) {
+		return {
+			children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+		};
+	}
 
 	return (
 		<Box
@@ -35,7 +44,13 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 			</Stack>
 			<Stack spacing={0.5} sx={{ mt: 2 }}>
 				{activities.map((activity) => (
-					<Box key={activity.id}>{activity.startTime}</Box>
+					<Box key={activity.id} sx={{ borderRadius: 1, p: 1, backgroundColor: activity.color }}>
+						<Typography variant='body2'>{activity.startTime}</Typography>
+						<Typography>{activity.title}</Typography>
+						<Box display='flex' justifyContent='flex-end'>
+							<Avatar sx={{ height: 12, width: 12 }} {...stringAvatar(`${activity.createdBy}`)} />
+						</Box>
+					</Box>
 				))}
 			</Stack>
 		</Box>
