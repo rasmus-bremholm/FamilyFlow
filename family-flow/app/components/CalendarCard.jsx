@@ -1,8 +1,16 @@
 "use client";
 import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack, Button } from "@mui/material";
-import { Restaurant, DirectionsRun } from "@mui/icons-material";
+import { useState, useEffect, useMemo } from "react";
 
-export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, activites }) {
+export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, date }) {
+	const activities = useMemo(() => {
+		const storedActivities = localStorage.getItem("activities");
+		if (!storedActivities) return [];
+
+		const allActivities = JSON.parse(storedActivities);
+		return allActivities.filter((activity) => activity.date === date).sort((a, b) => a.startTime.localeCompare(b.startTime));
+	}, [date]);
+
 	return (
 		<Box
 			sx={{
@@ -25,15 +33,10 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, ac
 					{dayNumber}
 				</Typography>
 			</Stack>
-			<Stack>
-				{/*
-	{activities &&
-					activities.map((activity) => (
-						<Button startIcon={activity.action ? <Restaurant /> : <DirectionsRun />} key={activity.id}>
-							{activity.title}
-						</Button>
-					))}
-					*/}
+			<Stack spacing={0.5} sx={{ mt: 2 }}>
+				{activities.map((activity) => (
+					<Box key={activity.id}>{activity.startTime}</Box>
+				))}
 			</Stack>
 		</Box>
 	);
