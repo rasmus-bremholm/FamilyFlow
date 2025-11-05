@@ -18,18 +18,31 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export default function Modal({ open, date, onClose, onSubmit, mode }) {
-  const [type, setType] = useState("meal");
-  const [title, setTitle] = useState("");
-  const [time, setTime] = useState("");
-  const [person, setPerson] = useState("");
-  const [notes, setNotes] = useState("");
-
-  useEffect(() => {
-		
-	});
+export default function Modal({
+  open,
+  date,
+  onClose,
+  onSubmit,
+  mode,
+  activity,
+}) {
+  const [type, setType] = useState(
+    mode === "edit" && activity ? activity.type : "meal"
+  );
+  const [title, setTitle] = useState(
+    mode === "edit" && activity ? activity.title : ""
+  );
+  const [time, setTime] = useState(
+    mode === "edit" && activity ? activity.time : ""
+  );
+  const [person, setPerson] = useState(
+    mode === "edit" && activity ? activity.person : ""
+  );
+  const [notes, setNotes] = useState(
+    mode === "edit" && activity ? activity.notes : ""
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,7 +79,8 @@ export default function Modal({ open, date, onClose, onSubmit, mode }) {
       </IconButton>
 
       <DialogTitle sx={{ fontWeight: 550, fontSize: "1.25rem" }}>
-        {date}
+        {date}{" "}
+        {/* {mode === "add" ? `Add Plan - ${date}` : `Edit Plan - ${date}`} */}
       </DialogTitle>
 
       <DialogContent>
@@ -218,7 +232,11 @@ export default function Modal({ open, date, onClose, onSubmit, mode }) {
           }}
           onClick={handleSubmit}
         >
-          {type === "meal" ? "Add meal" : "Add activity"}
+          {mode === "add"
+            ? type === "meal"
+              ? "Add Meal"
+              : "Add Activity"
+            : "Save Changes"}
         </Button>
       </DialogActions>
     </Dialog>

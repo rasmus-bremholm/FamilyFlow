@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@mui/material";
-import ModalAddPlan from "./Modal";
+import Modal from "./Modal";
 
 export default function AddPlanButton() {
   const [open, setOpen] = useState(false);
@@ -22,11 +22,12 @@ export default function AddPlanButton() {
         + Add Plan
       </Button>
 
-      <ModalAddPlan
+      <Modal
         open={open}
         date="Monday, October 27"
         onClose={() => setOpen(false)}
         onSubmit={handleAddPlan}
+        mode="add"
       />
     </>
   );
