@@ -8,6 +8,7 @@ export default function AddPlanButton() {
   const [open, setOpen] = useState(false);
 
   const handleAddPlan = (data) => {
+    localStorage.setItem("added plan", data);
     console.log("Plan added:", data);
   };
 
@@ -24,7 +25,6 @@ export default function AddPlanButton() {
 
       <Modal
         open={open}
-        date="Monday, October 27"
         onClose={() => setOpen(false)}
         onSubmit={handleAddPlan}
         mode="add"

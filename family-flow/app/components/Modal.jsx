@@ -21,22 +21,21 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import { useState } from "react";
 
-export default function Modal({
-  open,
-  date,
-  onClose,
-  onSubmit,
-  mode,
-  activity,
-}) {
-  const [type, setType] = useState(
-    mode === "edit" && activity ? activity.type : "meal"
+export default function Modal({ open, onClose, onSubmit, mode, activity }) {
+  const [activityType, setActivityType] = useState(
+    mode === "edit" && activity ? activity.activityType : "meal"
   );
   const [title, setTitle] = useState(
     mode === "edit" && activity ? activity.title : ""
   );
-  const [time, setTime] = useState(
-    mode === "edit" && activity ? activity.time : ""
+  const [activityCategory, setActivityCategory] = useState(
+    mode === "edit" && activity ? activity.activityCategory : ""
+  );
+  const [startTime, setStartTime] = useState(
+    mode === "edit" && activity ? activity.startTime : ""
+  );
+  const [date, setDate] = useState(
+    mode === "edit" && activity ? activity.date : ""
   );
   const [person, setPerson] = useState(
     mode === "edit" && activity ? activity.person : ""
@@ -47,13 +46,24 @@ export default function Modal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ type, title, time, person, notes });
+    onSubmit({
+      activityType,
+      title,
+      activityCategory,
+      startTime,
+      date,
+      person,
+      notes,
+    });
 
     if (mode === "add") {
+      setActivityType("meal");
       setTitle("");
-      setTime("");
+      setActivityCategory("");
+      setStartTime("");
+      setDate("");
+      setPerson("");
       setNotes("");
-      setType("meal");
     }
     onClose();
   };
@@ -76,25 +86,38 @@ export default function Modal({
           position: "absolute",
           right: 8,
           top: 8,
+          color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
         }}
       >
         <CloseIcon />
       </IconButton>
 
-      <DialogTitle sx={{ fontWeight: 550, fontSize: "1.25rem" }}>
-        {mode === "add" ? `Add Plan - ${date}` : `Edit Plan - ${date}`}
+      <DialogTitle
+        sx={{
+          color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+          fontWeight: 550,
+          fontSize: "1.25rem",
+        }}
+      >
+        {mode === "add" ? "Add Plan" : "Edit Plan"}
       </DialogTitle>
 
       <DialogContent>
         <Box component="form" onSubmit={handleSubmit}>
           {/* Type Toggle */}
-          <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+              mb: 0.5,
+            }}
+          >
             Type
           </Typography>
           <ToggleButtonGroup
-            value={type}
+            value={activityType}
             exclusive
-            onChange={(_, value) => value && setType(value)}
+            onChange={(_, value) => value && setActivityType(value)}
             fullWidth
             sx={{
               mb: 3,
@@ -103,7 +126,7 @@ export default function Modal({
               "& .MuiToggleButton-root": {
                 textTransform: "none",
                 borderRadius: 3,
-                border: "1.5px solid #c8e1c8",
+                border: (theme) => `1.5px solid ${theme.palette.primary.light}`,
               },
             }}
           >
@@ -119,21 +142,99 @@ export default function Modal({
             </ToggleButton>
           </ToggleButtonGroup>
 
-          {/* Title */}
-          <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-            Title *
+          {/* Title or activity */}
+          {mode === "add" && activityType === "meal" ? (
+            <>
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+                  mb: 0.5,
+                }}
+              >
+                Title *
+              </Typography>
+              <TextField
+                placeholder={
+                  activityType === "meal"
+                    ? "e.g., Spaghetti Bolognese"
+                    : "e.g., Park Playdate"
+                }
+                fullWidth
+                required
+                margin="dense"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                InputProps={{
+                  sx: {
+                    borderRadius: 3,
+                  },
+                }}
+                sx={{ mb: 2 }}
+              />
+            </>
+          ) : (
+            <>
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+                  mb: 0.5,
+                }}
+              >
+                Category *
+              </Typography>
+              <TextField
+                select
+                fullWidth
+                required
+                margin="dense"
+                value={activityCategory}
+                onChange={(e) => setActivityCategory(e.target.value)}
+                InputProps={{
+                  sx: {
+                    borderRadius: 3,
+                  },
+                }}
+                sx={{ mb: 2 }}
+              >
+                {[
+                  "Homework / Study",
+                  "Outdoor Play",
+                  "Sports / Exercise",
+                  "Arts & Crafts",
+                  "Music / Dance",
+                  "Chores / Household Tasks",
+                  "Screen / Media Time",
+                  "Social / Playdates",
+                  "Relax / Family Time",
+                  "Nature / Outdoor Adventures",
+                ].map((category) => (
+                  <MenuItem key={category} value={category}>
+                    {category}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </>
+          )}
+
+          {/* Time */}
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+              mb: 0.5,
+            }}
+          >
+            Time *
           </Typography>
           <TextField
-            placeholder={
-              type === "meal"
-                ? "e.g., Spaghetti Bolognese"
-                : "e.g., Park Playdate"
-            }
-            fullWidth
             required
+            type="time"
+            fullWidth
             margin="dense"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={startTime}
+            onChange={(e) => setStartTime(e.target.value)}
             InputProps={{
               sx: {
                 borderRadius: 3,
@@ -142,16 +243,23 @@ export default function Modal({
             sx={{ mb: 2 }}
           />
 
-          {/* Time */}
-          <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-            Time (optional)
+          {/* Date */}
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+              mb: 0.5,
+            }}
+          >
+            Date *
           </Typography>
           <TextField
-            type="time"
+            required
+            type="date"
             fullWidth
             margin="dense"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             InputProps={{
               sx: {
                 borderRadius: 3,
@@ -161,10 +269,17 @@ export default function Modal({
           />
 
           {/* Assign */}
-          <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-            Assign to (optional)
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+              mb: 0.5,
+            }}
+          >
+            Assign to *
           </Typography>
           <TextField
+            required
             select
             fullWidth
             margin="dense"
@@ -182,7 +297,13 @@ export default function Modal({
           </TextField>
 
           {/* Notes */}
-          <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+              mb: 0.5,
+            }}
+          >
             Notes (optional)
           </Typography>
           <TextField
@@ -254,7 +375,7 @@ export default function Modal({
           onClick={handleSubmit}
         >
           {mode === "add"
-            ? type === "meal"
+            ? activityType === "meal"
               ? "Add Meal"
               : "Add Activity"
             : "Save Changes"}
