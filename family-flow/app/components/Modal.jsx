@@ -46,11 +46,14 @@ export default function Modal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ type, title, notes });
-    setTitle("");
-    setTime("");
-    setNotes("");
-    setType("meal");
+    onSubmit({ type, title, time, person, notes });
+
+    if (mode === "add") {
+      setTitle("");
+      setTime("");
+      setNotes("");
+      setType("meal");
+    }
     onClose();
   };
 
@@ -131,7 +134,7 @@ export default function Modal({
             required
             margin="dense"
             value={title}
-            onChange={(e) => setPerson(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
             InputProps={{
               sx: {
                 borderRadius: 3,
@@ -148,7 +151,8 @@ export default function Modal({
             type="time"
             fullWidth
             margin="dense"
-            onChange={(e) => setTitle(e.target.value)}
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
             InputProps={{
               sx: {
                 borderRadius: 3,
@@ -165,7 +169,8 @@ export default function Modal({
             select
             fullWidth
             margin="dense"
-            onChange={(e) => setTitle(e.target.value)}
+            value={person}
+            onChange={(e) => setPerson(e.target.value)}
             InputProps={{
               sx: {
                 borderRadius: 3,
