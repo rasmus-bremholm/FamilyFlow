@@ -1,15 +1,15 @@
 "use client";
 import { createTheme, ThemeOptions, Components } from "@mui/material/styles";
-import { Roboto, Fredoka } from "next/font/google";
+import { Roboto, Poppins } from "next/font/google";
 
 const RobotoFont = Roboto({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-const FredokaFont = Fredoka({
+const PoppinsFont = Poppins({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["600"],
 });
 
 const theme = createTheme({
@@ -32,7 +32,7 @@ const theme = createTheme({
   typography: {
     fontFamily: [RobotoFont.style.fontFamily, "Arial", "sans-serif"].join(","),
     h1: {
-      fontFamily: [FredokaFont.style.fontFamily, "Arial", "sans-serif"].join(
+      fontFamily: [PoppinsFont.style.fontFamily, "Arial", "sans-serif"].join(
         ","
       ),
       fontSize: "44px",
