@@ -1,11 +1,29 @@
 "use client";
 
+/* Hooks */
+import { useTheme } from "@mui/material/styles";
+import { useState } from "react";
+import { loginUser } from "@/lib/auth";
+
+/* MUI */
 import { Container, Button, Stack, TextField, Typography } from "@mui/material";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
-import { useTheme } from "@mui/material/styles";
 
 export default function LoginPage() {
   const theme = useTheme();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    const loggedInUser = loginUser(email, password);
+
+    if (loggedInUser) {
+      console.log("Success!");
+    } else {
+      console.log("D'oh!");
+    }
+  };
 
   return (
     <Container
@@ -54,8 +72,11 @@ export default function LoginPage() {
         <Stack spacing={4}>
           <TextField
             label="Email"
+						type="email"
             id="outlined-size-normal"
             placeholder="Email"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
             sx={{
               "& .MuiOutlinedInput-root": {
                 backgroundColor: theme.palette.background.default,
@@ -71,6 +92,8 @@ export default function LoginPage() {
             type="password"
             id="outlined-size-normal"
             placeholder="Password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
             sx={{
               "& .MuiOutlinedInput-root": {
                 backgroundColor: theme.palette.background.default,
@@ -82,7 +105,7 @@ export default function LoginPage() {
             }}
           />
         </Stack>
-        <Button variant="contained" color="primary" sx={{ py: 1.5 }}>
+        <Button variant="contained" color="primary" onClick={handleLogin} sx={{ py: 1.5 }}>
           Sign In
         </Button>
       </Stack>
