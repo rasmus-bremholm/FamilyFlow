@@ -1,8 +1,25 @@
 "use client";
-import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack, Button } from "@mui/material";
-import { Restaurant, DirectionsRun } from "@mui/icons-material";
+import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack, Button, Avatar } from "@mui/material";
+import { useState, useEffect, useMemo } from "react";
 
-export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, activites }) {
+export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, date }) {
+	const activities = useMemo(() => {
+		// Ett weird hack för att "localstorage is not defined ska försvinna"
+		if (typeof window === "undefined") return [];
+
+		const storedActivities = localStorage.getItem("activities");
+		if (!storedActivities) return [];
+
+		const allActivities = JSON.parse(storedActivities);
+		return allActivities.filter((activity) => activity.date === date).sort((a, b) => a.startTime.localeCompare(b.startTime));
+	}, [date]);
+
+	function stringAvatar(name) {
+		return {
+			children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+		};
+	}
+
 	return (
 		<Box
 			sx={{
@@ -25,15 +42,20 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, ac
 					{dayNumber}
 				</Typography>
 			</Stack>
-			<Stack>
-				{/*
-	{activities &&
-					activities.map((activity) => (
-						<Button startIcon={activity.action ? <Restaurant /> : <DirectionsRun />} key={activity.id}>
-							{activity.title}
-						</Button>
-					))}
-					*/}
+			<Stack spacing={0.5} sx={{ mt: 2 }}>
+				{activities.map((activity) => (
+					<Box key={activity.id} sx={{ borderRadius: 1, p: 1, backgroundColor: activity.color }}>
+						<Stack direction='row'>
+							<Box>
+								<Typography>{activity.title}</Typography>
+								<Typography variant='body2'>{activity.startTime}</Typography>
+							</Box>
+							<Box display='flex' flex={1} flexDirection='row' justifyContent='flex-end' alignItems='flex-start'>
+								<Avatar sx={{ height: 12, width: 12 }} {...stringAvatar(`${activity.createdBy}`)} />
+							</Box>
+						</Stack>
+					</Box>
+				))}
 			</Stack>
 		</Box>
 	);

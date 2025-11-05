@@ -7,7 +7,7 @@ export default function WeekCards({ currentWeek }) {
 		<Grid container spacing={2} sx={{ mt: 2 }}>
 			{currentWeek.map((day) => (
 				<Grid key={day.date} size={1.7}>
-					<CalendarCard shortDay={day.shortDay} dayNumber={day.dayNumber} isToday={day.isToday} />
+					<CalendarCard shortDay={day.shortDay} dayNumber={day.dayNumber} isToday={day.isToday} date={day.date} />
 				</Grid>
 			))}
 		</Grid>
