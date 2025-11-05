@@ -27,7 +27,8 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 				minHeight: 200,
 				border: (theme) => (isToday ? `2px solid ${theme.palette.primary.main}` : `2px solid ${theme.palette.divider}`),
 				borderRadius: 3,
-				p: 2,
+				px: { xs: 2, md: 1, lg: 2 },
+				py: 2,
 				bgcolor: "background.paper",
 				transition: "all 0.2s",
 				"&:hover": {
