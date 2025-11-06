@@ -7,6 +7,8 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 		// Ett weird hack för att "localstorage is not defined ska försvinna"
 		if (typeof window === "undefined") return [];
 
+
+		{/* EVENTS */}
 		const storedActivities = localStorage.getItem("activities");
 		if (!storedActivities) return [];
 
@@ -36,6 +38,7 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 				},
 			}}>
 			<Stack>
+				{/* Kolla över dagens namn. */}
 				<Typography variant='caption' sx={{ color: isToday ? "primary.main" : "text.secondary", fontWeight: 500 }}>
 					{shortDay}
 				</Typography>
