@@ -21,33 +21,31 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import { useState } from "react";
 
-export default function Modal({ open, onClose, onSubmit, mode, activity }) {
-  const [activityType, setActivityType] = useState(
-    mode === "edit" && activity ? activity.activityType : "meal"
+export default function Modal({ open, onClose, onSubmit, mode, event }) {
+  const [eventType, seteventType] = useState(
+    mode === "edit" && event ? event.eventType : "meal"
   );
   const [title, setTitle] = useState(
-    mode === "edit" && activity ? activity.title : ""
+    mode === "edit" && event ? event.title : ""
   );
   const [activityCategory, setActivityCategory] = useState(
-    mode === "edit" && activity ? activity.activityCategory : ""
+    mode === "edit" && event ? event.activityCategory : ""
   );
   const [startTime, setStartTime] = useState(
-    mode === "edit" && activity ? activity.startTime : ""
+    mode === "edit" && event ? event.startTime : ""
   );
-  const [date, setDate] = useState(
-    mode === "edit" && activity ? activity.date : ""
-  );
+  const [date, setDate] = useState(mode === "edit" && event ? event.date : "");
   const [membersId, setMembersId] = useState(
-    mode === "edit" && activity ? activity.membersId : ""
+    mode === "edit" && event ? event.membersId : []
   );
   const [notes, setNotes] = useState(
-    mode === "edit" && activity ? activity.notes : ""
+    mode === "edit" && event ? event.notes : ""
   );
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({
-      activityType,
+      eventType,
       title,
       activityCategory,
       startTime,
@@ -57,7 +55,7 @@ export default function Modal({ open, onClose, onSubmit, mode, activity }) {
     });
 
     if (mode === "add") {
-      setActivityType("meal");
+      seteventType("meal");
       setTitle("");
       setActivityCategory("");
       setStartTime("");
@@ -99,7 +97,7 @@ export default function Modal({ open, onClose, onSubmit, mode, activity }) {
           fontSize: "1.25rem",
         }}
       >
-        {mode === "add" ? "Add Plan" : "Edit Plan"}
+        {mode === "add" ? "Add Event" : "Edit Event"}
       </DialogTitle>
 
       <DialogContent>
@@ -115,9 +113,9 @@ export default function Modal({ open, onClose, onSubmit, mode, activity }) {
             Type
           </Typography>
           <ToggleButtonGroup
-            value={activityType}
+            value={eventType}
             exclusive
-            onChange={(_, value) => value && setActivityType(value)}
+            onChange={(_, value) => value && seteventType(value)}
             fullWidth
             sx={{
               mb: 3,
@@ -142,38 +140,37 @@ export default function Modal({ open, onClose, onSubmit, mode, activity }) {
             </ToggleButton>
           </ToggleButtonGroup>
 
-          {/* Title or activity */}
-          {mode === "add" && activityType === "meal" ? (
-            <>
-              <Typography
-                variant="subtitle2"
-                sx={{
-                  color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
-                  mb: 0.5,
-                }}
-              >
-                Title *
-              </Typography>
-              <TextField
-                placeholder={
-                  activityType === "meal"
-                    ? "e.g., Spaghetti Bolognese"
-                    : "e.g., Park Playdate"
-                }
-                fullWidth
-                required
-                margin="dense"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                InputProps={{
-                  sx: {
-                    borderRadius: 3,
-                  },
-                }}
-                sx={{ mb: 2 }}
-              />
-            </>
-          ) : (
+          {/* Title */}
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+              mb: 0.5,
+            }}
+          >
+            Title *
+          </Typography>
+          <TextField
+            placeholder={
+              eventType === "meal"
+                ? "e.g., Spaghetti Bolognese"
+                : "e.g., Park Playdate"
+            }
+            fullWidth
+            required
+            margin="dense"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            InputProps={{
+              sx: {
+                borderRadius: 3,
+              },
+            }}
+            sx={{ mb: 2 }}
+          />
+
+          {/* ActivityCategory */}
+          {mode === "add" && eventType === "activity" && (
             <>
               <Typography
                 variant="subtitle2"
@@ -375,7 +372,7 @@ export default function Modal({ open, onClose, onSubmit, mode, activity }) {
           onClick={handleSubmit}
         >
           {mode === "add"
-            ? activityType === "meal"
+            ? eventType === "meal"
               ? "Add Meal"
               : "Add Activity"
             : "Save Changes"}

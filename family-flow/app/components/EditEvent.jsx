@@ -4,41 +4,43 @@ import { useState } from "react";
 import { Button } from "@mui/material";
 import Modal from "./Modal";
 
-export default function EditPlan() {
+export default function EditEvent() {
   const [open, setOpen] = useState(false);
 
-  const ActivityToEdit = {
-    activityCategory: "Sports / Exercise",
-    activityType: "activity",
-    title: "Morning Run",
+  const EventToEdit = {
+    eventCategory: "Sports / Exercise",
+    eventType: "activity",
+    title: "Morning run",
     startTime: "07:30",
     date: "2025-11-06",
-    person: "Person 1",
     notes: "Warm up 10 min",
+    id: 1,
+    createdBy: 3,
+    membersId: [1, 2],
   };
 
-  const handleEditPlan = (data) => {
-    console.log("Plan edited:", data);
+  const handleEditEvent = (data) => {
+    console.log("Event edited:", data);
   };
 
   return (
     <>
-      {/*       <Button
+      <Button
         variant="contained"
         color="primary"
         onClick={() => setOpen(true)}
         sx={{ borderRadius: 2, textTransform: "none", px: 3 }}
       >
-        Edit Plan
-      </Button> */}
+        Edit Event
+      </Button>
 
       <Modal
         open={open}
         date="Monday, October 27"
         onClose={() => setOpen(false)}
-        onSubmit={handleEditPlan}
+        onSubmit={handleEditEvent}
         mode="edit"
-        activity={ActivityToEdit}
+        event={EventToEdit}
       />
     </>
   );
