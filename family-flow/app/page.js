@@ -1,7 +1,7 @@
 "use client";
-import { Container } from "@mui/material";
-import WeeklySchedule from "./MainView/page";
+
+import LoginPage from "./LoginView/page";
 
 export default function Home() {
-  return <WeeklySchedule />;
+  return <LoginPage />;
 }

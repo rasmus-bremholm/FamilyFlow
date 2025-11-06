@@ -1,0 +1,20 @@
+[
+	{
+		"id": 1,
+		"name": "Malin Larsson",
+		"email": "malin.l@live.se",
+		"password": "password123"
+	},
+	{
+		"id": 2,
+		"name": "Rikard Larsson",
+		"email": "rikard.l@live.se",
+		"password": "test"
+	},
+	{
+		"id": 3,
+		"name": "Bobby Larsson",
+		"email": "bobby.l@live.se",
+		"password": "123"
+	}
+]
