@@ -3,6 +3,7 @@
 /* Hooks */
 import { useTheme } from "@mui/material/styles";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { loginUser } from "@/lib/auth";
 
 /* MUI */
@@ -10,6 +11,7 @@ import { Container, Button, Stack, TextField, Typography } from "@mui/material";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 
 export default function LoginPage() {
+	const router = useRouter();
   const theme = useTheme();
 
   const [email, setEmail] = useState("");
@@ -21,6 +23,7 @@ export default function LoginPage() {
 
     if (loggedInUser) {
       console.log("Success!");
+			router.push('/MainView')
     } else {
       console.log("D'oh!");
       setError("Invalid email or password");
