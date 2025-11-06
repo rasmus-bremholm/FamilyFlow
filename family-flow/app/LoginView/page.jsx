@@ -18,7 +18,8 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+		e.preventDefault();
     const loggedInUser = loginUser(email, password);
 
     if (loggedInUser) {
@@ -76,49 +77,50 @@ export default function LoginPage() {
             Sign in to your account.
           </Typography>
         </Stack>
-        <Stack spacing={4}>
-          <TextField
-            label="Email"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                backgroundColor: theme.palette.background.default,
-                borderRadius: 2,
-                "&.Mui-focused": {
-                  backgroundColor: theme.palette.background.input,
+        <form onSubmit={handleLogin}>
+          <Stack spacing={4}>
+            <TextField
+              label="Email"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: theme.palette.background.default,
+                  borderRadius: 2,
+                  "&.Mui-focused": {
+                    backgroundColor: theme.palette.background.input,
+                  },
                 },
-              },
-            }}
-          />
-          <TextField
-            label="Password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                backgroundColor: theme.palette.background.default,
-                borderRadius: 2,
-                "&.Mui-focused": {
-                  backgroundColor: theme.palette.background.input,
+              }}
+            />
+            <TextField
+              label="Password"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: theme.palette.background.default,
+                  borderRadius: 2,
+                  "&.Mui-focused": {
+                    backgroundColor: theme.palette.background.input,
+                  },
                 },
-              },
-            }}
-          />
-        </Stack>
-
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleLogin}
-          sx={{ py: 1.5 }}
-        >
-          Sign In
-        </Button>
+              }}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              sx={{ py: 1.5 }}
+            >
+              Sign In
+            </Button>
+          </Stack>
+        </form>
         <Typography
           align="center"
           sx={{ fontSize: "0.80rem", minHeight: "1.5rem" }}
