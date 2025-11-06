@@ -3,25 +3,34 @@ import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack, 
 import { useState, useEffect, useMemo } from "react";
 
 export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, date }) {
+	// Gets all the users, used for filtering later.
 	const users = useMemo(() => {
 		if (typeof window === "undefined") return [];
 
 		const storedUsers = localStorage.getItem("users");
 		if (!storedUsers) return [];
 
-		const allUsers = JSON.parse(storedUsers);
-	});
+		return JSON.parse(storedUsers);
+	}, []);
+
+	// Gets logged in user
+	const loggedInUser = useMemo(() => {
+		const storedUser = localStorage.getItem("loggedInUser");
+		return storedUser;
+	}, []);
 
 	const events = useMemo(() => {
 		// Ett weird hack för att "localstorage is not defined ska försvinna"
 		if (typeof window === "undefined") return [];
 
 		const storedEvents = localStorage.getItem("events");
-		if (!storedEvents) return [];
+		if (!storedEvents || !loggedInUser) return [];
 
 		const allEvents = JSON.parse(storedEvents);
-		return allEvents.filter((event) => event.date === date).sort((a, b) => a.startTime.localeCompare(b.startTime));
-	}, [date]);
+		return allEvents
+			.filter((event) => loggedInUser.events.ID.includes(event.id) && event.date === date)
+			.sort((a, b) => a.startTime.localeCompare(b.startTime));
+	}, [date, loggedInUser]);
 
 	function stringAvatar(name) {
 		return {
