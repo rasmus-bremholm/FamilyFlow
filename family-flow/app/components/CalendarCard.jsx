@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/preserve-manual-memoization */
 "use client";
 import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack, Button, Avatar } from "@mui/material";
 import { useState, useEffect, useMemo } from "react";
@@ -15,28 +16,36 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 
 	// Gets logged in user
 	const loggedInUser = useMemo(() => {
+		if (typeof window === "undefined") return null;
+
 		const storedUser = localStorage.getItem("loggedInUser");
-		return storedUser;
+		if (!storedUser) return null;
+
+		return JSON.parse(storedUser);
 	}, []);
 
 	const events = useMemo(() => {
-		// Ett weird hack för att "localstorage is not defined ska försvinna"
 		if (typeof window === "undefined") return [];
+		if (!loggedInUser) return [];
 
 		const storedEvents = localStorage.getItem("events");
-		if (!storedEvents || !loggedInUser) return [];
+		if (!storedEvents) return [];
 
 		const allEvents = JSON.parse(storedEvents);
 		return allEvents
-			.filter((event) => loggedInUser.events.ID.includes(event.id) && event.date === date)
+			.filter((event) => loggedInUser.eventsID.includes(event.id) && event.date === date)
 			.sort((a, b) => a.startTime.localeCompare(b.startTime));
 	}, [date, loggedInUser]);
 
-	function stringAvatar(name) {
+	const getUserById = (userId) => {
+		return users.find((user) => user.id === userId);
+	};
+
+	const stringAvatar = (name) => {
 		return {
 			children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
 		};
-	}
+	};
 
 	return (
 		<Box
@@ -54,7 +63,6 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 				},
 			}}>
 			<Stack>
-				{/* Kolla över dagens namn. */}
 				<Typography variant='caption' sx={{ color: isToday ? "primary.main" : "text.secondary", fontWeight: 500 }}>
 					{shortDay}
 				</Typography>
@@ -63,19 +71,22 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 				</Typography>
 			</Stack>
 			<Stack spacing={0.5} sx={{ mt: 2 }}>
-				{events.map((event) => (
-					<Box key={event.id} sx={{ borderRadius: 1, p: 1, backgroundColor: "// JUSTERA COLOR" }}>
-						<Stack direction='row'>
-							<Box>
-								<Typography>{event.title}</Typography>
-								<Typography variant='body2'>{event.startTime}</Typography>
-							</Box>
-							<Box display='flex' flex={1} flexDirection='row' justifyContent='flex-end' alignItems='flex-start'>
-								<Avatar sx={{ height: 12, width: 12, fontSize: 6 }} {...stringAvatar(`${event.createdBy}`)} />
-							</Box>
-						</Stack>
-					</Box>
-				))}
+				{events.map((event) => {
+					const creator = getUserById(event.createdBy);
+					return (
+						<Box key={event.id} sx={{ borderRadius: 1, p: 1, backgroundColor: "action.hover" }}>
+							<Stack direction='row'>
+								<Box>
+									<Typography>{event.title}</Typography>
+									<Typography variant='body2'>{event.startTime}</Typography>
+								</Box>
+								<Box display='flex' flex={1} flexDirection='row' justifyContent='flex-end' alignItems='flex-start'>
+									{creator && <Avatar sx={{ height: 24, width: 24, fontSize: 10 }} {...stringAvatar(creator.name)} />}
+								</Box>
+							</Stack>
+						</Box>
+					);
+				})}
 			</Stack>
 		</Box>
 	);
