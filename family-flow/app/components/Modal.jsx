@@ -341,7 +341,7 @@ export default function Modal({ open, onClose, onSubmit, mode, event }) {
         {/* Render delete button in edit mode */}
         {mode === "edit" && (
           <Button
-            onClick={onClose}
+            onClick={() => ondeviceorientationabsolute(event.id)}
             variant="outlined"
             fullWidth
             color="primary"
