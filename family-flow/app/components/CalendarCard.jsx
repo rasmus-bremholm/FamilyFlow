@@ -3,6 +3,15 @@ import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack, 
 import { useState, useEffect, useMemo } from "react";
 
 export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, date }) {
+	const users = useMemo(() => {
+		if (typeof window === "undefined") return [];
+
+		const storedUsers = localStorage.getItem("users");
+		if (!storedUsers) return [];
+
+		const allUsers = JSON.parse(storedUsers);
+	});
+
 	const events = useMemo(() => {
 		// Ett weird hack för att "localstorage is not defined ska försvinna"
 		if (typeof window === "undefined") return [];
@@ -53,7 +62,7 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 								<Typography variant='body2'>{event.startTime}</Typography>
 							</Box>
 							<Box display='flex' flex={1} flexDirection='row' justifyContent='flex-end' alignItems='flex-start'>
-								<Avatar sx={{ height: 12, width: 12 }} {...stringAvatar(`${event.createdBy}`)} />
+								<Avatar sx={{ height: 12, width: 12, fontSize: 6 }} {...stringAvatar(`${event.createdBy}`)} />
 							</Box>
 						</Stack>
 					</Box>
