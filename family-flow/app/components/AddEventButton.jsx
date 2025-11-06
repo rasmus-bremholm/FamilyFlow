@@ -11,6 +11,12 @@ export default function AddEventButton() {
   const [open, setOpen] = useState(false);
 
   const handleAddEvent = (data) => {
+    console.log("data", data);
+
+    /* get created by attribute + color?*/
+
+    /* get membersId from persons */
+
     /* generate plan id */
     const eventId = uuidv4();
     const newEvent = { id: eventId, ...data };
@@ -21,8 +27,6 @@ export default function AddEventButton() {
     localStorage.setItem("events", JSON.stringify(updatedEvents));
     console.log("Event added to local storage:", newEvent);
     console.log("updated Event array:", updatedEvents);
-
-    /* get created by attribute + color?*/
   };
 
   return (
