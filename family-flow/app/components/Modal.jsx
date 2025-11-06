@@ -294,7 +294,7 @@ export default function Modal({ open, onClose, onSubmit, mode, event }) {
             }}
             sx={{ mb: 2 }}
           >
-            {users.users.map((names) => (
+            {users.map((names) => (
               <MenuItem key={names.id} value={names.id}>
                 {names.name}
               </MenuItem>
