@@ -32,7 +32,7 @@ const theme = createTheme({
     activity: {
       homework: "#B3E3C9",
       outdoor: "#B2D5C5",
-      sports: "#A4D5CE",
+      sport: "#A4D5CE",
       arts: "#B3E9B4",
       music: "#D9F7C2",
       chore: "#A4B394",
@@ -61,6 +61,20 @@ const theme = createTheme({
       fontSize: "20px",
       fontWeight: "400",
     },
+		cardDayNum: {
+			fontSize: "1rem",
+		},
+		cardShortDay: {
+			fontSize: "1.5rem",
+			textTransform: "capitalize",
+		},
+		eventTitle: {
+			fontSize: "0.8rem",
+			fontWeight: "600",
+		},
+		eventTime: {
+			fontSize: "0.7rem",
+		}
   },
   components: {
     MuiContainer: {

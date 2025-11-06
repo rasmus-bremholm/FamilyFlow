@@ -68,31 +68,30 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 				},
 			}}>
 			<Stack>
-				<Typography variant='caption' sx={{ color: isToday ? "primary.main" : "text.secondary", fontWeight: 500 }}>
-					{shortDay}
-				</Typography>
-				<Typography variant='h3' sx={{ color: isToday ? "primary.main" : "text.primary" }}>
+				<Typography variant='cardDayNum' sx={{ color: isToday ? "primary.main" : "text.primary" }}>
 					{dayNumber}
+				</Typography>
+				<Typography variant='cardShortDay' sx={{ color: isToday ? "primary.main" : "text.secondary", fontWeight: 500 }}>
+					{shortDay}
 				</Typography>
 			</Stack>
 			<Stack spacing={0.5} sx={{ mt: 2 }}>
 				{events.map((event) => {
 					const creator = getUserById(event.createdBy);
 					return (
-						<Box key={event.id} sx={{ borderRadius: 1, p: 1, backgroundColor: "action.hover" }}>
+						<Box key={event.id} sx={{ borderRadius: 1, p: 1,  bgcolor: getActivityColor(event.activityCategory)} }>
 							<Stack direction='row'>
 								<Box>
-									<Typography>{event.title}</Typography>
-									<Typography variant='body2'>{event.startTime}</Typography>
+									<Typography variant='eventTitle' component='h5'>{event.title}</Typography>
+									<Typography variant='eventTime' component='p'>{event.startTime}</Typography>
 								</Box>
 								<Box
 									display='flex'
 									flex={1}
 									flexDirection='row'
 									justifyContent='flex-end'
-									alignItems='flex-start'
-									bgcolor={getActivityColor(event.activityCategory)}>
-									{creator && <Avatar sx={{ height: 24, width: 24, fontSize: 10 }} {...stringAvatar(creator.name)} />}
+									alignItems='flex-start'>
+									{creator && <Avatar sx={{ height: 28, width: 28, fontSize: 11 }} {...stringAvatar(creator.name)} />}
 								</Box>
 							</Stack>
 						</Box>
