@@ -1,10 +1,15 @@
 "use client";
 import { createTheme, ThemeOptions, Components } from "@mui/material/styles";
-import { Roboto } from "next/font/google";
+import { Roboto, Poppins } from "next/font/google";
 
 const RobotoFont = Roboto({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+const PoppinsFont = Poppins({
+  subsets: ["latin"],
+  weight: ["600"],
 });
 
 const theme = createTheme({
@@ -18,6 +23,7 @@ const theme = createTheme({
     background: {
       default: "#F5FAF7",
       card: "#FBFBFB",
+			input: "#edfbf2ff",
     },
     text: {
       primary: "#2E2E2E",
@@ -45,8 +51,11 @@ const theme = createTheme({
   typography: {
     fontFamily: [RobotoFont.style.fontFamily, "Arial", "sans-serif"].join(","),
     h1: {
+      fontFamily: [PoppinsFont.style.fontFamily, "Arial", "sans-serif"].join(
+        ","
+      ),
       fontSize: "44px",
-      fontWeight: "600",
+      fontWeight: "500",
     },
     h3: {
       fontSize: "20px",
