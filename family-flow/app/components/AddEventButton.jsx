@@ -11,18 +11,23 @@ export default function AddEventButton() {
   const [open, setOpen] = useState(false);
 
   const handleAddEvent = (data) => {
-    /* generate plan id */
+    /* get logged in user*/
+    const storedUser = localStorage.getItem("loggedInUser");
+    const loggedInUser = storedUser ? JSON.parse(storedUser) : null;
+    const createdBy = loggedInUser ? loggedInUser.id : 0;
+
+    /* generate event id */
     const eventId = uuidv4();
-    const newEvent = { id: eventId, ...data };
+
+    /* Save event to local storage */
+    const newEvent = { id: eventId, createdBy, ...data };
+    console.log("new event:", newEvent);
 
     const events = JSON.parse(localStorage.getItem("events")) || [];
     const updatedEvents = [...events, newEvent];
 
     localStorage.setItem("events", JSON.stringify(updatedEvents));
-    console.log("Event added to local storage:", newEvent);
     console.log("updated Event array:", updatedEvents);
-
-    /* get created by attribute + color?*/
   };
 
   return (

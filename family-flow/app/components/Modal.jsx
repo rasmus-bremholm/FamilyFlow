@@ -21,6 +21,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import { useState } from "react";
 
+import users from "../../lib/users";
+
 export default function Modal({ open, onClose, onSubmit, mode, event }) {
   const [eventType, seteventType] = useState(
     mode === "edit" && event ? event.eventType : "meal"
@@ -35,8 +37,8 @@ export default function Modal({ open, onClose, onSubmit, mode, event }) {
     mode === "edit" && event ? event.startTime : ""
   );
   const [date, setDate] = useState(mode === "edit" && event ? event.date : "");
-  const [membersId, setMembersId] = useState(
-    mode === "edit" && event ? event.membersId : []
+  const [membersID, setMembersID] = useState(
+    mode === "edit" && event ? event.membersID : []
   );
   const [notes, setNotes] = useState(
     mode === "edit" && event ? event.notes : ""
@@ -50,7 +52,7 @@ export default function Modal({ open, onClose, onSubmit, mode, event }) {
       activityCategory,
       startTime,
       date,
-      membersId,
+      membersID,
       notes,
     });
 
@@ -60,7 +62,7 @@ export default function Modal({ open, onClose, onSubmit, mode, event }) {
       setActivityCategory("");
       setStartTime("");
       setDate("");
-      setMembersId("");
+      setMembersID([]);
       setNotes("");
     }
     onClose();
@@ -280,8 +282,11 @@ export default function Modal({ open, onClose, onSubmit, mode, event }) {
             select
             fullWidth
             margin="dense"
-            value={membersId}
-            onChange={(e) => setMembersId(e.target.value)}
+            value={membersID}
+            onChange={(e) => setMembersID(e.target.value)}
+            SelectProps={{
+              multiple: true,
+            }}
             InputProps={{
               sx: {
                 borderRadius: 3,
@@ -289,8 +294,11 @@ export default function Modal({ open, onClose, onSubmit, mode, event }) {
             }}
             sx={{ mb: 2 }}
           >
-            <MenuItem value="Person 1">Person 1</MenuItem>
-            <MenuItem value="Person 2">Person 2</MenuItem>
+            {users.users.map((names) => (
+              <MenuItem key={names.id} value={names.id}>
+                {names.name}
+              </MenuItem>
+            ))}
           </TextField>
 
           {/* Notes */}
@@ -333,7 +341,7 @@ export default function Modal({ open, onClose, onSubmit, mode, event }) {
         {/* Render delete button in edit mode */}
         {mode === "edit" && (
           <Button
-            onClick={onClose}
+            onClick={() => ondeviceorientationabsolute(event.id)}
             variant="outlined"
             fullWidth
             color="primary"
