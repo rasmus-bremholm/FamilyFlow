@@ -21,7 +21,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import { useState } from "react";
 
-import users from "../../lib/users/users";
+import users from "../../lib/users";
 
 export default function Modal({ open, onClose, onSubmit, mode, event }) {
   const [eventType, seteventType] = useState(
