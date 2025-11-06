@@ -1,26 +1,56 @@
+/* eslint-disable react-hooks/preserve-manual-memoization */
 "use client";
 import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack, Button, Avatar } from "@mui/material";
 import { useState, useEffect, useMemo } from "react";
+import { getActivityColor } from "@/lib/getActivityColor";
 
 export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, date }) {
-	const activities = useMemo(() => {
-		// Ett weird hack för att "localstorage is not defined ska försvinna"
+	// Gets all the users, used for filtering later.
+	const users = useMemo(() => {
 		if (typeof window === "undefined") return [];
 
+		const storedUsers = localStorage.getItem("users");
+		if (!storedUsers) return [];
 
-		{/* EVENTS */}
-		const storedActivities = localStorage.getItem("activities");
-		if (!storedActivities) return [];
+		return JSON.parse(storedUsers);
+	}, []);
 
-		const allActivities = JSON.parse(storedActivities);
-		return allActivities.filter((activity) => activity.date === date).sort((a, b) => a.startTime.localeCompare(b.startTime));
-	}, [date]);
+	// Gets logged in user
+	const loggedInUser = useMemo(() => {
+		if (typeof window === "undefined") return null;
 
-	function stringAvatar(name) {
+		const storedUser = localStorage.getItem("loggedInUser");
+		if (!storedUser) return null;
+
+		return JSON.parse(storedUser);
+	}, []);
+
+	console.log(`Logged in user`, loggedInUser);
+
+	const events = useMemo(() => {
+		if (typeof window === "undefined") return [];
+		if (!loggedInUser) return [];
+
+		const storedEvents = localStorage.getItem("events");
+		if (!storedEvents) return [];
+
+		const allEvents = JSON.parse(storedEvents);
+		return allEvents
+			.filter((event) => loggedInUser.eventsID.includes(event.id) && event.date === date)
+			.sort((a, b) => a.startTime.localeCompare(b.startTime));
+	}, [date, loggedInUser]);
+
+	const getUserById = (userId) => {
+		return users.find((user) => user.id === userId);
+	};
+
+	const stringAvatar = (name) => {
 		return {
 			children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
 		};
-	}
+	};
+
+	console.log(`All Events: `, events);
 
 	return (
 		<Box
@@ -38,7 +68,6 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 				},
 			}}>
 			<Stack>
-				{/* Kolla över dagens namn. */}
 				<Typography variant='caption' sx={{ color: isToday ? "primary.main" : "text.secondary", fontWeight: 500 }}>
 					{shortDay}
 				</Typography>
@@ -47,19 +76,28 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 				</Typography>
 			</Stack>
 			<Stack spacing={0.5} sx={{ mt: 2 }}>
-				{activities.map((activity) => (
-					<Box key={activity.id} sx={{ borderRadius: 1, p: 1, backgroundColor: activity.color }}>
-						<Stack direction='row'>
-							<Box>
-								<Typography>{activity.title}</Typography>
-								<Typography variant='body2'>{activity.startTime}</Typography>
-							</Box>
-							<Box display='flex' flex={1} flexDirection='row' justifyContent='flex-end' alignItems='flex-start'>
-								<Avatar sx={{ height: 12, width: 12 }} {...stringAvatar(`${activity.createdBy}`)} />
-							</Box>
-						</Stack>
-					</Box>
-				))}
+				{events.map((event) => {
+					const creator = getUserById(event.createdBy);
+					return (
+						<Box key={event.id} sx={{ borderRadius: 1, p: 1, backgroundColor: "action.hover" }}>
+							<Stack direction='row'>
+								<Box>
+									<Typography>{event.title}</Typography>
+									<Typography variant='body2'>{event.startTime}</Typography>
+								</Box>
+								<Box
+									display='flex'
+									flex={1}
+									flexDirection='row'
+									justifyContent='flex-end'
+									alignItems='flex-start'
+									bgcolor={getActivityColor(event.activityCategory)}>
+									{creator && <Avatar sx={{ height: 24, width: 24, fontSize: 10 }} {...stringAvatar(creator.name)} />}
+								</Box>
+							</Stack>
+						</Box>
+					);
+				})}
 			</Stack>
 		</Box>
 	);
