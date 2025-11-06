@@ -12,10 +12,14 @@ export default function AddPlanButton() {
 
   const handleAddPlan = (data) => {
     const planId = uuidv4();
-    const plan = { id: planId, ...data };
+    const newPlan = { id: planId, ...data };
 
-    localStorage.setItem(`plan-${planId}`, JSON.stringify(plan));
-    console.log("Plan added:", plan);
+    const plans = JSON.parse(localStorage.getItem("plans")) || [];
+    const updatedPlans = [...plans, newPlan];
+
+    localStorage.setItem("plans", JSON.stringify(updatedPlans));
+    console.log("Plan added to local storage:", newPlan);
+		console.log("updated plan array:", updatedPlans);
   };
 
   return (

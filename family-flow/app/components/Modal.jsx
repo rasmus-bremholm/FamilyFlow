@@ -37,8 +37,8 @@ export default function Modal({ open, onClose, onSubmit, mode, activity }) {
   const [date, setDate] = useState(
     mode === "edit" && activity ? activity.date : ""
   );
-  const [person, setPerson] = useState(
-    mode === "edit" && activity ? activity.person : ""
+  const [membersId, setMembersId] = useState(
+    mode === "edit" && activity ? activity.membersId : ""
   );
   const [notes, setNotes] = useState(
     mode === "edit" && activity ? activity.notes : ""
@@ -52,7 +52,7 @@ export default function Modal({ open, onClose, onSubmit, mode, activity }) {
       activityCategory,
       startTime,
       date,
-      person,
+      membersId,
       notes,
     });
 
@@ -62,7 +62,7 @@ export default function Modal({ open, onClose, onSubmit, mode, activity }) {
       setActivityCategory("");
       setStartTime("");
       setDate("");
-      setPerson("");
+      setMembersId("");
       setNotes("");
     }
     onClose();
@@ -268,7 +268,7 @@ export default function Modal({ open, onClose, onSubmit, mode, activity }) {
             sx={{ mb: 2 }}
           />
 
-          {/* Assign */}
+          {/* Assign members */}
           <Typography
             variant="subtitle2"
             sx={{
@@ -283,8 +283,8 @@ export default function Modal({ open, onClose, onSubmit, mode, activity }) {
             select
             fullWidth
             margin="dense"
-            value={person}
-            onChange={(e) => setPerson(e.target.value)}
+            value={membersId}
+            onChange={(e) => setMembersId(e.target.value)}
             InputProps={{
               sx: {
                 borderRadius: 3,
