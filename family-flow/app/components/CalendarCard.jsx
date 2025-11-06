@@ -80,7 +80,7 @@ export default function CalendarCard({
         {activities.map((activity) => (
           <Box
             key={activity.id}
-            sx={{ borderRadius: 1, p: 1, backgroundColor: activity.color }}
+            sx={{ borderRadius: 1, p: 1, backgroundColor: activity.color, opacity: past ? 0.7 : 1, transition: "opacity 0.3s ease" }}
           >
             <Stack direction="row">
               <Box>
