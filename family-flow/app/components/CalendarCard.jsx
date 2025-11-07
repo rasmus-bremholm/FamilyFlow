@@ -27,11 +27,12 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 
 		const storedEvents = localStorage.getItem("events");
 		if (!storedEvents) return [];
-
+		
 		const allEvents = JSON.parse(storedEvents);
-		return allEvents
-			.filter((event) => loggedInUser.eventsID.includes(event.id) && event.date === date)
-			.sort((a, b) => a.startTime.localeCompare(b.startTime));
+
+		const filteredEvents = allEvents.filter((event) => loggedInUser.id === allEvents.createdBy || event.membersId.includes(loggedInUser.id) && event.date === date).sort((a, b) => a.startTime.localeCompare(b.startTime));
+ 
+		return filteredEvents
 	}, [date, loggedInUser]);
 
 	const getUserById = (userId) => {
