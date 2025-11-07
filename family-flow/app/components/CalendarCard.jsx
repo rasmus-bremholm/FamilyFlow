@@ -87,7 +87,7 @@ export default function CalendarCard({
         borderRadius: 3,
         px: { xs: 2, md: 1, lg: 2 },
         py: 2,
-        bgcolor: past ? "passedDay.backgroundColor" : "background.paper",
+        bgcolor: past ? "background.passedDay" : "background.paper",
         transition: "all 0.2s",
         "&:hover": {
           borderColor: isToday ? "primary.main" : "action.hover",

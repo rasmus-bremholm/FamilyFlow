@@ -24,6 +24,7 @@ const theme = createTheme({
       default: "#F5FAF7",
       card: "#FBFBFB",
       input: "#edfbf2ff",
+      passedDay: "#f0f0f0",
     },
     text: {
       primary: "#2E2E2E",
@@ -75,9 +76,6 @@ const theme = createTheme({
     eventTime: {
       fontSize: "0.7rem",
     },
-  },
-  passedDay: {
-    backgroundColor: "#f0f0f0",
   },
   components: {
     MuiContainer: {
