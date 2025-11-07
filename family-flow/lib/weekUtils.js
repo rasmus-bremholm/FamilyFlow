@@ -5,7 +5,7 @@ import "dayjs/locale/sv";
 
 dayjs.extend(weekOfYear);
 dayjs.extend(isoWeek);
-dayjs.locale("sv");
+//dayjs.locale("sv");
 
 // Denna funktionen returnerar veckan som en ISOWeek, bra för main-view kalendern
 export function getWeekArray(startDate) {
