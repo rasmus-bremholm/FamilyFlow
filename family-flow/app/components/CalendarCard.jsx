@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/preserve-manual-memoization */
 "use client";
 import {
   Typography,
@@ -11,6 +12,8 @@ import {
   Avatar,
 } from "@mui/material";
 import { useState, useEffect, useMemo } from "react";
+import { useTheme } from "@emotion/react";
+import { getEventColors } from "@/lib/getEventColors";
 import { isPassed } from "./PassedDay";
 
 export default function CalendarCard({
@@ -20,26 +23,57 @@ export default function CalendarCard({
   isToday,
   date,
 }) {
+  const theme = useTheme();
   const past = useMemo(() => isPassed(date, isToday), [date, isToday]);
-
-  const activities = useMemo(() => {
-    // Ett weird hack för att "localstorage is not defined ska försvinna"
+  // Gets all the users, used for filtering later.
+  const users = useMemo(() => {
     if (typeof window === "undefined") return [];
 
-    const storedActivities = localStorage.getItem("activities");
-    if (!storedActivities) return [];
+    const storedUsers = localStorage.getItem("users");
+    if (!storedUsers) return [];
 
-    const allActivities = JSON.parse(storedActivities);
-    return allActivities
-      .filter((activity) => activity.date === date)
+    return JSON.parse(storedUsers);
+  }, []);
+
+  // Gets logged in user
+  const loggedInUser = useMemo(() => {
+    if (typeof window === "undefined") return null;
+
+    const storedUser = localStorage.getItem("loggedInUser");
+    if (!storedUser) return null;
+
+    return JSON.parse(storedUser);
+  }, []);
+
+  console.log(`Logged in user`, loggedInUser);
+
+  const events = useMemo(() => {
+    if (typeof window === "undefined") return [];
+    if (!loggedInUser) return [];
+
+    const storedEvents = localStorage.getItem("events");
+    if (!storedEvents) return [];
+
+    const allEvents = JSON.parse(storedEvents);
+    return allEvents
+      .filter(
+        (event) =>
+          loggedInUser.eventsID.includes(event.id) && event.date === date
+      )
       .sort((a, b) => a.startTime.localeCompare(b.startTime));
-  }, [date]);
+  }, [date, loggedInUser]);
 
-  function stringAvatar(name) {
+  const getUserById = (userId) => {
+    return users.find((user) => user.id === userId);
+  };
+
+  const stringAvatar = (name) => {
     return {
       children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
     };
-  }
+  };
+
+  console.log(`All Events: `, events);
 
   return (
     <Box
@@ -80,7 +114,13 @@ export default function CalendarCard({
         {activities.map((activity) => (
           <Box
             key={activity.id}
-            sx={{ borderRadius: 1, p: 1, backgroundColor: activity.color, opacity: past ? 0.7 : 1, transition: "opacity 0.3s ease" }}
+            sx={{
+              borderRadius: 1,
+              p: 1,
+              backgroundColor: activity.color,
+              opacity: past ? 0.7 : 1,
+              transition: "opacity 0.3s ease",
+            }}
           >
             <Stack direction="row">
               <Box>
