@@ -40,12 +40,12 @@ const theme = createTheme({
       social: "#F0DDCC",
       relax: "#DAB799",
       nature: "#BEEED7",
-			contrastText: "#2E2E2E",
+			contrastText: "#424242ff",
     },
     meal: {
       lunch: "#3D7D5D",
       dinner: "#2F5E46",
-			contrastText: "#fbfbfbff",
+			contrastText: "#f5f4f4ff",
     },
   },
   typography: {

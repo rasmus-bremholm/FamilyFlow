@@ -2,9 +2,11 @@
 "use client";
 import { Typography, Box, Card, CardContent, CardHeader, CardActionArea, Stack, Button, Avatar } from "@mui/material";
 import { useState, useEffect, useMemo } from "react";
-import { getActivityColor } from "@/lib/getActivityColor";
+import { useTheme } from "@emotion/react";
+import { getEventColors } from "@/lib/getEventColors";
 
 export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, date }) {
+	const theme = useTheme();
 	// Gets all the users, used for filtering later.
 	const users = useMemo(() => {
 		if (typeof window === "undefined") return [];
@@ -79,7 +81,7 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 				{events.map((event) => {
 					const creator = getUserById(event.createdBy);
 					return (
-						<Box key={event.id} sx={{ borderRadius: 1, p: 1,  bgcolor: getActivityColor(event.activityCategory)} }>
+						<Box key={event.id} sx={{ borderRadius: 1, p: 1, ...getEventColors(event, theme)} }>
 							<Stack direction='row'>
 								<Box>
 									<Typography variant='eventTitle' component='h5'>{event.title}</Typography>
