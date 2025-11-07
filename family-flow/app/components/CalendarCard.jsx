@@ -31,8 +31,8 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 		const allEvents = JSON.parse(storedEvents);
 
 		const filteredEvents = allEvents
-			.filter((event) => loggedInUser.id === allEvents.createdBy || (event.membersId.includes(loggedInUser.id) && event.date === date))
-			.sort((a, b) => a.startTime.localeCompare(b.startTime));
+			.filter((event) => loggedInUser.id === event.createdBy || event.membersId.includes(loggedInUser.id))
+			.filter((event) => event.date === date);
 
 		return filteredEvents;
 	}, [date, loggedInUser]);
