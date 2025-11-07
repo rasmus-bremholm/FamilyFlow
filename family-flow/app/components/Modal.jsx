@@ -21,9 +21,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import { useState } from "react";
 
-import users from "../../lib/users";
+import users from "../../lib/mockFunctions/mockUsers";
 
 export default function Modal({ open, onClose, onSubmit, mode, event }) {
+
   const [eventType, seteventType] = useState(
     mode === "edit" && event ? event.eventType : "meal"
   );
