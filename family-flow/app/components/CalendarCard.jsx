@@ -21,7 +21,6 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 		return JSON.parse(storedUser);
 	}, []);
 
-
 	const events = useMemo(() => {
 		if (typeof window === "undefined") return [];
 		if (!loggedInUser) return [];
@@ -44,7 +43,6 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 			children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
 		};
 	};
-
 
 	return (
 		<Box
