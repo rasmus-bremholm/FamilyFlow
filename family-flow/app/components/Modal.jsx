@@ -23,7 +23,7 @@ import { useState } from 'react';
 
 import users from '../../lib/mockFunctions/mockUsers';
 
-export default function Modal({ open, onClose, onSubmit, mode, event }) {
+export default function Modal({ open, onClose, onSubmit, onDelete, mode, event }) {
   const [eventType, seteventType] = useState(
     mode === 'edit' && event ? event.eventType : 'meal'
   );
@@ -341,7 +341,7 @@ export default function Modal({ open, onClose, onSubmit, mode, event }) {
         {/* Render delete button in edit mode */}
         {mode === 'edit' && (
           <Button
-            onClick={() => ondeviceorientationabsolute(event.id)}
+            onClick={() => onDelete(event.id)}
             variant="outlined"
             fullWidth
             color="primary"
