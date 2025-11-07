@@ -26,7 +26,6 @@ export default function CalendarCard({
   date,
 }) {
   const [open, setOpen] = useState(false);
-  const [onClose, setOnClose] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState({});
 
   const theme = useTheme();
@@ -161,9 +160,8 @@ export default function CalendarCard({
       </Box>
       {open && (
         <EditEvent
-          key={event.id}
           open={open}
-          onClose={onClose}
+          onClose={() => setOpen(false)}
           event={selectedEvent}
         />
       )}

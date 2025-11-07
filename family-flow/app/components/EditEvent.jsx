@@ -45,7 +45,7 @@ export default function EditEvent({ open, onClose, event }) {
     localStorage.setItem('events', JSON.stringify(updatedEvents));
     console.log('updated Event array:', updatedEvents);
 
-    setOpen(false);
+    onClose();
   };
 
   return (
