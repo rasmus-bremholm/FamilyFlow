@@ -6,8 +6,13 @@ import { useTheme } from "@emotion/react";
 import { getEventColors } from "@/lib/getEventColors";
 import { isPassed } from "./PassedDay";
 import users from "../../lib/mockFunctions/mockUsers";
+import EditEvent from "./EditEvent";
 
 export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, date }) {
+	const [open, setOpen] = useState(false);
+	const [onClose, setOnClose] = useState(false);
+	const [selectedEvent, setSelectedEvent] = useState({});
+
 	const theme = useTheme();
 	const past = useMemo(() => isPassed(date, isToday), [date, isToday]);
 
@@ -32,7 +37,8 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 
 		const filteredEvents = allEvents
 			.filter((event) => loggedInUser.id === event.createdBy || event.membersId.includes(loggedInUser.id))
-			.filter((event) => event.date === date);
+			.filter((event) => event.date === date)
+			.sort((a, b) => a.startTime.localeCompare(b.startTime));
 
 		return filteredEvents;
 	}, [date, loggedInUser]);
@@ -47,126 +53,76 @@ export default function CalendarCard({ dayName, shortDay, dayNumber, isToday, da
 		};
 	};
 
+	const handleClick = (event) => {
+		setOpen(true);
+		setSelectedEvent(event);
+	};
+
 	return (
-		<Box
-			sx={{
-				minWidth: 100,
-				minHeight: 200,
-				border: (theme) => (isToday ? `2px solid ${theme.palette.primary.main}` : `2px solid ${theme.palette.divider}`),
-				borderRadius: 3,
-				px: { xs: 2, md: 1, lg: 2 },
-				py: 2,
-				bgcolor: past ? "background.passedDay" : "background.paper",
-				transition: "all 0.2s",
-				"&:hover": {
-					borderColor: isToday ? "primary.main" : "action.hover",
-				},
-			}}>
-			<Stack>
-				<Typography variant='cardDayNum' sx={{ color: isToday ? "primary.main" : "text.primary" }}>
-					{dayNumber}
-				</Typography>
-				<Typography
-					variant='cardShortDay'
-					sx={{
-						color: isToday ? "primary.main" : "text.secondary",
-						fontWeight: 500,
-					}}>
-					{shortDay}
-				</Typography>
-			</Stack>
-			<Stack spacing={0.5} sx={{ mt: 2 }}>
-				{events.map((event) => {
-					const creator = getUserById(event.createdBy);
-					return (
-						<Box
-							key={event.id}
-							sx={{
-								borderRadius: 1,
-								p: 1,
-								...getEventColors(event, theme),
-								opacity: past ? 0.7 : 1,
-								transition: "opacity 0.3s ease",
-							}}>
-							<Stack direction='row'>
-								<Box>
-									<Typography variant='eventTitle' component='h5'>
-										{event.title}
-									</Typography>
-									<Typography variant='eventTime' component='p'>
-										{""}
-										{event.startTime}
-									</Typography>
+		<>
+			<Box
+				sx={{
+					minWidth: 100,
+					minHeight: 200,
+					border: (theme) => (isToday ? `2px solid ${theme.palette.primary.main}` : `2px solid ${theme.palette.divider}`),
+					borderRadius: 3,
+					px: { xs: 2, md: 1, lg: 2 },
+					py: 2,
+					bgcolor: past ? "background.passedDay" : "background.paper",
+					transition: "all 0.2s",
+					"&:hover": {
+						borderColor: isToday ? "primary.main" : "action.hover",
+					},
+				}}>
+				<Stack>
+					<Typography variant='cardDayNum' sx={{ color: isToday ? "primary.main" : "text.primary" }}>
+						{dayNumber}
+					</Typography>
+					<Typography
+						variant='cardShortDay'
+						sx={{
+							color: isToday ? "primary.main" : "text.secondary",
+							fontWeight: 500,
+						}}>
+						{shortDay}
+					</Typography>
+				</Stack>
+				<Stack spacing={0.5} sx={{ mt: 2 }}>
+					{events.map((event) => {
+						const creator = getUserById(event.createdBy);
+						return (
+							<>
+								<Box
+									key={event.id}
+									sx={{
+										borderRadius: 1,
+										p: 1,
+										...getEventColors(event, theme),
+										opacity: past ? 0.7 : 1,
+										transition: "opacity 0.3s ease",
+									}}
+									onClick={() => handleClick(event)}>
+									<Stack direction='row'>
+										<Box>
+											<Typography variant='eventTitle' component='h5'>
+												{event.title}
+											</Typography>
+											<Typography variant='eventTime' component='p'>
+												{""}
+												{event.startTime}
+											</Typography>
+										</Box>
+										<Box display='flex' flex={1} flexDirection='row' justifyContent='flex-end' alignItems='flex-start'>
+											<Avatar sx={{ height: 28, width: 28, fontSize: 11 }} {...stringAvatar(creator.name)} />
+										</Box>
+									</Stack>
 								</Box>
-								<Box display='flex' flex={1} flexDirection='row' justifyContent='flex-end' alignItems='flex-start'>
-									<Avatar sx={{ height: 28, width: 28, fontSize: 11 }} {...stringAvatar(creator.name)} />
-								</Box>
-							</Stack>
-						</Box>
-					);
-				})}
-			</Stack>
-		</Box>
-	);
-	return (
-		<Box
-			sx={{
-				minWidth: 100,
-				minHeight: 200,
-				border: (theme) => (isToday ? `2px solid ${theme.palette.primary.main}` : `2px solid ${theme.palette.divider}`),
-				borderRadius: 3,
-				px: { xs: 2, md: 1, lg: 2 },
-				py: 2,
-				bgcolor: past ? "#f0f0f0" : "background.paper",
-				transition: "all 0.2s",
-				"&:hover": {
-					borderColor: isToday ? "primary.main" : "action.hover",
-				},
-			}}>
-			<Stack>
-				<Typography variant='cardDayNum' sx={{ color: isToday ? "primary.main" : "text.primary" }}>
-					{dayNumber}
-				</Typography>
-				<Typography
-					variant='cardShortDay'
-					sx={{
-						color: isToday ? "primary.main" : "text.secondary",
-						fontWeight: 500,
-					}}>
-					{shortDay}
-				</Typography>
-			</Stack>
-			<Stack spacing={0.5} sx={{ mt: 2 }}>
-				{events.map((event) => {
-					const creator = getUserById(event.createdBy);
-					return (
-						<Box
-							key={event.id}
-							sx={{
-								borderRadius: 1,
-								p: 1,
-								...getEventColors(event, theme),
-								opacity: past ? 0.7 : 1,
-								transition: "opacity 0.3s ease",
-							}}>
-							<Stack direction='row'>
-								<Box>
-									<Typography variant='eventTitle' component='h5'>
-										{event.title}
-									</Typography>
-									<Typography variant='eventTime' component='p'>
-										{""}
-										{event.startTime}
-									</Typography>
-								</Box>
-								<Box display='flex' flex={1} flexDirection='row' justifyContent='flex-end' alignItems='flex-start'>
-									<Avatar sx={{ height: 28, width: 28, fontSize: 11 }} {...stringAvatar(creator.name)} />
-								</Box>
-							</Stack>
-						</Box>
-					);
-				})}
-			</Stack>
-		</Box>
+							</>
+						);
+					})}
+				</Stack>
+			</Box>
+			{open && <EditEvent key={event.id} open={open} onClose={onClose} event={selectedEvent} />}
+		</>
 	);
 }
