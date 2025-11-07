@@ -1,4 +1,4 @@
-import users from "./users.json";
+import users from "./mockFunctions/mockUsers";
 
 export function loginUser(email, password) {
   const loggedInUser = users.find(

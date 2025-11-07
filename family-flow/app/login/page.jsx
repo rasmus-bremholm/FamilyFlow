@@ -24,7 +24,7 @@ export default function LoginPage() {
 
     if (loggedInUser) {
       localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
-      router.push("/MainView");
+      router.push("/main");
     } else {
       setError("Invalid email or password");
     }
