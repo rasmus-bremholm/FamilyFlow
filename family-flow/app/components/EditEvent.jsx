@@ -1,26 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@mui/material";
-import Modal from "./Modal";
+import Modal from "../Modal";
 
-export default function EditEvent() {
-  const [open, setOpen] = useState(false);
-
-  const eventToEdit = {
-    eventCategory: "Sports / Exercise",
-    eventType: "activity",
-    title: "Morning run",
-    startTime: "07:30",
-    date: "2025-11-06",
-    notes: "Warm up 10 min",
-    id: 1,
-    createdBy: 3,
-    membersId: [1, 2],
-  };
-
+export default function EditEvent({ open, onClose, event }) {
   const handleEditEvent = (data) => {
     console.log("Event to edit:", data);
+
+    if (!event) return;
 
     /* get logged in user*/
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -42,6 +28,8 @@ export default function EditEvent() {
     );
     localStorage.setItem("events", JSON.stringify(updatedEvents));
     console.log("updated Event array:", updatedEvents);
+
+    onClose();
   };
 
   const handleDeleteEvent = (eventId) => {
@@ -64,22 +52,21 @@ export default function EditEvent() {
     <>
       {/* Mock button for testing */}
       {/*       <Button
-        variant="contained"
-        color="primary"
-        onClick={() => setOpen(true)}
-        sx={{ borderRadius: 2, textTransform: "none", px: 3 }}
-      >
-        Edit Event
-      </Button> */}
+				variant="contained"
+				color="primary"
+				onClick={() => setOpen(true)}
+				sx={{ borderRadius: 2, textTransform: "none", px: 3 }}
+			>
+				Edit Event
+			</Button> */}
 
       <Modal
         open={open}
-        date="Monday, October 27"
-        onClose={() => setOpen(false)}
+        onClose={onClose}
         onSubmit={handleEditEvent}
-        onDelete={handleDeleteEvent}
+        onDelete={() => handleDeleteEvent(event.id)}
         mode="edit"
-        event={eventToEdit}
+        event={event}
       />
     </>
   );
