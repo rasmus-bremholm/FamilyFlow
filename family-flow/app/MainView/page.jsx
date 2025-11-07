@@ -3,6 +3,7 @@ import { useState } from "react";
 import {
   Box,
   Typography,
+  useTheme,
   Paper,
   Button,
   Select,
@@ -20,6 +21,7 @@ import EditEvent from "../components/EditEvent";
 function WeeklySchedule() {
   const { previousWeek, nextWeek, currentWeek, weekNumber } =
     useWeekNavigation();
+  const theme = useTheme();
 
   return (
     <Container maxWidth={false} sx={{ height: "100vh" }}>
@@ -33,8 +35,16 @@ function WeeklySchedule() {
         }}
       >
         <Box>
-          <Typography variant="h1">Family Flow</Typography>
-          <Typography variant="h3">
+          <Typography
+            variant="h1"
+            sx={{ color: theme.palette.text.primary, mt: 1 }}
+          >
+            Family Flow
+          </Typography>
+          <Typography
+            variant="h3"
+            sx={{ color: theme.palette.text.secondary, mt: 1 }}
+          >
             Plan your meals and activities for the week
           </Typography>
         </Box>
