@@ -32,8 +32,9 @@ export default function EditEvent({ open, onClose, event }) {
     onClose();
   };
 
-  const handleDeleteEvent = (eventId) => {
-    console.log('Event to delete:', eventId);
+  const handleDeleteEvent = (event) => {
+    const eventId = event.id
+		console.log('Event to delete:', eventId);
 
     /* get all saved events */
     const events = JSON.parse(localStorage.getItem('events')) || [];
