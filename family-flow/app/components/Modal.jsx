@@ -21,9 +21,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import { useState } from "react";
 
-import users from "../../lib/users";
+import users from "../../lib/mockFunctions/mockUsers";
 
 export default function Modal({ open, onClose, onSubmit, mode, event }) {
+
   const [eventType, seteventType] = useState(
     mode === "edit" && event ? event.eventType : "meal"
   );
@@ -37,8 +38,8 @@ export default function Modal({ open, onClose, onSubmit, mode, event }) {
     mode === "edit" && event ? event.startTime : ""
   );
   const [date, setDate] = useState(mode === "edit" && event ? event.date : "");
-  const [membersID, setMembersID] = useState(
-    mode === "edit" && event ? event.membersID : []
+  const [membersId, setmembersId] = useState(
+    mode === "edit" && event ? event.membersId : []
   );
   const [notes, setNotes] = useState(
     mode === "edit" && event ? event.notes : ""
@@ -52,7 +53,7 @@ export default function Modal({ open, onClose, onSubmit, mode, event }) {
       activityCategory,
       startTime,
       date,
-      membersID,
+      membersId,
       notes,
     });
 
@@ -62,7 +63,7 @@ export default function Modal({ open, onClose, onSubmit, mode, event }) {
       setActivityCategory("");
       setStartTime("");
       setDate("");
-      setMembersID([]);
+      setmembersId([]);
       setNotes("");
     }
     onClose();
@@ -282,8 +283,8 @@ export default function Modal({ open, onClose, onSubmit, mode, event }) {
             select
             fullWidth
             margin="dense"
-            value={membersID}
-            onChange={(e) => setMembersID(e.target.value)}
+            value={membersId}
+            onChange={(e) => setmembersId(e.target.value)}
             SelectProps={{
               multiple: true,
             }}
