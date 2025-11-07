@@ -23,7 +23,8 @@ const theme = createTheme({
     background: {
       default: "#F5FAF7",
       card: "#FBFBFB",
-			input: "#edfbf2ff",
+      input: "#edfbf2ff",
+      passedDay: "#f0f0f0",
     },
     text: {
       primary: "#2E2E2E",
@@ -40,12 +41,12 @@ const theme = createTheme({
       social: "#F0DDCC",
       relax: "#DAB799",
       nature: "#BEEED7",
-			contrastText: "#424242ff",
+      contrastText: "#424242ff",
     },
     meal: {
       lunch: "#3D7D5D",
       dinner: "#2F5E46",
-			contrastText: "#f5f4f4ff",
+      contrastText: "#f5f4f4ff",
     },
   },
   typography: {
@@ -61,20 +62,20 @@ const theme = createTheme({
       fontSize: "20px",
       fontWeight: "400",
     },
-		cardDayNum: {
-			fontSize: "1rem",
-		},
-		cardShortDay: {
-			fontSize: "1.5rem",
-			textTransform: "capitalize",
-		},
-		eventTitle: {
-			fontSize: "0.8rem",
-			fontWeight: "600",
-		},
-		eventTime: {
-			fontSize: "0.7rem",
-		}
+    cardDayNum: {
+      fontSize: "1rem",
+    },
+    cardShortDay: {
+      fontSize: "1.5rem",
+      textTransform: "capitalize",
+    },
+    eventTitle: {
+      fontSize: "0.8rem",
+      fontWeight: "600",
+    },
+    eventTime: {
+      fontSize: "0.7rem",
+    },
   },
   components: {
     MuiContainer: {
