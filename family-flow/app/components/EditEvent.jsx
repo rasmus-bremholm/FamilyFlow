@@ -49,25 +49,13 @@ export default function EditEvent({ open, onClose, event }) {
   };
 
   return (
-    <>
-      {/* Mock button for testing */}
-      {/*       <Button
-				variant="contained"
-				color="primary"
-				onClick={() => setOpen(true)}
-				sx={{ borderRadius: 2, textTransform: "none", px: 3 }}
-			>
-				Edit Event
-			</Button> */}
-
-      <Modal
-        open={open}
-        onClose={onClose}
-        onSubmit={handleEditEvent}
-        onDelete={() => handleDeleteEvent(event.id)}
-        mode="edit"
-        event={event}
-      />
-    </>
+    <Modal
+      open={open}
+      onClose={onClose}
+      onSubmit={handleEditEvent}
+      onDelete={() => handleDeleteEvent(event.id)}
+      mode="edit"
+      event={event}
+    />
   );
 }
