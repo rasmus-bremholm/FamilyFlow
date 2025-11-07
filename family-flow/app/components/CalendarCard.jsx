@@ -85,7 +85,8 @@ export default function CalendarCard({
             ? `2px solid ${theme.palette.primary.main}`
             : `2px solid ${theme.palette.divider}`,
         borderRadius: 3,
-        p: 2,
+        px: { xs: 2, md: 1, lg: 2 },
+        py: 2,
         bgcolor: past ? "#f0f0f0" : "background.paper",
         transition: "all 0.2s",
         "&:hover": {
@@ -95,7 +96,13 @@ export default function CalendarCard({
     >
       <Stack>
         <Typography
-          variant="caption"
+          variant="cardDayNum"
+          sx={{ color: isToday ? "primary.main" : "text.primary" }}
+        >
+          {dayNumber}
+        </Typography>
+        <Typography
+          variant="cardShortDay"
           sx={{
             color: isToday ? "primary.main" : "text.secondary",
             fontWeight: 500,
@@ -103,45 +110,47 @@ export default function CalendarCard({
         >
           {shortDay}
         </Typography>
-        <Typography
-          variant="h3"
-          sx={{ color: isToday ? "primary.main" : "text.primary" }}
-        >
-          {dayNumber}
-        </Typography>
       </Stack>
       <Stack spacing={0.5} sx={{ mt: 2 }}>
-        {activities.map((activity) => (
-          <Box
-            key={activity.id}
-            sx={{
-              borderRadius: 1,
-              p: 1,
-              backgroundColor: activity.color,
-              opacity: past ? 0.7 : 1,
-              transition: "opacity 0.3s ease",
-            }}
-          >
-            <Stack direction="row">
-              <Box>
-                <Typography>{activity.title}</Typography>
-                <Typography variant="body2">{activity.startTime}</Typography>
-              </Box>
-              <Box
-                display="flex"
-                flex={1}
-                flexDirection="row"
-                justifyContent="flex-end"
-                alignItems="flex-start"
-              >
-                <Avatar
-                  sx={{ height: 12, width: 12 }}
-                  {...stringAvatar(`${activity.createdBy}`)}
-                />
-              </Box>
-            </Stack>
-          </Box>
-        ))}
+        {events.map((event) => {
+          const creator = getUserById(event.createdBy);
+          return (
+            <Box
+              key={event.id}
+              sx={{
+                borderRadius: 1,
+                p: 1,
+                ...getEventColors(event, theme),
+                opacity: past ? 0.7 : 1,
+                transition: "opacity 0.3s ease",
+              }}
+            >
+              <Stack direction="row">
+                <Box>
+                  <Typography variant="eventTitle" component="h5">
+                    {event.title}
+                  </Typography>
+                  <Typography variant="eventTime" component="p">
+                    {""}
+                    {event.startTime}
+                  </Typography>
+                </Box>
+                <Box
+                  display="flex"
+                  flex={1}
+                  flexDirection="row"
+                  justifyContent="flex-end"
+                  alignItems="flex-start"
+                >
+                  <Avatar
+                    sx={{ height: 28, width: 28, fontSize: 11 }}
+                    {...stringAvatar(creator.name)}
+                  />
+                </Box>
+              </Stack>
+            </Box>
+          );
+        })}
       </Stack>
     </Box>
   );

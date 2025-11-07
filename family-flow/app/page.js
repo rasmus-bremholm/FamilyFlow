@@ -1,6 +1,6 @@
 "use client";
 
-import LoginPage from "./LoginView/page";
+import LoginPage from "./login/page";
 
 export default function Home() {
   return <LoginPage />;
