@@ -66,7 +66,7 @@ export default function CalendarCard({
     return users.find((user) => user.id === userId);
   };
 
-	const getAvatarColor = (user) => user.bgColor ? user.bgColor : '#bdbdbd'
+  const getAvatarColor = (user) => (user.bgColor ? user.bgColor : '#bdbdbd');
 
   const stringAvatar = (name) => {
     return {
@@ -124,7 +124,9 @@ export default function CalendarCard({
                 key={event.id}
                 sx={{
                   borderRadius: 1,
-                  p: 1,
+                  cursor: 'pointer',
+                  px: 1,
+									py: 1.3,
                   ...getEventColors(event, theme),
                   opacity: past ? 0.7 : 1,
                   transition: 'opacity 0.3s ease',
