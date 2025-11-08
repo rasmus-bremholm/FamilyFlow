@@ -6,6 +6,7 @@ const users = [
 		email: "anna.svensson@example.com",
 		password: "hashed_password_anna",
 		familyId: "1001",
+		bgColor: "#a2a680ff"
 	},
 	{
 		id: 2,
@@ -13,6 +14,7 @@ const users = [
 		email: "johan.svensson@example.com",
 		password: "hashed_password_johan",
 		familyId: "1001",
+		bgColor: "#dad985ff"
 	},
 	{
 		id: 3,
@@ -20,6 +22,7 @@ const users = [
 		email: "lisa.svensson@example.com",
 		password: "hashed_password_lisa",
 		familyId: "1001",
+		bgColor: "#84a4b1ff"
 	},
 	{
 		id: 4,
@@ -27,6 +30,7 @@ const users = [
 		email: "oskar.nilsson@example.com",
 		password: "hashed_password_oskar",
 		familyId: "1002",
+		bgColor: "#a584b1ff"
 	},
 ];
 
