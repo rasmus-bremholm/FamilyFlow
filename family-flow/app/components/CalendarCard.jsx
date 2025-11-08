@@ -66,6 +66,8 @@ export default function CalendarCard({
     return users.find((user) => user.id === userId);
   };
 
+	const getAvatarColor = (user) => user.bgColor ? user.bgColor : '#bdbdbd'
+
   const stringAvatar = (name) => {
     return {
       children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
@@ -148,7 +150,12 @@ export default function CalendarCard({
                     alignItems="flex-start"
                   >
                     <Avatar
-                      sx={{ height: 28, width: 28, fontSize: 11 }}
+                      sx={{
+                        height: 28,
+                        width: 28,
+                        fontSize: 11,
+                        bgcolor: getAvatarColor(creator),
+                      }}
                       {...stringAvatar(creator.name)}
                     />
                   </Box>
