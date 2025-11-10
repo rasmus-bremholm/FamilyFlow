@@ -19,7 +19,7 @@ import AddEventButton from '../components/AddEventButton';
 import EditEvent from '../components/EditEvent';
 
 function WeeklySchedule() {
-  const { previousWeek, nextWeek, currentWeek, weekNumber } =
+  const { previousWeek, nextWeek, currentWeek, weekNumber, goToToday } =
     useWeekNavigation();
   const theme = useTheme();
 
@@ -79,6 +79,7 @@ function WeeklySchedule() {
       </Box>
 
       <WeekCards currentWeek={currentWeek} />
+      <Box id="current-and-share-container"></Box>
     </Container>
   );
 }
