@@ -23,7 +23,14 @@ import { useState } from 'react';
 
 import users from '../../lib/mockFunctions/mockUsers';
 
-export default function Modal({ open, onClose, onSubmit, onDelete, mode, event }) {
+export default function Modal({
+  open,
+  onClose,
+  onSubmit,
+  onDelete,
+  mode,
+  event,
+}) {
   const [eventType, seteventType] = useState(
     mode === 'edit' && event ? event.eventType : 'meal'
   );
@@ -37,7 +44,10 @@ export default function Modal({ open, onClose, onSubmit, onDelete, mode, event }
     mode === 'edit' && event ? event.startTime : ''
   );
   const [date, setDate] = useState(mode === 'edit' && event ? event.date : '');
-  const [membersId, setmembersId] = useState(
+  const [responsibleUser, setResponsibleUser] = useState(
+    mode === 'edit' && event ? event.responsibleUser : []
+  );
+  const [membersId, setMembersId] = useState(
     mode === 'edit' && event ? event.membersId : []
   );
   const [notes, setNotes] = useState(
@@ -52,6 +62,7 @@ export default function Modal({ open, onClose, onSubmit, onDelete, mode, event }
       activityCategory,
       startTime,
       date,
+      responsibleUser,
       membersId,
       notes,
     });
@@ -62,7 +73,8 @@ export default function Modal({ open, onClose, onSubmit, onDelete, mode, event }
       setActivityCategory('');
       setStartTime('');
       setDate('');
-      setmembersId([]);
+      setResponsibleUser([]);
+      setMembersId([]);
       setNotes('');
     }
     onClose();
@@ -267,6 +279,40 @@ export default function Modal({ open, onClose, onSubmit, onDelete, mode, event }
             sx={{ mb: 2 }}
           />
 
+          {/* Responsible person */}
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+              mb: 0.5,
+            }}
+          >
+            Responsible person *
+          </Typography>
+          <TextField
+            required
+            select
+            fullWidth
+            margin="dense"
+            value={responsibleUser}
+            onChange={(e) => setResponsibleUser(e.target.value)}
+            SelectProps={{
+              multiple: true,
+            }}
+            InputProps={{
+              sx: {
+                borderRadius: 3,
+              },
+            }}
+            sx={{ mb: 2 }}
+          >
+            {users.map((names) => (
+              <MenuItem key={names.id} value={names.id}>
+                {names.name}
+              </MenuItem>
+            ))}
+          </TextField>
+
           {/* Assign members */}
           <Typography
             variant="subtitle2"
@@ -283,7 +329,7 @@ export default function Modal({ open, onClose, onSubmit, onDelete, mode, event }
             fullWidth
             margin="dense"
             value={membersId}
-            onChange={(e) => setmembersId(e.target.value)}
+            onChange={(e) => setMembersId(e.target.value)}
             SelectProps={{
               multiple: true,
             }}
