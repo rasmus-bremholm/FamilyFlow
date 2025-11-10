@@ -9,9 +9,17 @@ import Badge from '@mui/material/Badge';
 export function Notification() {
   const [notificationsNumber, setNotificationsNumber] = useState(3);
 
-  const handleNotificationClick = () => {
+  function handleNotificationClick() {
     setNotificationsNumber((prev) => (prev > 0 ? prev - 1 : 0));
-  };
+  }
+
+  function handleSettings() {
+    console.log(settings);
+  }
+
+  function handleLogout() {
+    console.log(logout);
+  }
 
   return (
     <SpeedDial
@@ -37,6 +45,16 @@ export function Notification() {
             : 'Du har en tillagd aktivitet'
         }
         onClick={handleNotificationClick}
+      />
+      <SpeedDialAction
+        icon={<SettingsIcon />}
+        tooltipTitle="Inställningar"
+        onClick={handleSettings}
+      />
+      <SpeedDialAction
+        icon={<LogoutIcon />}
+        tooltipTitle="Logga ut"
+        onClick={handleLogout}
       />
     </SpeedDial>
   );
