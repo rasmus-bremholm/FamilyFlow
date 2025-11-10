@@ -44,8 +44,8 @@ export default function Modal({
     mode === 'edit' && event ? event.startTime : ''
   );
   const [date, setDate] = useState(mode === 'edit' && event ? event.date : '');
-  const [responsibleUser, setResponsibleUser] = useState(
-    mode === 'edit' && event ? event.responsibleUser : []
+  const [responsibleUsers, setResponsibleUsers] = useState(
+    mode === 'edit' && event ? event.responsibleUsers : []
   );
   const [membersId, setMembersId] = useState(
     mode === 'edit' && event ? event.membersId : []
@@ -62,7 +62,7 @@ export default function Modal({
       activityCategory,
       startTime,
       date,
-      responsibleUser,
+      responsibleUsers,
       membersId,
       notes,
     });
@@ -73,7 +73,7 @@ export default function Modal({
       setActivityCategory('');
       setStartTime('');
       setDate('');
-      setResponsibleUser([]);
+      setResponsibleUsers([]);
       setMembersId([]);
       setNotes('');
     }
@@ -294,8 +294,8 @@ export default function Modal({
             select
             fullWidth
             margin="dense"
-            value={responsibleUser}
-            onChange={(e) => setResponsibleUser(e.target.value)}
+            value={responsibleUsers}
+            onChange={(e) => setResponsibleUsers(e.target.value)}
             SelectProps={{
               multiple: true,
             }}
