@@ -17,6 +17,7 @@ import WeekNavButton from '../components/WeekNavButton';
 import { useWeekNavigation } from '@/lib/useWeekNavigation';
 import AddEventButton from '../components/AddEventButton';
 import EditEvent from '../components/EditEvent';
+import CurrentWeekButton from '../components/CurrentWeekButton';
 
 function WeeklySchedule() {
   const { previousWeek, nextWeek, currentWeek, weekNumber, goToToday } =
@@ -79,7 +80,11 @@ function WeeklySchedule() {
       </Box>
 
       <WeekCards currentWeek={currentWeek} />
-      <Box id="current-and-share-container"></Box>
+      <Box id="current-and-share-container">
+        <Stack direction="row">
+          <CurrentWeekButton onClick={() => goToToday()} />
+        </Stack>
+      </Box>
     </Container>
   );
 }
