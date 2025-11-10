@@ -4,7 +4,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 
 export function Notification() {
-  const notificationsNumber = 0;
+  const notificationsNumber = 1;
 
   return (
     <SpeedDial
