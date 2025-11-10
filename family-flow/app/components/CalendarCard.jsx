@@ -168,6 +168,7 @@ export default function CalendarCard({
                         return (
                           <Avatar
                             key={user.id}
+														src={user.avatarUrl}
                             sx={{
                               border: 'none !important',
                               height: 30,
