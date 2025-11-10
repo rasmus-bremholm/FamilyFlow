@@ -5,9 +5,12 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Badge from '@mui/material/Badge';
+import { useLogout } from '../../lib/logout';
 
 export function Notification() {
-  const [notificationsNumber, setNotificationsNumber] = useState(3);
+  const [notificationsNumber, setNotificationsNumber] = useState(1);
+
+  const { showDialog, LogoutDialogElement } = useLogout();
 
   function handleNotificationClick() {
     setNotificationsNumber((prev) => (prev > 0 ? prev - 1 : 0));
@@ -17,45 +20,44 @@ export function Notification() {
     console.log(settings);
   }
 
-  function handleLogout() {
-    console.log(logout);
-  }
-
   return (
-    <SpeedDial
-      ariaLabel="Notification Speed Dial"
-      direction="left"
-      sx={{ position: 'absolute', top: 70, right: 38 }}
-      icon={<SpeedDialIcon />}
-    >
-      <SpeedDialAction
-        icon={
-          <Badge
-            variant="dot"
-            color="error"
-            invisible={notificationsNumber === 0}
-            overlap="circular"
-          >
-            <NotificationsIcon />
-          </Badge>
-        }
-        tooltipTitle={
-          notificationsNumber === 0
-            ? 'Notification'
-            : 'Du har en tillagd aktivitet'
-        }
-        onClick={handleNotificationClick}
-      />
-      <SpeedDialAction
-        icon={<SettingsIcon />}
-        tooltipTitle="Inställningar"
-        onClick={handleSettings}
-      />
-      <SpeedDialAction
-        icon={<LogoutIcon />}
-        tooltipTitle="Logga ut"
-        onClick={handleLogout}
-      />
-    </SpeedDial>
+    <>
+      <SpeedDial
+        ariaLabel="Notification Speed Dial"
+        direction="left"
+        sx={{ position: 'absolute', top: 70, right: 38 }}
+        icon={<SpeedDialIcon />}
+      >
+        <SpeedDialAction
+          icon={
+            <Badge
+              variant="dot"
+              color="error"
+              invisible={notificationsNumber === 0}
+              overlap="circular"
+            >
+              <NotificationsIcon />
+            </Badge>
+          }
+          tooltipTitle={
+            notificationsNumber === 0
+              ? 'Notification'
+              : 'Du har en tillagd aktivitet'
+          }
+          onClick={handleNotificationClick}
+        />
+        <SpeedDialAction
+          icon={<SettingsIcon />}
+          tooltipTitle="Inställningar"
+          onClick={handleSettings}
+        />
+        <SpeedDialAction
+          icon={<LogoutIcon />}
+          tooltipTitle="Logga ut"
+          onClick={showDialog}
+        />
+      </SpeedDial>
+      {LogoutDialogElement}
+    </>
   );
 }
