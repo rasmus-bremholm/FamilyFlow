@@ -113,7 +113,7 @@ export default function CalendarCard({
               fontWeight: 500,
             }}
           >
-            {shortDay}
+            {dayName}
           </Typography>
         </Stack>
         <Stack spacing={0.5} sx={{ mt: 2 }}>
