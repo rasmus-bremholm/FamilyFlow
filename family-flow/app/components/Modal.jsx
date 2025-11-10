@@ -44,11 +44,11 @@ export default function Modal({
     mode === 'edit' && event ? event.startTime : ''
   );
   const [date, setDate] = useState(mode === 'edit' && event ? event.date : '');
+  const [responsibleUser, setResponsibleUser] = useState(
+    mode === 'edit' && event ? event.responsibleUser : []
+  );
   const [membersId, setMembersId] = useState(
     mode === 'edit' && event ? event.membersId : []
-  );
-  const [responsibleUser, setResponsibleUser] = useState(
-    mode === 'edit' && event ? event.responsibleUser : ''
   );
   const [notes, setNotes] = useState(
     mode === 'edit' && event ? event.notes : ''
@@ -62,8 +62,8 @@ export default function Modal({
       activityCategory,
       startTime,
       date,
-      membersId,
       responsibleUser,
+      membersId,
       notes,
     });
 
@@ -73,8 +73,8 @@ export default function Modal({
       setActivityCategory('');
       setStartTime('');
       setDate('');
+      setResponsibleUser([]);
       setMembersId([]);
-      setResponsibleUser('');
       setNotes('');
     }
     onClose();
