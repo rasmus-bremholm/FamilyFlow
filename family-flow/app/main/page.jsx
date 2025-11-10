@@ -90,7 +90,7 @@ function WeeklySchedule() {
       </Box>
 
       <WeekCards currentWeek={currentWeek} />
-      <Box id="current-and-share-container">
+      <Box id="current-and-share-container" sx={{ py: 2 }}>
         <Stack direction="row">
           {!isCurrentWeek && <CurrentWeekButton onClick={() => goToToday()} />}
         </Stack>
