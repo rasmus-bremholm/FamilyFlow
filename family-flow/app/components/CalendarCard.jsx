@@ -17,6 +17,7 @@ import { getEventColors } from '@/lib/getEventColors';
 import { isPassed } from './PassedDay';
 import users from '../../lib/mockFunctions/mockUsers';
 import EditEvent from './EditEvent';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 
 export default function CalendarCard({
   dayName,
@@ -136,9 +137,14 @@ export default function CalendarCard({
               >
                 <Stack direction="row">
                   <Box>
-                    <Typography variant="eventTitle" component="h5">
-                      {event.title}
-                    </Typography>
+                    <Box display="flex" gap={0.5}>
+                      {event.eventType === 'meal' && (
+                        <RestaurantIcon sx={{fontSize: 12, alignSelf: 'center'}} />
+                      )}
+                      <Typography variant="eventTitle" component="h5">
+                        {event.title}
+                      </Typography>
+                    </Box>
                     <Typography variant="eventTime" component="p">
                       {''}
                       {event.startTime}
