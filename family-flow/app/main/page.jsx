@@ -18,11 +18,21 @@ import { useWeekNavigation } from '@/lib/useWeekNavigation';
 import AddEventButton from '../components/AddEventButton';
 import EditEvent from '../components/EditEvent';
 import CurrentWeekButton from '../components/CurrentWeekButton';
+import { weekStart } from 'dayjs/locale/sv';
 
 function WeeklySchedule() {
-  const { previousWeek, nextWeek, currentWeek, weekNumber, goToToday } =
-    useWeekNavigation();
+  const {
+    previousWeek,
+    nextWeek,
+    currentWeek,
+    weekNumber,
+    goToToday,
+    weekStart,
+  } = useWeekNavigation();
   const theme = useTheme();
+
+  const todayWeekStart = dayjs().startOf('isoWeek');
+  const isCurrentWeek = weekStart.isSame(todayWeekStart, 'day');
 
   return (
     <Container maxWidth={false} sx={{ height: '100vh' }}>
@@ -82,7 +92,7 @@ function WeeklySchedule() {
       <WeekCards currentWeek={currentWeek} />
       <Box id="current-and-share-container">
         <Stack direction="row">
-          <CurrentWeekButton onClick={() => goToToday()} />
+          {!isCurrentWeek && <CurrentWeekButton onClick={() => goToToday()} />}
         </Stack>
       </Box>
     </Container>

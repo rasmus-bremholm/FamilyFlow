@@ -1,21 +1,14 @@
 import { Box, IconButton, Stack, Tooltip } from '@mui/material';
-import History from '@mui/icons-material/';
+import HistoryIcon from '@mui/icons-material/History';
 import { useWeekNavigation } from '@/lib/useWeekNavigation';
 import dayjs from 'dayjs';
 
-export default function CurrentWeekButton({ onClick, currentWeek }) {
-  // Ingen aning om detta funkar....
-  const { goToToday, weekStart } = useWeekNavigation();
-  const todayWeekStart = dayjs().startOf('isoWeek');
-  const isCurrentWeek = weekStart.isSame(todayWeekStart, 'day');
-
-  if (isCurrentWeek) return null;
-
+export default function CurrentWeekButton({ onClick }) {
   return (
     <Box onClick={onClick}>
       <Tooltip title="Go to today">
         <IconButton>
-          <History />
+          <HistoryIcon />
         </IconButton>
       </Tooltip>
     </Box>
