@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import LogoutDialog from '@/app/components/logoutDialog';
+import LogoutDialog from '@/app/components/LogoutDialog';
 
 export function useLogout() {
   const router = useRouter();

@@ -1,23 +1,50 @@
 'use client';
 import { useState } from 'react';
-import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
+import {
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+} from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Badge from '@mui/material/Badge';
 import { useLogout } from '../../lib/logout';
+import NotificationDialog from './NotificationDialog';
 
 export function Notification() {
   const [notificationsNumber, setNotificationsNumber] = useState(1);
+  const [notificationDialogOpen, setNotificationDialogOpen] = useState(false);
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
 
   const { showDialog, LogoutDialogElement } = useLogout();
 
+  function handleSettings() {
+    console.log(settings);
+  }
+
   function handleNotificationClick() {
+    setNotificationDialogOpen(true);
+  }
+
+  function handleNotificationDialogClose() {
+    setNotificationDialogOpen(false);
     setNotificationsNumber((prev) => (prev > 0 ? prev - 1 : 0));
   }
 
-  function handleSettings() {
-    console.log(settings);
+  function openConfirmation() {
+    setConfirmationOpen(true);
+
+    setTimeout(() => {
+      setConfirmationOpen(false);
+      handleNotificationDialogClose();
+      //setNotificationDialogOpen(false);
+      setNotificationsNumber((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 2000);
+    console.log('added');
   }
 
   return (
@@ -58,6 +85,12 @@ export function Notification() {
         />
       </SpeedDial>
       {LogoutDialogElement}
+
+      <NotificationDialog
+        open={notificationDialogOpen}
+        onConfirm={openConfirmation}
+        onCancel={handleNotificationDialogClose}
+      />
     </>
   );
 }
