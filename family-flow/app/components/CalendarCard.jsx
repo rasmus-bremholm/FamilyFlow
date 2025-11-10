@@ -10,6 +10,7 @@ import {
   Stack,
   Button,
   Avatar,
+  AvatarGroup,
 } from '@mui/material';
 import { useState, useEffect, useMemo } from 'react';
 import { useTheme } from '@emotion/react';
@@ -119,7 +120,8 @@ export default function CalendarCard({
         </Stack>
         <Stack spacing={0.5} sx={{ mt: 2 }}>
           {events.map((event) => {
-            const creator = getUserById(event.createdBy);
+            const responsibleUsersArray = event.responsibleUsers;
+						
             return (
               <Box
                 key={event.id}
@@ -139,7 +141,9 @@ export default function CalendarCard({
                   <Box>
                     <Box display="flex" gap={0.5}>
                       {event.eventType === 'meal' && (
-                        <RestaurantIcon sx={{fontSize: 12, alignSelf: 'center'}} />
+                        <RestaurantIcon
+                          sx={{ fontSize: 12, alignSelf: 'center' }}
+                        />
                       )}
                       <Typography variant="eventTitle" component="h5">
                         {event.title}
@@ -157,15 +161,26 @@ export default function CalendarCard({
                     justifyContent="flex-end"
                     alignItems="flex-start"
                   >
-                    <Avatar
-                      sx={{
-                        height: 28,
-                        width: 28,
-                        fontSize: 11,
-                        bgcolor: getAvatarColor(creator),
-                      }}
-                      {...stringAvatar(creator.name)}
-                    />
+                    <AvatarGroup>
+                      {responsibleUsersArray.map((id) => {
+                        const user = getUserById(id);
+
+                        return (
+                          <Avatar
+                            key={user.id}
+														src={user.avatarUrl}
+                            sx={{
+                              border: 'none !important',
+                              height: 30,
+                              width: 30,
+                              fontSize: 12,
+                              bgcolor: getAvatarColor(user),
+                            }}
+                            {...stringAvatar(user.name)}
+                          />
+                        );
+                      })}
+                    </AvatarGroup>
                   </Box>
                 </Stack>
               </Box>

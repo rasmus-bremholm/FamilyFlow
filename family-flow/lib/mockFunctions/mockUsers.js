@@ -6,7 +6,8 @@ const users = [
 		email: "anna.svensson@example.com",
 		password: "hashed_password_anna",
 		familyId: "1001",
-		bgColor: "#9ca16cff"
+		bgColor: "#9ca16cff",
+		avatarUrl: "/users/3.png",
 	},
 	{
 		id: 2,
@@ -14,7 +15,8 @@ const users = [
 		email: "johan.svensson@example.com",
 		password: "hashed_password_johan",
 		familyId: "1001",
-		bgColor: "#73b99bff"
+		bgColor: "#73b99bff",
+		avatarUrl: "/users/1.png",
 	},
 	{
 		id: 3,
@@ -22,7 +24,8 @@ const users = [
 		email: "lisa.svensson@example.com",
 		password: "hashed_password_lisa",
 		familyId: "1001",
-		bgColor: "#84a4b1ff"
+		bgColor: "#84a4b1ff",
+		avatarUrl: "/users/4.png",
 	},
 	{
 		id: 4,
@@ -30,7 +33,8 @@ const users = [
 		email: "oskar.nilsson@example.com",
 		password: "hashed_password_oskar",
 		familyId: "1002",
-		bgColor: "#a584b1ff"
+		bgColor: "#a584b1ff",
+		avatarUrl: "/users/2.png",
 	},
 ];
 
