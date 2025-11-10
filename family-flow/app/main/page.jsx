@@ -45,14 +45,20 @@ function WeeklySchedule() {
           mx: 'auto',
           p: 2,
           display: 'flex',
-					flexDirection: {xs: 'column', sm: 'row'},
-					gap: {xs: 4, sm: 0},
+          flexDirection: { xs: 'column', sm: 'row' },
+          gap: { xs: 4, sm: 0 },
           justifyContent: 'space-between',
           alignItems: 'center',
           width: '100%',
         }}
       >
-        <Box sx={{display: 'flex', flexDirection: 'column', alignItems: {xs: 'center', sm: 'flex-start'}}}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: { xs: 'center', sm: 'flex-start' },
+          }}
+        >
           <Typography
             variant="h1"
             sx={{ color: theme.palette.text.primary, mt: 1 }}
