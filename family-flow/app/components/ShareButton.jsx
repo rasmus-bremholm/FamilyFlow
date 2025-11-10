@@ -7,10 +7,10 @@ import {
   Alert,
 } from '@mui/material';
 import ShareIcon from '@mui/icons-material/Share';
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from '@mui/icons-material/Close'; // Kanske vi kan lägga till ifall...
 import { useState } from 'react';
 
-export default function ShareButton({ weekNumber, weekYear }) {
+export default function ShareButton({ weekNumber }) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {

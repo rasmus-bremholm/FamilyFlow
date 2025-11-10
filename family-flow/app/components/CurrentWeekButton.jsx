@@ -1,4 +1,4 @@
-import { Box, IconButton, Stack, Tooltip } from '@mui/material';
+import { Box, IconButton, Tooltip } from '@mui/material';
 import HistoryIcon from '@mui/icons-material/History';
 
 export default function CurrentWeekButton({ onClick }) {

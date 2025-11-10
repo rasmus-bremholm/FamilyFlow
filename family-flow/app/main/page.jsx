@@ -28,6 +28,7 @@ function WeeklySchedule() {
     weekNumber,
     goToToday,
     weekStart,
+    weekYear,
   } = useWeekNavigation();
   const theme = useTheme();
 
@@ -102,7 +103,7 @@ function WeeklySchedule() {
         alignItems="flex-start"
       >
         <Stack direction="row">
-          <ShareButton />
+          <ShareButton weekNumber={weekNumber} />
           {!isCurrentWeek && <CurrentWeekButton onClick={() => goToToday()} />}
         </Stack>
       </Box>
