@@ -6,7 +6,8 @@ export function getEventColors(event, theme) {
   }
 
   if (event.eventType === "activity") {
-    const color = theme.palette.activity[event.activityCategory];
+    const color = theme.palette.activity[event.activityCategory.toLowerCase()];
+		
 		return { backgroundColor: color, color: theme.palette.activity.contrastText };
   }
 
