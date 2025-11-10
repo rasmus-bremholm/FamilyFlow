@@ -39,7 +39,7 @@ export default function AddEventButton() {
           gap: 1,
           borderRadius: 2,
           textTransform: 'none',
-          px: {sm: 1, md:3},
+          px: 3,
         }}
       >
         <AddIcon sx={{ fontSize: 16 }} /> Lägg till event
