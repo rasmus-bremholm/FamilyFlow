@@ -21,7 +21,7 @@ export default function WeekNavButton({ direction, onClick }) {
       startIcon={isPrev ? <ChevronLeftIcon /> : undefined}
       endIcon={!isPrev ? <ChevronRightIcon /> : undefined}
     >
-      {matches ? (isPrev ? "Previous week" : "Next week") : ""}
+      {matches ? (isPrev ? "Tidigare vecka" : "Nästa vecka") : ""}
     </Button>
   );
 }
