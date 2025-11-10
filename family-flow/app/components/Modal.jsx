@@ -358,7 +358,7 @@ export default function Modal({
             Anteckningar (valfritt)
           </Typography>
           <TextField
-            placeholder="Add any notes..."
+            placeholder="Lägg till anteckningar..."
             fullWidth
             multiline
             minRows={2}
