@@ -35,7 +35,10 @@ function WeeklySchedule() {
   const isCurrentWeek = weekStart.isSame(todayWeekStart, 'day');
 
   return (
-    <Container maxWidth={false} sx={{ height: '100vh' }}>
+    <Container
+      maxWidth={false}
+      sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}
+    >
       <Box
         sx={{
           mx: 'auto',
@@ -90,7 +93,14 @@ function WeeklySchedule() {
       </Box>
 
       <WeekCards currentWeek={currentWeek} />
-      <Box id="current-and-share-container" sx={{ py: 2 }}>
+      <Box
+        id="current-and-share-container"
+        sx={{ py: 2, minHeight: 200 }}
+        display="flex"
+        justifyContent="flex-end"
+        alignItems="flex-end"
+        flex={1}
+      >
         <Stack direction="row">
           {!isCurrentWeek && <CurrentWeekButton onClick={() => goToToday()} />}
         </Stack>

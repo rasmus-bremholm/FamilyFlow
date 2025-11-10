@@ -84,7 +84,7 @@ export default function CalendarCard({
       <Box
         sx={{
           minWidth: 100,
-          minHeight: 200,
+          minHeight: { xs: 200, md: 350 },
           border: (theme) =>
             isToday
               ? `2px solid ${theme.palette.primary.main}`
@@ -126,7 +126,7 @@ export default function CalendarCard({
                   borderRadius: 1,
                   cursor: 'pointer',
                   px: 1,
-									py: 1.3,
+                  py: 1.3,
                   ...getEventColors(event, theme),
                   opacity: past ? 0.7 : 1,
                   transition: 'opacity 0.3s ease',
