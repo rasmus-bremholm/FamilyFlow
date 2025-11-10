@@ -18,7 +18,7 @@ import { useWeekNavigation } from '@/lib/useWeekNavigation';
 import AddEventButton from '../components/AddEventButton';
 import EditEvent from '../components/EditEvent';
 import CurrentWeekButton from '../components/CurrentWeekButton';
-import { weekStart } from 'dayjs/locale/sv';
+import ShareButton from '../components/ShareButton';
 
 function WeeklySchedule() {
   const {
@@ -46,6 +46,7 @@ function WeeklySchedule() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
+          width: '100%',
         }}
       >
         <Box>
@@ -95,13 +96,13 @@ function WeeklySchedule() {
       <WeekCards currentWeek={currentWeek} />
       <Box
         id="current-and-share-container"
-        sx={{ py: 2, minHeight: 200 }}
+        sx={{ py: 2, transition: 'all 0.2s ease' }}
         display="flex"
         justifyContent="flex-end"
-        alignItems="flex-end"
-        flex={1}
+        alignItems="flex-start"
       >
         <Stack direction="row">
+          <ShareButton />
           {!isCurrentWeek && <CurrentWeekButton onClick={() => goToToday()} />}
         </Stack>
       </Box>
