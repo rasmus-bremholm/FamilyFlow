@@ -66,9 +66,9 @@ function WeeklySchedule() {
           </Typography>
         </Box>
 
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <AddEventButton />
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 4 }}>
           <Notification />
+          <AddEventButton />
         </Box>
       </Box>
       <Box
@@ -77,6 +77,7 @@ function WeeklySchedule() {
         justifyContent="space-between"
         alignItems="center"
         sx={{
+          mt: 2,
           backgroundColor: 'background.card',
           p: 2,
           borderRadius: 3,

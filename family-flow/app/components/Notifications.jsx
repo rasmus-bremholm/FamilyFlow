@@ -1,11 +1,13 @@
 'use client';
+import { useState } from 'react';
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import LogoutIcon from '@mui/icons-material/Logout';
+import SettingsIcon from '@mui/icons-material/Settings';
 import Badge from '@mui/material/Badge';
-import { useState } from 'react';
 
 export function Notification() {
-  const [notificationsNumber, setNotificationsNumber] = useState(1);
+  const [notificationsNumber, setNotificationsNumber] = useState(3);
 
   const handleNotificationClick = () => {
     setNotificationsNumber((prev) => (prev > 0 ? prev - 1 : 0));
@@ -14,7 +16,8 @@ export function Notification() {
   return (
     <SpeedDial
       ariaLabel="Notification Speed Dial"
-      sx={{ position: 'absolute', top: 16, right: 16 }}
+      direction="left"
+      sx={{ position: 'absolute', top: 70, right: 38 }}
       icon={<SpeedDialIcon />}
     >
       <SpeedDialAction
