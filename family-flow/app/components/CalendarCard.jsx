@@ -17,6 +17,7 @@ import { getEventColors } from '@/lib/getEventColors';
 import { isPassed } from './PassedDay';
 import users from '../../lib/mockFunctions/mockUsers';
 import EditEvent from './EditEvent';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 
 export default function CalendarCard({
   dayName,
@@ -84,7 +85,7 @@ export default function CalendarCard({
       <Box
         sx={{
           minWidth: 100,
-          minHeight: 200,
+          minHeight: { xs: 200, md: 350 },
           border: (theme) =>
             isToday
               ? `2px solid ${theme.palette.primary.main}`
@@ -126,19 +127,24 @@ export default function CalendarCard({
                   borderRadius: 1,
                   cursor: 'pointer',
                   px: 1,
-									py: 1.3,
+                  py: 1.3,
                   ...getEventColors(event, theme),
                   opacity: past ? 0.7 : 1,
-                  transition: 'opacity 0.3s ease',
+                  transition: 'all 0.3s ease',
                 }}
                 suppressHydrationWarning
                 onClick={() => handleClick(event)}
               >
                 <Stack direction="row">
                   <Box>
-                    <Typography variant="eventTitle" component="h5">
-                      {event.title}
-                    </Typography>
+                    <Box display="flex" gap={0.5}>
+                      {event.eventType === 'meal' && (
+                        <RestaurantIcon sx={{fontSize: 12, alignSelf: 'center'}} />
+                      )}
+                      <Typography variant="eventTitle" component="h5">
+                        {event.title}
+                      </Typography>
+                    </Box>
                     <Typography variant="eventTime" component="p">
                       {''}
                       {event.startTime}

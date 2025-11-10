@@ -17,15 +17,30 @@ import WeekNavButton from '../components/WeekNavButton';
 import { useWeekNavigation } from '@/lib/useWeekNavigation';
 import AddEventButton from '../components/AddEventButton';
 import EditEvent from '../components/EditEvent';
+import CurrentWeekButton from '../components/CurrentWeekButton';
+import ShareButton from '../components/ShareButton';
 import { Notification } from '../components/Notifications';
 
 function WeeklySchedule() {
-  const { previousWeek, nextWeek, currentWeek, weekNumber } =
-    useWeekNavigation();
+  const {
+    previousWeek,
+    nextWeek,
+    currentWeek,
+    weekNumber,
+    goToToday,
+    weekStart,
+    weekYear,
+  } = useWeekNavigation();
   const theme = useTheme();
 
+  const todayWeekStart = dayjs().startOf('isoWeek');
+  const isCurrentWeek = weekStart.isSame(todayWeekStart, 'day');
+
   return (
-    <Container maxWidth={false} sx={{ height: '100vh' }}>
+    <Container
+      maxWidth={false}
+      sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}
+    >
       <Box
         sx={{
           mx: 'auto',
@@ -33,6 +48,7 @@ function WeeklySchedule() {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
+          width: '100%',
         }}
       >
         <Box>
@@ -81,6 +97,18 @@ function WeeklySchedule() {
       </Box>
 
       <WeekCards currentWeek={currentWeek} />
+      <Box
+        id="current-and-share-container"
+        sx={{ py: 2, transition: 'all 0.2s ease' }}
+        display="flex"
+        justifyContent="flex-end"
+        alignItems="flex-start"
+      >
+        <Stack direction="row">
+          <ShareButton weekNumber={weekNumber} />
+          {!isCurrentWeek && <CurrentWeekButton onClick={() => goToToday()} />}
+        </Stack>
+      </Box>
     </Container>
   );
 }

@@ -4,8 +4,6 @@ import Modal from './Modal';
 
 export default function EditEvent({ open, onClose, event }) {
   const handleEditEvent = (data) => {
-    console.log('Event to edit:', data);
-
     if (!event) return;
 
     /* get logged in user*/
@@ -13,11 +11,10 @@ export default function EditEvent({ open, onClose, event }) {
 
     /* update current event */
     const editedEvent = {
-      ...event, //event information
-      ...data, //new input data
+      ...event,
+      ...data,
       createdBy: loggedInUser?.id || event.createdBy,
     };
-    console.log('editedEvent', editedEvent);
 
     /* get all saved events */
     const events = JSON.parse(localStorage.getItem('events')) || [];
@@ -27,14 +24,11 @@ export default function EditEvent({ open, onClose, event }) {
       event.id === editedEvent.id ? editedEvent : event
     );
     localStorage.setItem('events', JSON.stringify(updatedEvents));
-    console.log('updated Event array:', updatedEvents);
 
     onClose();
   };
 
   const handleDeleteEvent = (eventId) => {
-    console.log('Event to delete:', eventId);
-
     /* get all saved events */
     const events = JSON.parse(localStorage.getItem('events')) || [];
 
@@ -43,7 +37,6 @@ export default function EditEvent({ open, onClose, event }) {
 
     /* save updated array */
     localStorage.setItem('events', JSON.stringify(updatedEvents));
-    console.log('updated Event array:', updatedEvents);
 
     onClose();
   };
