@@ -210,16 +210,16 @@ export default function Modal({
                 sx={{ mb: 2 }}
               >
                 {[
-                  'Homework',
+                  'Studier',
                   'Shopping',
-                  'Sports',
-                  'Arts',
-                  'Music',
-                  'Chores',
+                  'Idrott',
+                  'Konst',
+                  'Musik',
+                  'Sysslor',
                   'Hobby',
-                  'Social',
-                  'Family',
-                  'Adventure',
+                  'Vänner',
+                  'Familj',
+                  'Äventyr',
                 ].map((category) => (
                   <MenuItem key={category} value={category}>
                     {category}
