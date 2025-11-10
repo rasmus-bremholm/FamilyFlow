@@ -17,6 +17,7 @@ import WeekNavButton from '../components/WeekNavButton';
 import { useWeekNavigation } from '@/lib/useWeekNavigation';
 import AddEventButton from '../components/AddEventButton';
 import EditEvent from '../components/EditEvent';
+import { Notification } from '../components/Notifications';
 
 function WeeklySchedule() {
   const { previousWeek, nextWeek, currentWeek, weekNumber } =
@@ -51,6 +52,7 @@ function WeeklySchedule() {
 
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <AddEventButton />
+          <Notification />
         </Box>
       </Box>
       <Box
