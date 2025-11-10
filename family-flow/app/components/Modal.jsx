@@ -198,16 +198,16 @@ export default function Modal({ open, onClose, onSubmit, onDelete, mode, event }
                 sx={{ mb: 2 }}
               >
                 {[
-                  'Homework / Study',
-                  'Outdoor Play',
-                  'Sports / Exercise',
-                  'Arts & Crafts',
-                  'Music / Dance',
-                  'Chores / Household Tasks',
-                  'Screen / Media Time',
-                  'Social / Playdates',
-                  'Relax / Family Time',
-                  'Nature / Outdoor Adventures',
+                  'Homework',
+                  'Shopping',
+                  'Sports',
+                  'Arts',
+                  'Music',
+                  'Chores',
+                  'Hobby',
+                  'Social',
+                  'Family',
+                  'Adventure',
                 ].map((category) => (
                   <MenuItem key={category} value={category}>
                     {category}
