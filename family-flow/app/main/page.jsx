@@ -61,7 +61,7 @@ function WeeklySchedule() {
             variant="h3"
             sx={{ color: theme.palette.text.secondary, mt: 1 }}
           >
-            Plan your meals and activities for the week
+            Planera dina måltider och aktiviteter för veckan
           </Typography>
         </Box>
 
@@ -84,7 +84,7 @@ function WeeklySchedule() {
         <WeekNavButton direction={'prev'} onClick={() => previousWeek()} />
         <Box>
           <Typography variant="h4" component="h2" textAlign="center">
-            w. {weekNumber}
+            v. {weekNumber}
           </Typography>
           <Box display="flex" gap={1}>
             <Typography variant="subtitle">{currentWeek[0].month}</Typography>
