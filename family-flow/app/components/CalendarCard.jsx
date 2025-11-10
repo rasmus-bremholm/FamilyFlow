@@ -85,7 +85,7 @@ export default function CalendarCard({
       <Box
         sx={{
           minWidth: 100,
-          minHeight: 200,
+          minHeight: { xs: 200, md: 350 },
           border: (theme) =>
             isToday
               ? `2px solid ${theme.palette.primary.main}`
