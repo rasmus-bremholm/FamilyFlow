@@ -1,9 +1,16 @@
-import { Box, IconButton, Snackbar, Tooltip, Button } from '@mui/material';
+import {
+  Box,
+  IconButton,
+  Snackbar,
+  Tooltip,
+  Button,
+  Alert,
+} from '@mui/material';
 import ShareIcon from '@mui/icons-material/Share';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from 'react';
 
-export default function ShareButton() {
+export default function ShareButton({ weekNumber, weekYear }) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -20,7 +27,7 @@ export default function ShareButton() {
   return (
     <>
       <Box onClick={handleClick}>
-        <Tooltip title="Share" arrow>
+        <Tooltip title="Share Week" arrow>
           <IconButton>
             <ShareIcon />
           </IconButton>
@@ -29,9 +36,18 @@ export default function ShareButton() {
       <Snackbar
         open={open}
         onClose={handleClose}
-        message="Week Shared"
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         autoHideDuration={2000}
-      />
+      >
+        <Alert
+          onClose={handleClose}
+          severity="success"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          Week {weekNumber} shared!
+        </Alert>
+      </Snackbar>
     </>
   );
 }
