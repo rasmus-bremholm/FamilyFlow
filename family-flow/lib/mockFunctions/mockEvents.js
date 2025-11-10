@@ -3,7 +3,7 @@ const mockEvents = [
   {
     id: '550e8400-e29b-41d4-a716-446655440000',
     title: 'Morgonyoga',
-    activityCategory: 'sports',
+    activityCategory: 'Idrott',
     date: '2025-11-06',
     startTime: '07:00',
     createdBy: 1,
@@ -27,7 +27,7 @@ const mockEvents = [
   {
     id: '550e8400-e29b-41d4-a716-446655440002',
     title: 'Basketmatch',
-    activityCategory: 'sports',
+    activityCategory: 'Idrott',
     date: '2025-11-08',
     startTime: '18:00',
     createdBy: 3,
@@ -51,7 +51,7 @@ const mockEvents = [
   {
     id: '550e8400-e29b-41d4-a716-446655440004',
     title: 'Bokklubb',
-    activityCategory: 'hobby',
+    activityCategory: 'Hobby',
     date: '2025-11-14',
     startTime: '16:00',
     createdBy: 1,
@@ -63,7 +63,7 @@ const mockEvents = [
   {
     id: '550e8400-e29b-41d4-a716-446655440006',
     title: 'Tennismatch',
-    activityCategory: 'Sports',
+    activityCategory: 'Idrott',
     date: '2025-11-12',
     startTime: '15:00',
     createdBy: 2,
@@ -75,7 +75,7 @@ const mockEvents = [
   {
     id: 'e1a0db5f-18d4-42f1-9fdd-11f0f0280e8f',
     title: 'Yogasession',
-    activityCategory: 'Sports',
+    activityCategory: 'Idrott',
     date: '2025-11-11',
     startTime: '07:00',
     createdBy: 1,
@@ -87,7 +87,7 @@ const mockEvents = [
   {
     id: '15b2d634-68f0-4b89-b71a-75b8752c60e4',
     title: 'Studieträff',
-    activityCategory: 'Homework',
+    activityCategory: 'Studier',
     date: '2025-11-08',
     startTime: '18:00',
     createdBy: 3,
@@ -99,7 +99,7 @@ const mockEvents = [
   {
     id: '3f4a7f4c-3e5b-48f1-b989-03fd938b706d',
     title: 'Vandringsäventyr',
-    activityCategory: 'Adventure',
+    activityCategory: 'Äventyr',
     date: '2025-11-12',
     startTime: '09:30',
     createdBy: 1,
@@ -111,7 +111,7 @@ const mockEvents = [
   {
     id: '29d60f99-8a8a-4d57-bb95-9f1b5e84cb23',
     title: 'Målarkurs',
-    activityCategory: 'Arts',
+    activityCategory: 'Konst',
     date: '2025-11-16',
     startTime: '10:00',
     createdBy: 1,
@@ -123,7 +123,7 @@ const mockEvents = [
   {
     id: '7b5b92f4-82ed-44c9-b57e-31e5666ed9a9',
     title: 'Jam-session',
-    activityCategory: 'Music',
+    activityCategory: 'Musik',
     date: '2025-11-20',
     startTime: '20:00',
     createdBy: 1,
@@ -147,7 +147,7 @@ const mockEvents = [
   {
     id: 'c1b67a2e-9c56-4c8a-b83c-18e40b4a2a9f',
     title: 'Gitarrträning',
-    activityCategory: 'Music',
+    activityCategory: 'Musik',
     date: '2025-11-05',
     startTime: '16:00',
     createdBy: 3,
@@ -159,7 +159,7 @@ const mockEvents = [
   {
     id: 'b58c67f0-ef2e-4c45-8f27-3ff4c891a5b2',
     title: 'Konst & Kaffeträff',
-    activityCategory: 'Arts',
+    activityCategory: 'Konst',
     date: '2025-11-07',
     startTime: '15:00',
     createdBy: 1,
@@ -171,7 +171,7 @@ const mockEvents = [
   {
     id: '9f2e041d-6a8a-4b7b-9f7d-1f43b768af9e',
     title: 'Grannstädning',
-    activityCategory: 'Chores',
+    activityCategory: 'Sysslor',
     date: '2025-11-09',
     startTime: '10:00',
     createdBy: 1,
@@ -183,7 +183,7 @@ const mockEvents = [
   {
     id: '2f90eaa3-ef73-4a32-9a86-6b984aebc2b5',
     title: 'Filmkväll',
-    activityCategory: 'Family',
+    activityCategory: 'Familj',
     date: '2025-11-10',
     startTime: '20:30',
     createdBy: 1,
@@ -207,7 +207,7 @@ const mockEvents = [
   {
     id: 'fd9f9a4a-1c88-4e3c-a50b-ec3b13a96973',
     title: 'Morgonjogg',
-    activityCategory: 'Sports',
+    activityCategory: 'Idrott',
     date: '2025-11-17',
     startTime: '08:00',
     createdBy: 2,
@@ -219,7 +219,7 @@ const mockEvents = [
   {
     id: '7e3c66f4-c172-45bb-9d39-53a1e7ef28a2',
     title: 'Läxor',
-    activityCategory: 'Homework',
+    activityCategory: 'Studier',
     date: '2025-11-19',
     startTime: '13:00',
     createdBy: 3,
@@ -231,7 +231,7 @@ const mockEvents = [
   {
     id: '0bdeab62-ec7c-4f31-bfcf-99d6c2554ef2',
     title: 'Brädspelskväll',
-    activityCategory: 'Social',
+    activityCategory: 'Vänner',
     date: '2025-11-22',
     startTime: '20:30',
     createdBy: 1,
@@ -243,7 +243,7 @@ const mockEvents = [
   {
     id: '3e0a4b84-6cfb-48f9-bc61-6b8dcd7f9e14',
     title: 'Morgonjogg',
-    activityCategory: 'Sports',
+    activityCategory: 'Idrott',
     date: '2025-11-10',
     startTime: '07:30',
     createdBy: 1,
@@ -255,7 +255,7 @@ const mockEvents = [
   {
     id: 'd8ad7c7e-9c91-4ff4-94b1-efde3e0a1bfa',
     title: 'Målarkurs',
-    activityCategory: 'Arts',
+    activityCategory: 'Konst',
     date: '2025-11-10',
     startTime: '16:00',
     createdBy: 1,
@@ -279,7 +279,7 @@ const mockEvents = [
   {
     id: '563b1d8c-ec62-46e9-bd4c-48a2d685fe5a',
     title: 'Gitarrövning',
-    activityCategory: 'Music',
+    activityCategory: 'Musik',
     date: '2025-11-11',
     startTime: '15:00',
     createdBy: 2,
@@ -291,7 +291,7 @@ const mockEvents = [
   {
     id: 'e8e62da5-351f-44d6-9d77-6c9b4661578c',
     title: 'Basketbollmatch',
-    activityCategory: 'Sports',
+    activityCategory: 'Idrott',
     date: '2025-11-13',
     startTime: '18:30',
     createdBy: 3,
@@ -303,7 +303,7 @@ const mockEvents = [
   {
     id: 'ed5b4326-67c6-4c59-ae93-dae17e4f343f',
     title: 'Brädspelskväll',
-    activityCategory: 'Social',
+    activityCategory: 'Vänner',
     date: '2025-11-12',
     startTime: '20:00',
     createdBy: 2,
@@ -315,7 +315,7 @@ const mockEvents = [
   {
     id: '8f2f3f7f-170f-4ac5-b1fe-b5f0db441d90',
     title: 'Yoga',
-    activityCategory: 'Sports',
+    activityCategory: 'Idrott',
     date: '2025-11-13',
     startTime: '07:45',
     createdBy: 1,
@@ -327,7 +327,7 @@ const mockEvents = [
   {
     id: '3b5f7d65-24f1-4752-bf67-e3e8da174f95',
     title: 'Keramikworkshop',
-    activityCategory: 'Arts',
+    activityCategory: 'Konst',
     date: '2025-11-13',
     startTime: '16:30',
     createdBy: 1,
@@ -339,7 +339,7 @@ const mockEvents = [
   {
     id: '6e9ff8b9-748b-4c62-b41a-2293e38b3f5a',
     title: 'Helgvandring',
-    activityCategory: 'Adventure',
+    activityCategory: 'Äventyr',
     date: '2025-11-15',
     startTime: '09:00',
     createdBy: 1,
@@ -363,7 +363,7 @@ const mockEvents = [
   {
     id: 'a648c8d3-d191-4d4b-a589-3d7ab1c65c1a',
     title: 'Danskurs',
-    activityCategory: 'Arts',
+    activityCategory: 'Konst',
     date: '2025-11-15',
     startTime: '17:30',
     createdBy: 1,
@@ -375,7 +375,7 @@ const mockEvents = [
   {
     id: '45399e42-e4f6-4968-8c2e-711b92e490b6',
     title: 'Tennismatch',
-    activityCategory: 'Sports',
+    activityCategory: 'Idrott',
     date: '2025-11-15',
     startTime: '10:30',
     createdBy: 2,
@@ -387,7 +387,7 @@ const mockEvents = [
   {
     id: '8a5b2cba-b6a6-4b82-b3de-3ec6cd2fdfbe',
     title: 'Jam Session',
-    activityCategory: 'Music',
+    activityCategory: 'Musik',
     date: '2025-11-16',
     startTime: '19:30',
     createdBy: 2,
@@ -411,7 +411,7 @@ const mockEvents = [
   {
     id: '42a98f9d-e3d3-4b06-bb42-b741616ba8b4',
     title: 'Klättring',
-    activityCategory: 'Adventure',
+    activityCategory: 'Äventyr',
     date: '2025-11-17',
     startTime: '10:00',
     createdBy: 2,
@@ -423,7 +423,7 @@ const mockEvents = [
   {
     id: '60e5cc51-3fa6-4778-911b-cd7680b77556',
     title: 'Konstutställning',
-    activityCategory: 'Arts',
+    activityCategory: 'Konst',
     date: '2025-11-17',
     startTime: '16:30',
     createdBy: 1,
@@ -435,7 +435,7 @@ const mockEvents = [
   {
     id: '756f1eb4-4514-4f7d-8b26-d34c95db3995',
     title: 'Karaokekväll',
-    activityCategory: 'Social',
+    activityCategory: 'Vänner',
     date: '2025-11-19',
     startTime: '20:00',
     createdBy: 1,
@@ -447,7 +447,7 @@ const mockEvents = [
   {
     id: 'dfc39350-3e0c-413e-bc43-d42f18de4d25',
     title: 'Cykeltur',
-    activityCategory: 'Adventure',
+    activityCategory: 'Äventyr',
     date: '2025-11-18',
     startTime: '09:30',
     createdBy: 2,
