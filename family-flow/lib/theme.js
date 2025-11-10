@@ -42,11 +42,13 @@ const theme = createTheme({
       family: "#DAB799",
       adventure: "#BEEED7",
       contrastText: "#424242ff",
+			hover: "#4f5251ff",
     },
     meal: {
       lunch: "#3D7D5D",
       dinner: "#2F5E46",
       contrastText: "#f5f4f4ff",
+			hover: "#dae1deff",
     },
   },
   typography: {
