@@ -12,7 +12,7 @@ import {
   Avatar,
   AvatarGroup,
 } from '@mui/material';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useContext } from 'react';
 import { useTheme } from '@emotion/react';
 import { getEventColors } from '@/lib/getEventColors';
 import { isPassed } from './PassedDay';
@@ -20,6 +20,7 @@ import users from '../../lib/mockFunctions/mockUsers';
 import EditEvent from './EditEvent';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import { useRenderEvents } from '@/lib/renderEvents';
+import eventContext from '@/lib/contexts/eventContext';
 
 export default function CalendarCard({
   dayName,
@@ -31,7 +32,8 @@ export default function CalendarCard({
   const [open, setOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState({});
   const [stateEvents, setStateEvents] = useState([]);
-  const { refreshEvents, events } = useRenderEvents();
+  const events = useContext(eventContext);
+  console.log('Calendar: ', events);
 
   const theme = useTheme();
   const past = useMemo(() => isPassed(date, isToday), [date, isToday]);
@@ -46,7 +48,7 @@ export default function CalendarCard({
     return JSON.parse(storedUser);
   }, []);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const getEvents = () => {
       const filteredEvents = events
         .filter(
@@ -59,10 +61,10 @@ export default function CalendarCard({
       setStateEvents(filteredEvents);
     };
     getEvents();
-  }, [date, loggedInUser, events]);
+  }, [date, loggedInUser]);
 
-  /*
-  const events = useMemo(() => {
+  */
+  const filteredEvents = useMemo(() => {
     if (typeof window === 'undefined') return [];
 
     if (!loggedInUser) return [];
@@ -83,7 +85,7 @@ export default function CalendarCard({
 
     return filteredEvents;
   }, [date, loggedInUser]);
-*/
+
   const getUserById = (userId) => {
     return users.find((user) => user.id === userId);
   };
@@ -139,10 +141,10 @@ export default function CalendarCard({
           </Typography>
         </Stack>
         <Stack spacing={0.5} sx={{ mt: 2 }}>
-          {stateEvents &&
-            stateEvents.map((event, index) => {
-              const responsibleUsersArray = stateEvents[index].responsibleUsers;
-              console.log(stateEvents[0].responsibleUsers[0]);
+          {filteredEvents &&
+            filteredEvents.map((event, index) => {
+              const responsibleUsersArray =
+                filteredEvents[index].responsibleUsers;
 
               return (
                 <Box
