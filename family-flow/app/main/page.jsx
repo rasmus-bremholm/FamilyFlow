@@ -119,13 +119,27 @@ function WeeklySchedule() {
           <Box display="flex" gap={1}>
             <Typography
               variant="subtitle"
-              sx={{ fontSize: { xs: 20, md: 16 } }}
+              sx={{
+                fontSize: {
+                  xs: 20,
+                  md: 16,
+                  color: theme.palette.text.primary,
+                  fontWeight: 600,
+                },
+              }}
             >
               {currentWeek[0].month}
             </Typography>
             <Typography
               variant="subtitle"
-              sx={{ fontSize: { xs: 20, md: 16 } }}
+              sx={{
+                fontSize: {
+                  xs: 20,
+                  md: 16,
+                  color: theme.palette.text.primary,
+                  fontWeight: 600,
+                },
+              }}
             >
               {currentWeek[0].year}
             </Typography>
