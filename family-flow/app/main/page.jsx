@@ -90,13 +90,23 @@ function WeeklySchedule() {
             variant="h4"
             component="h2"
             textAlign="center"
-            sx={{ color: theme.palette.text.secondary }}
+            sx={{ color: theme.palette.text.secondary, fontWeight: 600 }}
           >
             v. {weekNumber}
           </Typography>
           <Box display="flex" gap={1}>
-            <Typography variant="subtitle">{currentWeek[0].month}</Typography>
-            <Typography variant="subtitle">{currentWeek[0].year}</Typography>
+            <Typography
+              variant="subtitle"
+              sx={{ color: theme.palette.text.primary, fontWeight: 600 }}
+            >
+              {currentWeek[0].month}
+            </Typography>
+            <Typography
+              variant="subtitle"
+              sx={{ color: theme.palette.text.primary, fontWeight: 600 }}
+            >
+              {currentWeek[0].year}
+            </Typography>
           </Box>
         </Box>
         <WeekNavButton direction={'next'} onClick={() => nextWeek()} />
