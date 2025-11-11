@@ -93,21 +93,42 @@ function WeeklySchedule() {
         }}
       >
         <WeekNavButton direction={'prev'} onClick={() => previousWeek()} />
-        <Box sx={{display: 'flex', alignItems: 'center', flexDirection: {xs: 'row', sm: 'column'}, gap: {xs: 1, sm: 0},}}>
-          <Typography variant="h4" component="h2" textAlign="center" sx={{fontSize: {xs: 26, sm: 34}}}>
-            v. {weekNumber}
-        <Box>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: { xs: 'row', sm: 'column' },
+            gap: { xs: 1, sm: 0 },
+          }}
+        >
           <Typography
             variant="h4"
             component="h2"
             textAlign="center"
-            sx={{ color: theme.palette.text.secondary, fontWeight: 600 }}
+            sx={{
+              fontSize: {
+                xs: 26,
+                sm: 34,
+                color: theme.palette.text.secondary,
+                fontWeight: 600,
+              },
+            }}
           >
             v. {weekNumber}
           </Typography>
           <Box display="flex" gap={1}>
-            <Typography variant="subtitle" sx={{fontSize: {xs: 20, md: 16}}}>{currentWeek[0].month}</Typography>
-            <Typography variant="subtitle" sx={{fontSize: {xs: 20, md: 16}}}>{currentWeek[0].year}</Typography>
+            <Typography
+              variant="subtitle"
+              sx={{ fontSize: { xs: 20, md: 16 } }}
+            >
+              {currentWeek[0].month}
+            </Typography>
+            <Typography
+              variant="subtitle"
+              sx={{ fontSize: { xs: 20, md: 16 } }}
+            >
+              {currentWeek[0].year}
+            </Typography>
           </Box>
         </Box>
         <WeekNavButton direction={'next'} onClick={() => nextWeek()} />
