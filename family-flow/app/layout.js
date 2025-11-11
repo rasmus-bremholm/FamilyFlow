@@ -6,15 +6,10 @@ import { useEffect, useState } from 'react';
 import { mockEvents } from '../lib/mockFunctions/mockEvents';
 
 export default function RootLayout({ children }) {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState(mockEvents);
 
-  useEffect(() => {
-    const getEvents = () => {
-      setEvents(mockEvents);
-    };
-    getEvents();
-  }, []);
   console.log('Layout ', events);
+  console.log(mockEvents);
 
   return (
     <html lang="en">

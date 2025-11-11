@@ -65,16 +65,9 @@ export default function CalendarCard({
 
   */
   const filteredEvents = useMemo(() => {
-    if (typeof window === 'undefined') return [];
-
     if (!loggedInUser) return [];
 
-    const storedEvents = localStorage.getItem('events');
-    if (!storedEvents) return [];
-
-    const allEvents = JSON.parse(storedEvents);
-
-    const filteredEvents = allEvents
+    const filteredEvents = events.events
       .filter(
         (event) =>
           loggedInUser.id === event.createdBy ||
@@ -84,7 +77,7 @@ export default function CalendarCard({
       .sort((a, b) => a.startTime.localeCompare(b.startTime));
 
     return filteredEvents;
-  }, [date, loggedInUser]);
+  }, [date, loggedInUser, events]);
 
   const getUserById = (userId) => {
     return users.find((user) => user.id === userId);
