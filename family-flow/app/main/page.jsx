@@ -86,8 +86,13 @@ function WeeklySchedule() {
       >
         <WeekNavButton direction={'prev'} onClick={() => previousWeek()} />
         <Box>
-          <Typography variant="h4" component="h2" textAlign="center">
-            w. {weekNumber}
+          <Typography
+            variant="h4"
+            component="h2"
+            textAlign="center"
+            sx={{ color: theme.palette.text.secondary }}
+          >
+            v. {weekNumber}
           </Typography>
           <Box display="flex" gap={1}>
             <Typography variant="subtitle">{currentWeek[0].month}</Typography>
