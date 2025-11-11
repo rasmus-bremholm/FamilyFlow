@@ -26,7 +26,7 @@ export default function LoginPage() {
       localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
       router.push("/main");
     } else {
-      setError("Invalid email or password");
+      setError("Ogiltig e-postadress eller lösenord");
     }
   };
 
@@ -67,22 +67,22 @@ export default function LoginPage() {
         </Stack>
         <Stack spacing={1}>
           <Typography variant="h1" align="center" sx={{ fontSize: "1.75rem" }}>
-            Family Planner
+            Family Flow
           </Typography>
           <Typography
             component="p"
             align="center"
             sx={{ color: "primary.main" }}
           >
-            Sign in to your account.
+            Logga in på ditt konto.
           </Typography>
         </Stack>
         <form onSubmit={handleLogin}>
           <Stack spacing={4}>
             <TextField
-              label="Email"
+              label="E-post"
               type="email"
-              placeholder="Email"
+              placeholder="E-post"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               sx={{
@@ -96,9 +96,9 @@ export default function LoginPage() {
               }}
             />
             <TextField
-              label="Password"
+              label="Lösenord"
               type="password"
-              placeholder="Password"
+              placeholder="Lösenord"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               sx={{
@@ -117,7 +117,7 @@ export default function LoginPage() {
               type="submit"
               sx={{ py: 1.5 }}
             >
-              Sign In
+              Logga In
             </Button>
           </Stack>
         </form>

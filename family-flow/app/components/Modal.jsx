@@ -111,7 +111,7 @@ export default function Modal({
           fontSize: '1.25rem',
         }}
       >
-        {mode === 'add' ? 'Add Event' : 'Edit Event'}
+        {mode === 'add' ? 'Lägg till event' : 'Redigera event'}
       </DialogTitle>
 
       <DialogContent>
@@ -124,7 +124,7 @@ export default function Modal({
               mb: 0.5,
             }}
           >
-            Type
+            Typ av event
           </Typography>
           <ToggleButtonGroup
             value={eventType}
@@ -143,14 +143,14 @@ export default function Modal({
             }}
           >
             <ToggleButton value="meal" color="primary" sx={{ borderRadius: 2 }}>
-              <RestaurantIcon color="primary" sx={{ mr: 1 }} /> Meal
+              <RestaurantIcon color="primary" sx={{ mr: 1 }} /> Måltid
             </ToggleButton>
             <ToggleButton
               value="activity"
               color="secondary"
               sx={{ borderRadius: 2 }}
             >
-              <DirectionsRunIcon color="secondary" sx={{ mr: 1 }} /> Activity
+              <DirectionsRunIcon color="secondary" sx={{ mr: 1 }} /> Aktivitet
             </ToggleButton>
           </ToggleButtonGroup>
 
@@ -162,13 +162,13 @@ export default function Modal({
               mb: 0.5,
             }}
           >
-            Title *
+            Titel
           </Typography>
           <TextField
             placeholder={
               eventType === 'meal'
-                ? 'e.g., Spaghetti Bolognese'
-                : 'e.g., Park Playdate'
+                ? 't.ex. Spaghetti Bolognese'
+                : 't.ex. Lekstund i parken'
             }
             fullWidth
             required
@@ -193,7 +193,7 @@ export default function Modal({
                   mb: 0.5,
                 }}
               >
-                Category *
+                Kategori
               </Typography>
               <TextField
                 select
@@ -210,16 +210,16 @@ export default function Modal({
                 sx={{ mb: 2 }}
               >
                 {[
-                  'Homework',
+                  'Studier',
                   'Shopping',
-                  'Sports',
-                  'Arts',
-                  'Music',
-                  'Chores',
+                  'Idrott',
+                  'Konst',
+                  'Musik',
+                  'Sysslor',
                   'Hobby',
-                  'Social',
-                  'Family',
-                  'Adventure',
+                  'Vänner',
+                  'Familj',
+                  'Äventyr',
                 ].map((category) => (
                   <MenuItem key={category} value={category}>
                     {category}
@@ -237,7 +237,7 @@ export default function Modal({
               mb: 0.5,
             }}
           >
-            Time *
+            Tid
           </Typography>
           <TextField
             required
@@ -262,7 +262,7 @@ export default function Modal({
               mb: 0.5,
             }}
           >
-            Date *
+            Datum
           </Typography>
           <TextField
             required
@@ -287,7 +287,7 @@ export default function Modal({
               mb: 0.5,
             }}
           >
-            Responsible person *
+            Vem är ansvarig?
           </Typography>
           <TextField
             required
@@ -321,7 +321,7 @@ export default function Modal({
               mb: 0.5,
             }}
           >
-            Assign to *
+            Vem närvarar?
           </Typography>
           <TextField
             required
@@ -355,10 +355,10 @@ export default function Modal({
               mb: 0.5,
             }}
           >
-            Notes (optional)
+            Anteckningar (valfritt)
           </Typography>
           <TextField
-            placeholder="Add any notes..."
+            placeholder="Lägg till anteckningar..."
             fullWidth
             multiline
             minRows={2}
@@ -397,7 +397,7 @@ export default function Modal({
             }}
           >
             <DeleteIcon color="primary" sx={{ mr: 1 }} />
-            Delete
+            Radera
           </Button>
         )}
 
@@ -411,7 +411,7 @@ export default function Modal({
             textTransform: 'none',
           }}
         >
-          Cancel
+          Avbryt
         </Button>
 
         <Button
@@ -427,9 +427,9 @@ export default function Modal({
         >
           {mode === 'add'
             ? eventType === 'meal'
-              ? 'Add Meal'
-              : 'Add Activity'
-            : 'Save Changes'}
+              ? 'Lägg till måltid'
+              : 'Lägg till aktivitet'
+            : 'Spara ändringar'}
         </Button>
       </DialogActions>
     </Dialog>

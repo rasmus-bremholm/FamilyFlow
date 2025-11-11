@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Button } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 
 import Modal from './Modal';
 
@@ -34,9 +35,14 @@ export default function AddEventButton() {
         variant="contained"
         color="primary"
         onClick={() => setOpen(true)}
-        sx={{ borderRadius: 2, textTransform: 'none', px: 3 }}
+        sx={{
+          gap: 1,
+          borderRadius: 2,
+          textTransform: 'none',
+          px: 3,
+        }}
       >
-        + Add Event
+        <AddIcon sx={{ fontSize: 16 }} /> Lägg till event
       </Button>
 
       <Modal

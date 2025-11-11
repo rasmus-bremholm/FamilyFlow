@@ -16,7 +16,7 @@ const users = [
 		password: "hashed_password_johan",
 		familyId: "1001",
 		bgColor: "#73b99bff",
-		avatarUrl: "/users/1.png",
+		avatarUrl: "/users/2.png",
 	},
 	{
 		id: 3,
@@ -34,7 +34,7 @@ const users = [
 		password: "hashed_password_oskar",
 		familyId: "1002",
 		bgColor: "#a584b1ff",
-		avatarUrl: "/users/2.png",
+		avatarUrl: "/users/1.png",
 	},
 ];
 

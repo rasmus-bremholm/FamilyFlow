@@ -27,7 +27,7 @@ export default function ShareButton({ weekNumber }) {
   return (
     <>
       <Box onClick={handleClick}>
-        <Tooltip title="Share Week" arrow>
+        <Tooltip title="Dela veckoplanering" arrow>
           <IconButton>
             <ShareIcon />
           </IconButton>
