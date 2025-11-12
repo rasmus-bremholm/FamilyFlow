@@ -964,5 +964,3 @@ export const mockEvents = [
     notes: 'Evening meal together.',
   },
 ];
-
-localStorage.setItem('events', JSON.stringify(mockEvents));
