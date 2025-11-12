@@ -5,10 +5,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-
+import { useRenderEvents } from '@/lib/renderEvents';
 import Modal from './Modal';
 
 export default function AddEventButton() {
+  const { refreshEvents } = useRenderEvents();
   const [open, setOpen] = useState(false);
 
   const handleAddEvent = (data) => {
@@ -27,6 +28,7 @@ export default function AddEventButton() {
     const updatedEvents = [...events, newEvent];
 
     localStorage.setItem('events', JSON.stringify(updatedEvents));
+    refreshEvents();
   };
 
   return (

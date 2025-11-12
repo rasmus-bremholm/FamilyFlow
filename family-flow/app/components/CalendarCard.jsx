@@ -12,13 +12,15 @@ import {
   Avatar,
   AvatarGroup,
 } from '@mui/material';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useContext } from 'react';
 import { useTheme } from '@emotion/react';
 import { getEventColors } from '@/lib/getEventColors';
 import { isPassed } from './PassedDay';
 import users from '../../lib/mockFunctions/mockUsers';
 import EditEvent from './EditEvent';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import { useRenderEvents } from '@/lib/renderEvents';
+import eventContext from '@/lib/contexts/eventContext';
 
 export default function CalendarCard({
   dayName,
@@ -29,6 +31,9 @@ export default function CalendarCard({
 }) {
   const [open, setOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState({});
+  const [stateEvents, setStateEvents] = useState([]);
+  const events = useContext(eventContext);
+  console.log('Calendar: ', events);
 
   const theme = useTheme();
   const past = useMemo(() => isPassed(date, isToday), [date, isToday]);
@@ -43,16 +48,26 @@ export default function CalendarCard({
     return JSON.parse(storedUser);
   }, []);
 
-  const events = useMemo(() => {
-    if (typeof window === 'undefined') return [];
+  /* useEffect(() => {
+    const getEvents = () => {
+      const filteredEvents = events
+        .filter(
+          (event) =>
+            loggedInUser.id === event.createdBy ||
+            event.membersId.includes(loggedInUser.id)
+        )
+        .filter((event) => event.date === date)
+        .sort((a, b) => a.startTime.localeCompare(b.startTime));
+      setStateEvents(filteredEvents);
+    };
+    getEvents();
+  }, [date, loggedInUser]);
+
+  */
+  const filteredEvents = useMemo(() => {
     if (!loggedInUser) return [];
 
-    const storedEvents = localStorage.getItem('events');
-    if (!storedEvents) return [];
-
-    const allEvents = JSON.parse(storedEvents);
-
-    const filteredEvents = allEvents
+    const filteredEvents = events.events
       .filter(
         (event) =>
           loggedInUser.id === event.createdBy ||
@@ -62,7 +77,7 @@ export default function CalendarCard({
       .sort((a, b) => a.startTime.localeCompare(b.startTime));
 
     return filteredEvents;
-  }, [date, loggedInUser]);
+  }, [date, loggedInUser, events]);
 
   const getUserById = (userId) => {
     return users.find((user) => user.id === userId);
@@ -119,73 +134,76 @@ export default function CalendarCard({
           </Typography>
         </Stack>
         <Stack spacing={0.5} sx={{ mt: 2 }}>
-          {events.map((event) => {
-            const responsibleUsersArray = event.responsibleUsers;
-						
-            return (
-              <Box
-                key={event.id}
-                sx={{
-                  borderRadius: 1,
-                  cursor: 'pointer',
-                  px: 1,
-                  py: 1.3,
-                  ...getEventColors(event, theme),
-                  opacity: past ? 0.7 : 1,
-                  transition: 'all 0.3s ease',
-                }}
-                suppressHydrationWarning
-                onClick={() => handleClick(event)}
-              >
-                <Stack direction="row">
-                  <Box>
-                    <Box display="flex" gap={0.5}>
-                      {event.eventType === 'meal' && (
-                        <RestaurantIcon
-                          sx={{ fontSize: 12, alignSelf: 'center' }}
-                        />
-                      )}
-                      <Typography variant="eventTitle" component="h5">
-                        {event.title}
+          {filteredEvents &&
+            filteredEvents.map((event, index) => {
+              const responsibleUsersArray =
+                filteredEvents[index].responsibleUsers;
+
+              return (
+                <Box
+                  key={event.id}
+                  sx={{
+                    borderRadius: 1,
+                    cursor: 'pointer',
+                    px: 1,
+                    py: 1.3,
+                    ...getEventColors(event, theme),
+                    opacity: past ? 0.7 : 1,
+                    transition: 'all 0.3s ease',
+                  }}
+                  suppressHydrationWarning
+                  onClick={() => handleClick(event)}
+                >
+                  <Stack direction="row">
+                    <Box>
+                      <Box display="flex" gap={0.5}>
+                        {event.eventType === 'meal' && (
+                          <RestaurantIcon
+                            sx={{ fontSize: 12, alignSelf: 'center' }}
+                          />
+                        )}
+                        <Typography variant="eventTitle" component="h5">
+                          {event.title}
+                        </Typography>
+                      </Box>
+                      <Typography variant="eventTime" component="p">
+                        {''}
+                        {event.startTime}
                       </Typography>
                     </Box>
-                    <Typography variant="eventTime" component="p">
-                      {''}
-                      {event.startTime}
-                    </Typography>
-                  </Box>
-                  <Box
-                    display="flex"
-                    flex={1}
-                    flexDirection="row"
-                    justifyContent="flex-end"
-                    alignItems="flex-start"
-                  >
-                    <AvatarGroup>
-                      {responsibleUsersArray.map((id) => {
-                        const user = getUserById(id);
+                    <Box
+                      display="flex"
+                      flex={1}
+                      flexDirection="row"
+                      justifyContent="flex-end"
+                      alignItems="flex-start"
+                    >
+                      <AvatarGroup>
+                        {stateEvents &&
+                          responsibleUsersArray.map((id) => {
+                            const user = getUserById(id);
 
-                        return (
-                          <Avatar
-                            key={user.id}
-														src={user.avatarUrl}
-                            sx={{
-                              border: 'none !important',
-                              height: 30,
-                              width: 30,
-                              fontSize: 12,
-                              bgcolor: getAvatarColor(user),
-                            }}
-                            {...stringAvatar(user.name)}
-                          />
-                        );
-                      })}
-                    </AvatarGroup>
-                  </Box>
-                </Stack>
-              </Box>
-            );
-          })}
+                            return (
+                              <Avatar
+                                key={user.id}
+                                src={user.avatarUrl}
+                                sx={{
+                                  border: 'none !important',
+                                  height: 30,
+                                  width: 30,
+                                  fontSize: 12,
+                                  bgcolor: getAvatarColor(user),
+                                }}
+                                {...stringAvatar(user.name)}
+                              />
+                            );
+                          })}
+                      </AvatarGroup>
+                    </Box>
+                  </Stack>
+                </Box>
+              );
+            })}
         </Stack>
       </Box>
       {open && (
