@@ -26,12 +26,9 @@ export default function AddEventButton() {
     /* Save event to local storage */
     const newEvent = { id: eventId, createdBy, ...data };
 
-    const events = JSON.parse(localStorage.getItem('events')) || [];
-    const updatedEvents = [...events, newEvent];
-
-    // Byt ut detta mot sätta events i context?
+    // save events
     setEvents((prevEvents) => [...prevEvents, newEvent]);
-    localStorage.setItem('events', JSON.stringify(updatedEvents));
+
     refreshEvents();
   };
 
