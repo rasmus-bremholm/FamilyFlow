@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 
 export default function WeekCards({ currentWeek }) {
   return (
-    <Grid container spacing={2} sx={{ mt: 2 }}>
+    <Grid container spacing={{ xs:1 , lg: 2}} sx={{ mt: 2 }}>
       {currentWeek.map((day) => (
         <Grid key={day.date} size={{ xs: 12, md: 'grow' }}>
           <CalendarCard
