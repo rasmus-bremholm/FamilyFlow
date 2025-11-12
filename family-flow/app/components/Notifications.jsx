@@ -74,21 +74,17 @@ export function Notification() {
         direction="left"
         sx={{ position: 'absolute', top: 70, right: 38 }}
         icon={
-          <SpeedDialIcon
-            icon={
-              <Avatar
-                key={loggedInUser.id}
-                src={loggedInUser.avatarUrl}
-                sx={{
-                  border: 'none !important',
-                  height: 50,
-                  width: 50,
-                  fontSize: 12,
-                  // bgcolor: getAvatarColor(loggedInUser),
-                }}
-                // {...stringAvatar(loggedInUser.name)}
-              />
-            }
+          <Avatar
+            key={loggedInUser.id}
+            src={loggedInUser.avatarUrl}
+            sx={{
+              border: 'none !important',
+              height: 56,
+              width: 56,
+              fontSize: 12,
+              // bgcolor: getAvatarColor(loggedInUser),
+            }}
+            // {...stringAvatar(loggedInUser.name)}
           />
         }
       >
