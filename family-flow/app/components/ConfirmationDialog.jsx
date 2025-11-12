@@ -1,17 +1,15 @@
 'use client';
-import { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, useTheme } from '@mui/material';
 
 export default function ConfirmationDialog({ open }) {
+  const theme = useTheme();
+
   return (
     <>
-      <Dialog
-        //open={confirmationOpen}
-        //open={() => setConfirmationOpen(true)}
-        open={open}
-        onClose={() => {}}
-      >
-        <DialogTitle>Tillagd!</DialogTitle>
+      <Dialog open={open} onClose={() => {}}>
+        <DialogTitle sx={{ color: theme.palette.text.secondary }}>
+          Tillagd!
+        </DialogTitle>
         <DialogContent>
           Aktiviteten har nu lagts till i din kalender!
         </DialogContent>

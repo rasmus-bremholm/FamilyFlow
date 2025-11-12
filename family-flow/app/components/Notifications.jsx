@@ -1,15 +1,6 @@
 'use client';
 import { useState, useMemo } from 'react';
-import {
-  SpeedDial,
-  SpeedDialAction,
-  SpeedDialIcon,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Box,
-  Avatar,
-} from '@mui/material';
+import { SpeedDial, SpeedDialAction, Avatar } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -67,6 +58,14 @@ export function Notification() {
     console.log('added');
   }
 
+  const getAvatarColor = (user) => (user.bgColor ? user.bgColor : '#bdbdbd');
+
+  const stringAvatar = (name) => {
+    return {
+      children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    };
+  };
+
   return (
     <>
       <SpeedDial
@@ -82,9 +81,9 @@ export function Notification() {
               height: 56,
               width: 56,
               fontSize: 12,
-              // bgcolor: getAvatarColor(loggedInUser),
+              bgcolor: getAvatarColor(loggedInUser),
             }}
-            // {...stringAvatar(loggedInUser.name)}
+            {...stringAvatar(loggedInUser.name)}
           />
         }
       >
