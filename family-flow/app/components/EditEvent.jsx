@@ -1,8 +1,15 @@
 'use client';
 
+import { useContext } from 'react';
+
 import Modal from './Modal';
+import eventContext from '@/lib/contexts/eventContext';
+import { useRenderEvents } from '@/lib/renderEvents';
 
 export default function EditEvent({ open, onClose, event }) {
+  const { refreshEvents } = useRenderEvents();
+  const { events, setEvents } = useContext(eventContext);
+
   const handleEditEvent = (data) => {
     if (!event) return;
 
@@ -16,28 +23,24 @@ export default function EditEvent({ open, onClose, event }) {
       createdBy: loggedInUser?.id || event.createdBy,
     };
 
-    /* get all saved events */
-    const events = JSON.parse(localStorage.getItem('events')) || [];
-
     /* replace old event with the edited event */
     const updatedEvents = events.map((event) =>
       event.id === editedEvent.id ? editedEvent : event
     );
-    localStorage.setItem('events', JSON.stringify(updatedEvents));
+    setEvents(updatedEvents);
 
+    refreshEvents();
     onClose();
   };
 
   const handleDeleteEvent = (eventId) => {
-    /* get all saved events */
-    const events = JSON.parse(localStorage.getItem('events')) || [];
-
     /* filter events array */
     const updatedEvents = events.filter((event) => event.id !== eventId);
 
     /* save updated array */
-    localStorage.setItem('events', JSON.stringify(updatedEvents));
+    setEvents(updatedEvents);
 
+    refreshEvents();
     onClose();
   };
 
