@@ -67,6 +67,8 @@ export default function CalendarCard({
   const filteredEvents = useMemo(() => {
     if (!loggedInUser) return [];
 
+    if (!events) return [];
+
     const filteredEvents = events.events
       .filter(
         (event) =>
