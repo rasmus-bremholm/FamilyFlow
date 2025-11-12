@@ -104,6 +104,11 @@ export default function CalendarCard({
         sx={{
           minWidth: 100,
           minHeight: { xs: 200, md: 350 },
+          height: '100%',
+          //Hade vart najs att ha en calc() som på NÅGOT vis beräknar maxHeight baserat på utrymmet som finns kvar
+          maxHeight: '62vh',
+          overflowY: 'auto',
+          scrollbarWidth: 'none',
           border: (theme) =>
             isToday
               ? `2px solid ${theme.palette.primary.main}`
@@ -136,6 +141,74 @@ export default function CalendarCard({
           </Typography>
         </Stack>
         <Stack spacing={0.5} sx={{ mt: 2 }}>
+          {events.map((event) => {
+            const responsibleUsersArray = event.responsibleUsers;
+
+            return (
+              <Box
+                key={event.id}
+                sx={{
+                  borderRadius: 1,
+                  cursor: 'pointer',
+                  px: 1,
+                  py: 1.3,
+                  ...getEventColors(event, theme),
+                  opacity: past ? 0.7 : 1,
+                  transition: 'all 0.3s ease',
+                }}
+                suppressHydrationWarning
+                onClick={() => handleClick(event)}
+              >
+                <Stack direction="row" gap={0.5}>
+                  <Box sx={{ minWidth: 0, flex: 1 }}>
+                    <Box display="flex" gap={0.5}>
+                      {event.eventType === 'meal' && (
+                        <RestaurantIcon
+                          sx={{ fontSize: 12, alignSelf: 'center' }}
+                        />
+                      )}
+                      <Typography
+                        variant="eventTitle"
+                        component="h5"
+                        sx={{
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {event.title}
+                      </Typography>
+                    </Box>
+                    <Typography variant="eventTime" component="p">
+                      {''}
+                      {event.startTime}
+                    </Typography>
+                  </Box>
+
+                  <AvatarGroup>
+                    {responsibleUsersArray.map((id) => {
+                      const user = getUserById(id);
+
+                      return (
+                        <Avatar
+                          key={user.id}
+                          src={user.avatarUrl}
+                          sx={{
+                            border: 'none !important',
+                            height: 30,
+                            width: 30,
+                            fontSize: 12,
+                            bgcolor: getAvatarColor(user),
+                          }}
+                          {...stringAvatar(user.name)}
+                        />
+                      );
+                    })}
+                  </AvatarGroup>
+                </Stack>
+              </Box>
+            );
+          })}
           {filteredEvents &&
             filteredEvents.map((event, index) => {
               const responsibleUsersArray =
