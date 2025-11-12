@@ -1,6 +1,12 @@
 'use client';
 import { useState, useMemo } from 'react';
-import { SpeedDial, SpeedDialAction, Avatar } from '@mui/material';
+import {
+  SpeedDial,
+  SpeedDialAction,
+  Avatar,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -19,6 +25,9 @@ export function Notification() {
   const [confirmationOpen, setConfirmationOpen] = useState(false);
 
   const { showDialog, LogoutDialogElement } = useLogout();
+  const theme = useTheme();
+
+  const smallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const loggedInUser = useMemo(() => {
     if (typeof window === 'undefined') return null;
@@ -70,7 +79,7 @@ export function Notification() {
     <>
       <SpeedDial
         ariaLabel="Notification Speed Dial"
-        direction="left"
+        direction={smallScreen ? 'down' : 'left'}
         icon={
           <Avatar
             key={loggedInUser.id}
