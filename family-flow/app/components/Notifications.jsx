@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import {
   SpeedDial,
   SpeedDialAction,
@@ -7,6 +7,8 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
+  Box,
+  Avatar,
 } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -14,6 +16,10 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Badge from '@mui/material/Badge';
 import { useLogout } from '../../lib/logout';
 import NotificationDialog from './NotificationDialog';
+import {
+  mockLoggedinUsers,
+  loggedInUser,
+} from '../../lib/mockFunctions/mockLoggedInUser';
 
 export function Notification() {
   const [notificationsNumber, setNotificationsNumber] = useState(1);
@@ -21,6 +27,16 @@ export function Notification() {
   const [confirmationOpen, setConfirmationOpen] = useState(false);
 
   const { showDialog, LogoutDialogElement } = useLogout();
+
+  // Gets logged in user
+  const loggedInUser = useMemo(() => {
+    if (typeof window === 'undefined') return null;
+
+    const storedUser = localStorage.getItem('loggedInUser');
+    if (!storedUser) return null;
+
+    return JSON.parse(storedUser);
+  }, []);
 
   function handleSettings() {
     console.log(settings);
@@ -53,7 +69,24 @@ export function Notification() {
         ariaLabel="Notification Speed Dial"
         direction="left"
         sx={{ position: 'absolute', top: 70, right: 38 }}
-        icon={<SpeedDialIcon />}
+        icon={
+          <SpeedDialIcon
+            icon={
+              <Avatar
+                key={loggedInUser.id}
+                src={loggedInUser.avatarUrl}
+                sx={{
+                  border: 'none !important',
+                  height: 50,
+                  width: 50,
+                  fontSize: 12,
+                  // bgcolor: getAvatarColor(loggedInUser),
+                }}
+                // {...stringAvatar(loggedInUser.name)}
+              />
+            }
+          />
+        }
       >
         <SpeedDialAction
           icon={
