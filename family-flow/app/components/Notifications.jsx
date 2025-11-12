@@ -16,6 +16,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Badge from '@mui/material/Badge';
 import { useLogout } from '../../lib/logout';
 import NotificationDialog from './NotificationDialog';
+import ConfirmationDialog from './ConfirmationDialog';
 import {
   mockLoggedinUsers,
   loggedInUser,
@@ -28,7 +29,6 @@ export function Notification() {
 
   const { showDialog, LogoutDialogElement } = useLogout();
 
-  // Gets logged in user
   const loggedInUser = useMemo(() => {
     if (typeof window === 'undefined') return null;
 
@@ -51,15 +51,19 @@ export function Notification() {
     setNotificationsNumber((prev) => (prev > 0 ? prev - 1 : 0));
   }
 
-  function openConfirmation() {
-    setConfirmationOpen(true);
+  function handleConfirmation() {
+    setTimeout(() => {
+      setNotificationDialogOpen(false);
+    }, 300);
+
+    setTimeout(() => {
+      setConfirmationOpen(true);
+    }, 300);
 
     setTimeout(() => {
       setConfirmationOpen(false);
-      handleNotificationDialogClose();
-      //setNotificationDialogOpen(false);
       setNotificationsNumber((prev) => (prev > 0 ? prev - 1 : 0));
-    }, 2000);
+    }, 3000);
     console.log('added');
   }
 
@@ -121,9 +125,10 @@ export function Notification() {
 
       <NotificationDialog
         open={notificationDialogOpen}
-        onConfirm={openConfirmation}
+        onConfirm={handleConfirmation}
         onCancel={handleNotificationDialogClose}
       />
+      <ConfirmationDialog open={confirmationOpen} />
     </>
   );
 }
