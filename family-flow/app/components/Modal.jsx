@@ -228,56 +228,60 @@ export default function Modal({
               </TextField>
             </>
           )}
-
-          {/* Time */}
-          <Typography
-            variant="subtitle2"
-            sx={{
-              color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
-              mb: 0.5,
-            }}
-          >
-            Tid
-          </Typography>
-          <TextField
-            required
-            type="time"
-            fullWidth
-            margin="dense"
-            value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
-            InputProps={{
-              sx: {
-                borderRadius: 3,
-              },
-            }}
-            sx={{ mb: 2 }}
-          />
-
-          {/* Date */}
-          <Typography
-            variant="subtitle2"
-            sx={{
-              color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
-              mb: 0.5,
-            }}
-          >
-            Datum
-          </Typography>
-          <TextField
-            required
-            type="date"
-            fullWidth
-            margin="dense"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            InputProps={{
-              sx: {
-                borderRadius: 3,
-              },
-            }}
-            sx={{ mb: 2 }}
-          />
+          <Box display="flex" gap={1}>
+            <Box flex={1}>
+              {/* Time */}
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+                  mb: 0.5,
+                }}
+              >
+                Tid
+              </Typography>
+              <TextField
+                required
+                type="time"
+                fullWidth
+                margin="dense"
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
+                InputProps={{
+                  sx: {
+                    borderRadius: 3,
+                  },
+                }}
+                sx={{ mb: 2 }}
+              />
+            </Box>
+            <Box flex={1}>
+              {/* Date */}
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  color: (theme) => `1.5px solid ${theme.palette.text.primary}`,
+                  mb: 0.5,
+                }}
+              >
+                Datum
+              </Typography>
+              <TextField
+                required
+                type="date"
+                fullWidth
+                margin="dense"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                InputProps={{
+                  sx: {
+                    borderRadius: 3,
+                  },
+                }}
+                sx={{ mb: 2 }}
+              />
+            </Box>
+          </Box>
 
           {/* Responsible person */}
           <Typography
