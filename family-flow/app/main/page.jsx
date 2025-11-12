@@ -39,14 +39,31 @@ function WeeklySchedule() {
   return (
     <Container
       maxWidth={false}
-      sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}
+      sx={{
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'relative',
+      }}
     >
+      <Box
+        sx={{
+          position: { xs: 'absolute', md: 'static' },
+          top: { xs: 16, md: 'auto' },
+          right: { xs: 16, md: 'auto' },
+          zIndex: 10,
+          display: { xs: 'block', md: 'none' },
+        }}
+      >
+        <Notification />
+      </Box>
+
       <Box
         sx={{
           mx: 'auto',
           p: 2,
           display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
+          flexDirection: { xs: 'column', md: 'row' },
           gap: { xs: 4, sm: 0 },
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -57,7 +74,7 @@ function WeeklySchedule() {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: { xs: 'center', sm: 'flex-start' },
+            alignItems: { xs: 'center', md: 'flex-start' },
           }}
         >
           <Typography
@@ -74,9 +91,29 @@ function WeeklySchedule() {
           </Typography>
         </Box>
 
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 4 }}>
-          <Notification />
-          <AddEventButton />
+        <Box
+          sx={{
+            position: 'relative',
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            gap: 2,
+          }}
+        >
+          <Box
+            sx={{
+              display: { xs: 'none', md: 'flex' },
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              gap: 2,
+            }}
+          >
+            <Notification />
+          </Box>
+          <Box sx={{ marginTop: { xs: 1, md: 0 } }}>
+            <AddEventButton />
+          </Box>
         </Box>
       </Box>
       <Box

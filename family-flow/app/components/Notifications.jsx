@@ -71,7 +71,6 @@ export function Notification() {
       <SpeedDial
         ariaLabel="Notification Speed Dial"
         direction="left"
-        sx={{ position: 'absolute', top: 70, right: 38 }}
         icon={
           <Avatar
             key={loggedInUser.id}
