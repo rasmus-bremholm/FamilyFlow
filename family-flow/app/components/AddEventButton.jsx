@@ -1,15 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-
+import { useRenderEvents } from '@/lib/renderEvents';
 import Modal from './Modal';
+import eventContext from '@/lib/contexts/eventContext';
 
 export default function AddEventButton() {
+  const { refreshEvents } = useRenderEvents();
   const [open, setOpen] = useState(false);
+  const { events, setEvents } = useContext(eventContext);
 
   const handleAddEvent = (data) => {
     /* get logged in user*/
@@ -23,10 +26,10 @@ export default function AddEventButton() {
     /* Save event to local storage */
     const newEvent = { id: eventId, createdBy, ...data };
 
-    const events = JSON.parse(localStorage.getItem('events')) || [];
-    const updatedEvents = [...events, newEvent];
+    // save events
+    setEvents((prevEvents) => [...prevEvents, newEvent]);
 
-    localStorage.setItem('events', JSON.stringify(updatedEvents));
+    refreshEvents();
   };
 
   return (
