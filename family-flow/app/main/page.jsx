@@ -64,9 +64,9 @@ function WeeklySchedule() {
           p: 2,
           display: 'flex',
           flexDirection: { xs: 'column', md: 'row' },
-          gap: { xs: 4, sm: 0 },
+          gap: 1,
           justifyContent: 'space-between',
-          alignItems: 'center',
+          alignItems: { xs: 'flex-start', md: 'center' },
           width: '100%',
         }}
       >
@@ -74,7 +74,7 @@ function WeeklySchedule() {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: { xs: 'flex-start', sm: 'center', md: 'flex-start' },
+            alignItems: 'flex-start',
           }}
         >
           <Typography
@@ -111,7 +111,7 @@ function WeeklySchedule() {
           >
             <Notification />
           </Box>
-          <Box sx={{ marginTop: { xs: 1, md: 0 } }}>
+          <Box sx={{ marginTop: { xs: 1, md: 0 }, alignItems: 'center' }}>
             <AddEventButton />
           </Box>
         </Box>
