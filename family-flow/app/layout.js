@@ -17,7 +17,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <ThemeRegistry>
-          <LoggedInUserContext.Provider>
+          <LoggedInUserContext.Provider
+            value={{ loggedInUser, setLoggedInUser }}
+          >
             <EventContext.Provider value={{ events, setEvents }}>
               {children}
             </EventContext.Provider>
