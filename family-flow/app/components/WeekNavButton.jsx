@@ -18,6 +18,7 @@ export default function WeekNavButton({ direction, onClick }) {
       variant="text"
       color="primary"
       onClick={onClick}
+			sx={{ minWidth: 0 }}
       startIcon={
         isPrev ? (
           <ChevronLeftIcon

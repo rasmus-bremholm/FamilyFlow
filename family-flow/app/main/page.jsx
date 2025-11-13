@@ -1,13 +1,8 @@
 'use client';
-import { useState } from 'react';
 import {
   Box,
   Typography,
   useTheme,
-  Paper,
-  Button,
-  Select,
-  MenuItem,
   Container,
   Stack,
 } from '@mui/material';
@@ -16,7 +11,6 @@ import WeekCards from '../components/WeekCards';
 import WeekNavButton from '../components/WeekNavButton';
 import { useWeekNavigation } from '@/lib/useWeekNavigation';
 import AddEventButton from '../components/AddEventButton';
-import EditEvent from '../components/EditEvent';
 import CurrentWeekButton from '../components/CurrentWeekButton';
 import ShareButton from '../components/ShareButton';
 import { Notification } from '../components/Notifications';
@@ -29,7 +23,6 @@ function WeeklySchedule() {
     weekNumber,
     goToToday,
     weekStart,
-    weekYear,
   } = useWeekNavigation();
   const theme = useTheme();
 
@@ -163,6 +156,7 @@ function WeeklySchedule() {
                   color: theme.palette.text.primary,
                   fontWeight: 600,
                 },
+								textTransform: 'capitalize',
               }}
             >
               {currentWeek[0].month}
