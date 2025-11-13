@@ -1,6 +1,7 @@
 'use client';
 import ThemeRegistry from '@/lib/themeregistry';
 import EventContext from '@/lib/contexts/eventContext';
+import loggedInUserContext from '@/lib/contexts/loggedInUserContext';
 import { useEffect, useState } from 'react';
 import { mockEvents } from '../lib/mockFunctions/mockEvents';
 
