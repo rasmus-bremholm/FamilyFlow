@@ -10,12 +10,7 @@ import EditEvent from './EditEvent';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import eventContext from '@/lib/contexts/eventContext';
 
-export default function CalendarCard({
-  dayName,
-  dayNumber,
-  isToday,
-  date,
-}) {
+export default function CalendarCard({ dayName, dayNumber, isToday, date }) {
   const [open, setOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState({});
   const events = useContext(eventContext);
