@@ -1,6 +1,5 @@
 import CalendarCard from './CalendarCard';
 import { Grid } from '@mui/material';
-//import { useWeekNavigation } from "@/lib/useWeekNavigation";
 
 export default function WeekCards({ currentWeek }) {
   return (

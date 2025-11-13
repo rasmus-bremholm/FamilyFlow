@@ -1,37 +1,18 @@
 /* eslint-disable react-hooks/preserve-manual-memoization */
 'use client';
-import {
-  Typography,
-  Box,
-  Card,
-  CardContent,
-  CardHeader,
-  CardActionArea,
-  Stack,
-  Button,
-  Avatar,
-  AvatarGroup,
-} from '@mui/material';
-import { useState, useEffect, useMemo, useContext } from 'react';
+import { Typography, Box, Stack, Avatar, AvatarGroup } from '@mui/material';
+import { useState, useMemo, useContext } from 'react';
 import { useTheme } from '@emotion/react';
 import { getEventColors } from '@/lib/getEventColors';
 import { isPassed } from './PassedDay';
 import users from '../../lib/mockFunctions/mockUsers';
 import EditEvent from './EditEvent';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
-import { useRenderEvents } from '@/lib/renderEvents';
 import eventContext from '@/lib/contexts/eventContext';
 
-export default function CalendarCard({
-  dayName,
-  shortDay,
-  dayNumber,
-  isToday,
-  date,
-}) {
+export default function CalendarCard({ dayName, dayNumber, isToday, date }) {
   const [open, setOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState({});
-  const [stateEvents, setStateEvents] = useState([]);
   const events = useContext(eventContext);
   console.log('Calendar: ', events);
 
@@ -48,22 +29,6 @@ export default function CalendarCard({
     return JSON.parse(storedUser);
   }, []);
 
-  /* useEffect(() => {
-    const getEvents = () => {
-      const filteredEvents = events
-        .filter(
-          (event) =>
-            loggedInUser.id === event.createdBy ||
-            event.membersId.includes(loggedInUser.id)
-        )
-        .filter((event) => event.date === date)
-        .sort((a, b) => a.startTime.localeCompare(b.startTime));
-      setStateEvents(filteredEvents);
-    };
-    getEvents();
-  }, [date, loggedInUser]);
-
-  */
   const filteredEvents = useMemo(() => {
     if (!loggedInUser) return [];
 
@@ -146,71 +111,71 @@ export default function CalendarCard({
               const responsibleUsersArray =
                 filteredEvents[index].responsibleUsers;
 
-            return (
-              <Box
-                key={event.id}
-                sx={{
-                  borderRadius: 1,
-                  cursor: 'pointer',
-                  px: 1,
-                  py: 1.3,
-                  ...getEventColors(event, theme),
-                  opacity: past ? 0.7 : 1,
-                  transition: 'all 0.3s ease',
-                }}
-                suppressHydrationWarning
-                onClick={() => handleClick(event)}
-              >
-                <Stack direction="row" gap={0.5}>
-                  <Box sx={{ minWidth: 0, flex: 1 }}>
-                    <Box display="flex" gap={0.5}>
-                      {event.eventType === 'meal' && (
-                        <RestaurantIcon
-                          sx={{ fontSize: 12, alignSelf: 'center' }}
-                        />
-                      )}
-                      <Typography
-                        variant="eventTitle"
-                        component="h5"
-                        sx={{
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          whiteSpace: 'nowrap',
-                        }}
-                      >
-                        {event.title}
+              return (
+                <Box
+                  key={event.id}
+                  sx={{
+                    borderRadius: 1,
+                    cursor: 'pointer',
+                    px: 1,
+                    py: 1.3,
+                    ...getEventColors(event, theme),
+                    opacity: past ? 0.7 : 1,
+                    transition: 'all 0.3s ease',
+                  }}
+                  suppressHydrationWarning
+                  onClick={() => handleClick(event)}
+                >
+                  <Stack direction="row" gap={0.5}>
+                    <Box sx={{ minWidth: 0, flex: 1 }}>
+                      <Box display="flex" gap={0.5}>
+                        {event.eventType === 'meal' && (
+                          <RestaurantIcon
+                            sx={{ fontSize: 12, alignSelf: 'center' }}
+                          />
+                        )}
+                        <Typography
+                          variant="eventTitle"
+                          component="h5"
+                          sx={{
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                          }}
+                        >
+                          {event.title}
+                        </Typography>
+                      </Box>
+                      <Typography variant="eventTime" component="p">
+                        {''}
+                        {event.startTime}
                       </Typography>
                     </Box>
-                    <Typography variant="eventTime" component="p">
-                      {''}
-                      {event.startTime}
-                    </Typography>
-                  </Box>
 
-                  <AvatarGroup>
-                    {responsibleUsersArray.map((id) => {
-                      const user = getUserById(id);
+                    <AvatarGroup>
+                      {responsibleUsersArray.map((id) => {
+                        const user = getUserById(id);
 
-                      return (
-                        <Avatar
-                          key={user.id}
-                          src={user.avatarUrl}
-                          sx={{
-                            border: 'none !important',
-                            height: 30,
-                            width: 30,
-                            fontSize: 12,
-                            bgcolor: getAvatarColor(user),
-                          }}
-                          {...stringAvatar(user.name)}
-                        />
-                      );
-                    })}
-                  </AvatarGroup>
-                </Stack>
-              </Box>
-            );
-          })}
+                        return (
+                          <Avatar
+                            key={user.id}
+                            src={user.avatarUrl}
+                            sx={{
+                              border: 'none !important',
+                              height: 30,
+                              width: 30,
+                              fontSize: 12,
+                              bgcolor: getAvatarColor(user),
+                            }}
+                            {...stringAvatar(user.name)}
+                          />
+                        );
+                      })}
+                    </AvatarGroup>
+                  </Stack>
+                </Box>
+              );
+            })}
         </Stack>
       </Box>
       {open && (
