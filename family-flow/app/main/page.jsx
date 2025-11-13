@@ -74,7 +74,7 @@ function WeeklySchedule() {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: { xs: 'center', md: 'flex-start' },
+            alignItems: { xs: 'flex-start', sm: 'center', md: 'flex-start' },
           }}
         >
           <Typography
