@@ -45,7 +45,7 @@ export default function ShareButton({ weekNumber }) {
           variant="filled"
           sx={{ width: '100%' }}
         >
-          Week {weekNumber} shared!
+          Vecka {weekNumber} delad!
         </Alert>
       </Snackbar>
     </>
