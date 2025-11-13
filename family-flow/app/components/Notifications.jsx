@@ -39,7 +39,7 @@ export function Notification() {
   }, []);
 
   function handleSettings() {
-    console.log(settings);
+    console.log('settings');
   }
 
   function handleNotificationClick() {
