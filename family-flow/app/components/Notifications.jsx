@@ -75,6 +75,10 @@ export function Notification() {
     };
   };
 
+  if (!loggedInUser) {
+    return null;
+  }
+
   return (
     <>
       <SpeedDial
