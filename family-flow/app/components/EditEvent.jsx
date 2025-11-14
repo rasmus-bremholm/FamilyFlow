@@ -14,7 +14,8 @@ export default function EditEvent({ open, onClose, event }) {
     if (!event) return;
 
     /* get logged in user*/
-    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    const storedUser = typeof window !== 'undefined' ? localStorage.getItem('loggedInUser') : null;
+    const loggedInUser = storedUser ? JSON.parse(storedUser) : null;
 
     /* update current event */
     const editedEvent = {

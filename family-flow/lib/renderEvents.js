@@ -6,6 +6,8 @@ export function useRenderEvents() {
 
   useEffect(() => {
     const getEvents = () => {
+      if (typeof window === 'undefined') return;
+
       const storedEvents = localStorage.getItem('events');
       if (storedEvents) {
         setEvents(JSON.parse(storedEvents));

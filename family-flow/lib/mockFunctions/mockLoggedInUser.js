@@ -11,4 +11,4 @@ const loggedInUser = {
   avatarUrl: '/users/3.png',
 };
 
-localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+//localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
